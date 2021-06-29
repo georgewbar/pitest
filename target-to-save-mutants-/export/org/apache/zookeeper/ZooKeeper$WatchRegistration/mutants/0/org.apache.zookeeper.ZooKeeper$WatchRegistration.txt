@@ -1,0 +1,159 @@
+// class version 50.0 (50)
+// access flags 0x420
+abstract class org/apache/zookeeper/ZooKeeper$WatchRegistration {
+
+  // compiled from: ZooKeeper.java
+  // access flags 0x400
+  abstract INNERCLASS org/apache/zookeeper/ZooKeeper$WatchRegistration org/apache/zookeeper/ZooKeeper WatchRegistration
+
+  // access flags 0x2
+  private Lorg/apache/zookeeper/Watcher; watcher
+
+  // access flags 0x2
+  private Ljava/lang/String; clientPath
+
+  // access flags 0x1010
+  final synthetic Lorg/apache/zookeeper/ZooKeeper; this$0
+
+  // access flags 0x1
+  public <init>(Lorg/apache/zookeeper/ZooKeeper;Lorg/apache/zookeeper/Watcher;Ljava/lang/String;)V
+   L0
+    LINENUMBER 239 L0
+    ALOAD 0
+    ALOAD 1
+    PUTFIELD org/apache/zookeeper/ZooKeeper$WatchRegistration.this$0 : Lorg/apache/zookeeper/ZooKeeper;
+    ALOAD 0
+    INVOKESPECIAL java/lang/Object.<init> ()V
+   L1
+    LINENUMBER 240 L1
+    ALOAD 0
+    ALOAD 2
+    PUTFIELD org/apache/zookeeper/ZooKeeper$WatchRegistration.watcher : Lorg/apache/zookeeper/Watcher;
+   L2
+    LINENUMBER 241 L2
+    ALOAD 0
+    ALOAD 3
+    PUTFIELD org/apache/zookeeper/ZooKeeper$WatchRegistration.clientPath : Ljava/lang/String;
+   L3
+    LINENUMBER 242 L3
+    RETURN
+   L4
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper$WatchRegistration; L0 L4 0
+    LOCALVARIABLE this$0 Lorg/apache/zookeeper/ZooKeeper; L0 L4 1
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L4 2
+    LOCALVARIABLE clientPath Ljava/lang/String; L0 L4 3
+    MAXSTACK = 2
+    MAXLOCALS = 4
+
+  // access flags 0x404
+  // signature (I)Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;>;
+  // declaration: java.util.Map<java.lang.String, java.util.Set<org.apache.zookeeper.Watcher>> getWatches(int)
+  protected abstract getWatches(I)Ljava/util/Map;
+
+  // access flags 0x1
+  public register(I)V
+    TRYCATCHBLOCK L0 L1 L2 null
+    TRYCATCHBLOCK L2 L3 L2 null
+   L4
+    LINENUMBER 252 L4
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper$WatchRegistration.shouldAddWatch (I)Z
+    IFNE L5
+   L6
+    LINENUMBER 253 L6
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper$WatchRegistration.getWatches (I)Ljava/util/Map;
+    ASTORE 2
+   L7
+    LINENUMBER 254 L7
+    ALOAD 2
+    DUP
+    ASTORE 3
+    MONITORENTER
+   L0
+    LINENUMBER 255 L0
+    ALOAD 2
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$WatchRegistration.clientPath : Ljava/lang/String;
+    INVOKEINTERFACE java/util/Map.get (Ljava/lang/Object;)Ljava/lang/Object; (itf)
+    CHECKCAST java/util/Set
+    ASTORE 4
+   L8
+    LINENUMBER 256 L8
+    ALOAD 4
+    IFNONNULL L9
+   L10
+    LINENUMBER 257 L10
+    NEW java/util/HashSet
+    DUP
+    INVOKESPECIAL java/util/HashSet.<init> ()V
+    ASTORE 4
+   L11
+    LINENUMBER 258 L11
+    ALOAD 2
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$WatchRegistration.clientPath : Ljava/lang/String;
+    ALOAD 4
+    INVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; (itf)
+    POP
+   L9
+    LINENUMBER 260 L9
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$WatchRegistration I java/util/Map java/lang/Object java/util/Set] []
+    ALOAD 4
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$WatchRegistration.watcher : Lorg/apache/zookeeper/Watcher;
+    INVOKEINTERFACE java/util/Set.add (Ljava/lang/Object;)Z (itf)
+    POP
+   L12
+    LINENUMBER 261 L12
+    ALOAD 3
+    MONITOREXIT
+   L1
+    GOTO L5
+   L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$WatchRegistration I java/util/Map java/lang/Object] [java/lang/Throwable]
+    ASTORE 5
+    ALOAD 3
+    MONITOREXIT
+   L3
+    ALOAD 5
+    ATHROW
+   L5
+    LINENUMBER 263 L5
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$WatchRegistration I] []
+    RETURN
+   L13
+    LOCALVARIABLE watchers Ljava/util/Set; L8 L12 4
+    // signature Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;
+    // declaration: watchers extends java.util.Set<org.apache.zookeeper.Watcher>
+    LOCALVARIABLE watches Ljava/util/Map; L7 L5 2
+    // signature Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;>;
+    // declaration: watches extends java.util.Map<java.lang.String, java.util.Set<org.apache.zookeeper.Watcher>>
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper$WatchRegistration; L4 L13 0
+    LOCALVARIABLE rc I L4 L13 1
+    MAXSTACK = 3
+    MAXLOCALS = 6
+
+  // access flags 0x4
+  protected shouldAddWatch(I)Z
+   L0
+    LINENUMBER 271 L0
+    ILOAD 1
+    IFNE L1
+    ICONST_1
+    GOTO L2
+   L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$WatchRegistration I] []
+    ICONST_0
+   L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$WatchRegistration I] [I]
+    IRETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper$WatchRegistration; L0 L3 0
+    LOCALVARIABLE rc I L0 L3 1
+    MAXSTACK = 1
+    MAXLOCALS = 2
+}
+

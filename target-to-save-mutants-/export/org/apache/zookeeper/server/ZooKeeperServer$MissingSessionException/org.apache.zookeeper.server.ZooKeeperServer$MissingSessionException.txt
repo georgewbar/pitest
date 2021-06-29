@@ -1,0 +1,28 @@
+// class version 50.0 (50)
+// access flags 0x21
+public class org/apache/zookeeper/server/ZooKeeperServer$MissingSessionException extends java/io/IOException {
+
+  // compiled from: ZooKeeperServer.java
+  // access flags 0x9
+  public static INNERCLASS org/apache/zookeeper/server/ZooKeeperServer$MissingSessionException org/apache/zookeeper/server/ZooKeeperServer MissingSessionException
+
+  // access flags 0x1A
+  private final static J serialVersionUID = 7467414635467261007
+
+  // access flags 0x1
+  public <init>(Ljava/lang/String;)V
+   L0
+    LINENUMBER 367 L0
+    ALOAD 0
+    ALOAD 1
+    INVOKESPECIAL java/io/IOException.<init> (Ljava/lang/String;)V
+   L1
+    LINENUMBER 368 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer$MissingSessionException; L0 L2 0
+    LOCALVARIABLE msg Ljava/lang/String; L0 L2 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+}
+

@@ -1,0 +1,1 @@
+MutationDetails [id=MutationIdentifier [location=Location [clazz=modified.java.utils.LinkedList$LLSpliterator, method=getEst, methodDesc=()I], indexes=[16], mutator=org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator], filename=LinkedList.java, block=1, lineNumber=1208, description=negated conditional, testsInOrder=[], isInFinallyBlock=false, poison=NORMAL]

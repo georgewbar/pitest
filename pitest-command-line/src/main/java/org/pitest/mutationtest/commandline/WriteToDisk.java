@@ -76,9 +76,9 @@ public class WriteToDisk {
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        WriteToDisk wtd = new WriteToDisk(args[0], args[1]);
-        wtd.mutateAllIn(args[3]);
-//        WriteToDisk wtd = new WriteToDisk("classes-to-mutate", "target-to-save-mutants");
-//        wtd.mutateAllIn("classes-to-mutate.txt");
+//        WriteToDisk wtd = new WriteToDisk(args[0], args[1]);
+//        wtd.mutateAllIn(args[3]);
+        WriteToDisk wtd = new WriteToDisk("classes-to-mutate", "target-to-save-mutants");
+        wtd.mutateAllIn("classes-to-mutate_zookeeper.txt");
     }
 }

@@ -1,0 +1,1 @@
+MutationDetails [id=MutationIdentifier [location=Location [clazz=org.apache.zookeeper.ZooKeeper$States, method=isAlive, methodDesc=()Z], indexes=[8], mutator=org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator], filename=ZooKeeper.java, block=1, lineNumber=321, description=negated conditional, testsInOrder=[], isInFinallyBlock=false, poison=NORMAL]

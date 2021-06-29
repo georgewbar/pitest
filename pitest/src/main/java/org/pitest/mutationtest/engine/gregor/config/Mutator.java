@@ -294,6 +294,20 @@ public final class Mutator {
             new SwitchMutator()));
   }
 
+  /**
+   *
+   * @return
+   */
+  public static Collection<MethodMutatorFactory> strongerAllConditionals() {
+    return combine(
+            newDefaults(),
+            group(new RemoveConditionalMutator(Choice.EQUAL, true),
+                    new RemoveConditionalMutator(Choice.EQUAL, false),
+                    new RemoveConditionalMutator(Choice.ORDER, true),
+                    new RemoveConditionalMutator(Choice.ORDER, false),
+                    new SwitchMutator()));
+  }
+
   private static Collection<MethodMutatorFactory> combine(
       Collection<MethodMutatorFactory> a, Collection<MethodMutatorFactory> b) {
     final List<MethodMutatorFactory> l = new ArrayList<>(a);

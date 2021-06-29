@@ -1,0 +1,3796 @@
+// class version 50.0 (50)
+// access flags 0x21
+public class org/apache/zookeeper/ZooKeeper {
+
+  // compiled from: ZooKeeper.java
+  // access flags 0x1008
+  static synthetic INNERCLASS org/apache/zookeeper/ZooKeeper$1 null null
+  // access flags 0x4019
+  public final static enum INNERCLASS org/apache/zookeeper/ZooKeeper$States org/apache/zookeeper/ZooKeeper States
+  // access flags 0x0
+  INNERCLASS org/apache/zookeeper/ZooKeeper$ChildWatchRegistration org/apache/zookeeper/ZooKeeper ChildWatchRegistration
+  // access flags 0x0
+  INNERCLASS org/apache/zookeeper/ZooKeeper$DataWatchRegistration org/apache/zookeeper/ZooKeeper DataWatchRegistration
+  // access flags 0x0
+  INNERCLASS org/apache/zookeeper/ZooKeeper$ExistsWatchRegistration org/apache/zookeeper/ZooKeeper ExistsWatchRegistration
+  // access flags 0x400
+  abstract INNERCLASS org/apache/zookeeper/ZooKeeper$WatchRegistration org/apache/zookeeper/ZooKeeper WatchRegistration
+  // access flags 0xA
+  private static INNERCLASS org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/ZooKeeper ZKWatchManager
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/AsyncCallback$StringCallback org/apache/zookeeper/AsyncCallback StringCallback
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/AsyncCallback$MultiCallback org/apache/zookeeper/AsyncCallback MultiCallback
+  // access flags 0x9
+  public static INNERCLASS org/apache/zookeeper/OpResult$ErrorResult org/apache/zookeeper/OpResult ErrorResult
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/AsyncCallback$VoidCallback org/apache/zookeeper/AsyncCallback VoidCallback
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/AsyncCallback$StatCallback org/apache/zookeeper/AsyncCallback StatCallback
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/AsyncCallback$DataCallback org/apache/zookeeper/AsyncCallback DataCallback
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/AsyncCallback$ACLCallback org/apache/zookeeper/AsyncCallback ACLCallback
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/AsyncCallback$ChildrenCallback org/apache/zookeeper/AsyncCallback ChildrenCallback
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/AsyncCallback$Children2Callback org/apache/zookeeper/AsyncCallback Children2Callback
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/ZooDefs$OpCode org/apache/zookeeper/ZooDefs OpCode
+  // access flags 0x9
+  public static INNERCLASS org/apache/zookeeper/KeeperException$InvalidACLException org/apache/zookeeper/KeeperException InvalidACLException
+  // access flags 0x4019
+  public final static enum INNERCLASS org/apache/zookeeper/KeeperException$Code org/apache/zookeeper/KeeperException Code
+  // access flags 0x8
+  static INNERCLASS org/apache/zookeeper/ClientCnxn$Packet org/apache/zookeeper/ClientCnxn Packet
+  // access flags 0x0
+  INNERCLASS org/apache/zookeeper/ClientCnxn$SendThread org/apache/zookeeper/ClientCnxn SendThread
+  // access flags 0x0
+  INNERCLASS org/apache/zookeeper/ClientCnxn$EventThread org/apache/zookeeper/ClientCnxn EventThread
+
+  // access flags 0x19
+  public final static Ljava/lang/String; ZOOKEEPER_CLIENT_CNXN_SOCKET = "zookeeper.clientCnxnSocket"
+
+  // access flags 0x14
+  protected final Lorg/apache/zookeeper/ClientCnxn; cnxn
+
+  // access flags 0x1A
+  private final static Lorg/slf4j/Logger; LOG
+
+  // access flags 0x12
+  private final Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager; watchManager
+
+  // access flags 0x1
+  public getSaslClient()Lorg/apache/zookeeper/client/ZooKeeperSaslClient;
+   L0
+    LINENUMBER 99 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    GETFIELD org/apache/zookeeper/ClientCnxn.zooKeeperSaslClient : Lorg/apache/zookeeper/client/ZooKeeperSaslClient;
+    ARETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x0
+  // signature ()Ljava/util/List<Ljava/lang/String;>;
+  // declaration: java.util.List<java.lang.String> getDataWatches()
+  getDataWatches()Ljava/util/List;
+    TRYCATCHBLOCK L0 L1 L2 null
+    TRYCATCHBLOCK L2 L3 L2 null
+   L4
+    LINENUMBER 105 L4
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$100 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Ljava/util/Map;
+    DUP
+    ASTORE 1
+    MONITORENTER
+   L0
+    LINENUMBER 106 L0
+    NEW java/util/ArrayList
+    DUP
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$100 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Ljava/util/Map;
+    INVOKEINTERFACE java/util/Map.keySet ()Ljava/util/Set; (itf)
+    INVOKESPECIAL java/util/ArrayList.<init> (Ljava/util/Collection;)V
+    ASTORE 2
+   L5
+    LINENUMBER 107 L5
+    ALOAD 2
+    ALOAD 1
+    MONITOREXIT
+   L1
+    ARETURN
+   L2
+    LINENUMBER 108 L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/Object] [java/lang/Throwable]
+    ASTORE 3
+    ALOAD 1
+    MONITOREXIT
+   L3
+    ALOAD 3
+    ATHROW
+   L6
+    LOCALVARIABLE rc Ljava/util/List; L5 L2 2
+    // signature Ljava/util/List<Ljava/lang/String;>;
+    // declaration: rc extends java.util.List<java.lang.String>
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L4 L6 0
+    MAXSTACK = 3
+    MAXLOCALS = 4
+
+  // access flags 0x0
+  // signature ()Ljava/util/List<Ljava/lang/String;>;
+  // declaration: java.util.List<java.lang.String> getExistWatches()
+  getExistWatches()Ljava/util/List;
+    TRYCATCHBLOCK L0 L1 L2 null
+    TRYCATCHBLOCK L2 L3 L2 null
+   L4
+    LINENUMBER 111 L4
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$200 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Ljava/util/Map;
+    DUP
+    ASTORE 1
+    MONITORENTER
+   L0
+    LINENUMBER 112 L0
+    NEW java/util/ArrayList
+    DUP
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$200 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Ljava/util/Map;
+    INVOKEINTERFACE java/util/Map.keySet ()Ljava/util/Set; (itf)
+    INVOKESPECIAL java/util/ArrayList.<init> (Ljava/util/Collection;)V
+    ASTORE 2
+   L5
+    LINENUMBER 113 L5
+    ALOAD 2
+    ALOAD 1
+    MONITOREXIT
+   L1
+    ARETURN
+   L2
+    LINENUMBER 114 L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/Object] [java/lang/Throwable]
+    ASTORE 3
+    ALOAD 1
+    MONITOREXIT
+   L3
+    ALOAD 3
+    ATHROW
+   L6
+    LOCALVARIABLE rc Ljava/util/List; L5 L2 2
+    // signature Ljava/util/List<Ljava/lang/String;>;
+    // declaration: rc extends java.util.List<java.lang.String>
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L4 L6 0
+    MAXSTACK = 3
+    MAXLOCALS = 4
+
+  // access flags 0x0
+  // signature ()Ljava/util/List<Ljava/lang/String;>;
+  // declaration: java.util.List<java.lang.String> getChildWatches()
+  getChildWatches()Ljava/util/List;
+    TRYCATCHBLOCK L0 L1 L2 null
+    TRYCATCHBLOCK L2 L3 L2 null
+   L4
+    LINENUMBER 117 L4
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$300 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Ljava/util/Map;
+    DUP
+    ASTORE 1
+    MONITORENTER
+   L0
+    LINENUMBER 118 L0
+    NEW java/util/ArrayList
+    DUP
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$300 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Ljava/util/Map;
+    INVOKEINTERFACE java/util/Map.keySet ()Ljava/util/Set; (itf)
+    INVOKESPECIAL java/util/ArrayList.<init> (Ljava/util/Collection;)V
+    ASTORE 2
+   L5
+    LINENUMBER 119 L5
+    ALOAD 2
+    ALOAD 1
+    MONITOREXIT
+   L1
+    ARETURN
+   L2
+    LINENUMBER 120 L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/Object] [java/lang/Throwable]
+    ASTORE 3
+    ALOAD 1
+    MONITOREXIT
+   L3
+    ALOAD 3
+    ATHROW
+   L6
+    LOCALVARIABLE rc Ljava/util/List; L5 L2 2
+    // signature Ljava/util/List<Ljava/lang/String;>;
+    // declaration: rc extends java.util.List<java.lang.String>
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L4 L6 0
+    MAXSTACK = 3
+    MAXLOCALS = 4
+
+  // access flags 0x1
+  public <init>(Ljava/lang/String;ILorg/apache/zookeeper/Watcher;)V throws java/io/IOException 
+   L0
+    LINENUMBER 380 L0
+    ALOAD 0
+    ALOAD 1
+    ILOAD 2
+    ALOAD 3
+    ICONST_0
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.<init> (Ljava/lang/String;ILorg/apache/zookeeper/Watcher;Z)V
+   L1
+    LINENUMBER 381 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L2 0
+    LOCALVARIABLE connectString Ljava/lang/String; L0 L2 1
+    LOCALVARIABLE sessionTimeout I L0 L2 2
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L2 3
+    MAXSTACK = 5
+    MAXLOCALS = 4
+
+  // access flags 0x1
+  public <init>(Ljava/lang/String;ILorg/apache/zookeeper/Watcher;Z)V throws java/io/IOException 
+   L0
+    LINENUMBER 437 L0
+    ALOAD 0
+    INVOKESPECIAL java/lang/Object.<init> ()V
+   L1
+    LINENUMBER 102 L1
+    ALOAD 0
+    NEW org/apache/zookeeper/ZooKeeper$ZKWatchManager
+    DUP
+    ACONST_NULL
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ZKWatchManager.<init> (Lorg/apache/zookeeper/ZooKeeper$1;)V
+    PUTFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+   L2
+    LINENUMBER 438 L2
+    GETSTATIC org/apache/zookeeper/ZooKeeper.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Initiating client connection, connectString="
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LDC " sessionTimeout="
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ILOAD 2
+    INVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;
+    LDC " watcher="
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 3
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L3
+    LINENUMBER 441 L3
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    ALOAD 3
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$602 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;Lorg/apache/zookeeper/Watcher;)Lorg/apache/zookeeper/Watcher;
+    POP
+   L4
+    LINENUMBER 443 L4
+    NEW org/apache/zookeeper/client/ConnectStringParser
+    DUP
+    ALOAD 1
+    INVOKESPECIAL org/apache/zookeeper/client/ConnectStringParser.<init> (Ljava/lang/String;)V
+    ASTORE 5
+   L5
+    LINENUMBER 445 L5
+    NEW org/apache/zookeeper/client/StaticHostProvider
+    DUP
+    ALOAD 5
+   L6
+    LINENUMBER 446 L6
+    INVOKEVIRTUAL org/apache/zookeeper/client/ConnectStringParser.getServerAddresses ()Ljava/util/ArrayList;
+    INVOKESPECIAL org/apache/zookeeper/client/StaticHostProvider.<init> (Ljava/util/Collection;)V
+    ASTORE 6
+   L7
+    LINENUMBER 447 L7
+    ALOAD 0
+    NEW org/apache/zookeeper/ClientCnxn
+    DUP
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/client/ConnectStringParser.getChrootPath ()Ljava/lang/String;
+    ALOAD 6
+    ILOAD 2
+    ALOAD 0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+   L8
+    LINENUMBER 449 L8
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper.getClientCnxnSocket ()Lorg/apache/zookeeper/ClientCnxnSocket;
+    ILOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ClientCnxn.<init> (Ljava/lang/String;Lorg/apache/zookeeper/client/HostProvider;ILorg/apache/zookeeper/ZooKeeper;Lorg/apache/zookeeper/ClientWatchManager;Lorg/apache/zookeeper/ClientCnxnSocket;Z)V
+    PUTFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+   L9
+    LINENUMBER 450 L9
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.start ()V
+   L10
+    LINENUMBER 451 L10
+    RETURN
+   L11
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L11 0
+    LOCALVARIABLE connectString Ljava/lang/String; L0 L11 1
+    LOCALVARIABLE sessionTimeout I L0 L11 2
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L11 3
+    LOCALVARIABLE canBeReadOnly Z L0 L11 4
+    LOCALVARIABLE connectStringParser Lorg/apache/zookeeper/client/ConnectStringParser; L5 L11 5
+    LOCALVARIABLE hostProvider Lorg/apache/zookeeper/client/HostProvider; L7 L11 6
+    MAXSTACK = 10
+    MAXLOCALS = 7
+
+  // access flags 0x1
+  public <init>(Ljava/lang/String;ILorg/apache/zookeeper/Watcher;J[B)V throws java/io/IOException 
+   L0
+    LINENUMBER 509 L0
+    ALOAD 0
+    ALOAD 1
+    ILOAD 2
+    ALOAD 3
+    LLOAD 4
+    ALOAD 6
+    ICONST_0
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.<init> (Ljava/lang/String;ILorg/apache/zookeeper/Watcher;J[BZ)V
+   L1
+    LINENUMBER 510 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L2 0
+    LOCALVARIABLE connectString Ljava/lang/String; L0 L2 1
+    LOCALVARIABLE sessionTimeout I L0 L2 2
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L2 3
+    LOCALVARIABLE sessionId J L0 L2 4
+    LOCALVARIABLE sessionPasswd [B L0 L2 6
+    MAXSTACK = 8
+    MAXLOCALS = 7
+
+  // access flags 0x1
+  public <init>(Ljava/lang/String;ILorg/apache/zookeeper/Watcher;J[BZ)V throws java/io/IOException 
+   L0
+    LINENUMBER 574 L0
+    ALOAD 0
+    INVOKESPECIAL java/lang/Object.<init> ()V
+   L1
+    LINENUMBER 102 L1
+    ALOAD 0
+    NEW org/apache/zookeeper/ZooKeeper$ZKWatchManager
+    DUP
+    ACONST_NULL
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ZKWatchManager.<init> (Lorg/apache/zookeeper/ZooKeeper$1;)V
+    PUTFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+   L2
+    LINENUMBER 575 L2
+    GETSTATIC org/apache/zookeeper/ZooKeeper.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Initiating client connection, connectString="
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LDC " sessionTimeout="
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ILOAD 2
+    INVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;
+    LDC " watcher="
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 3
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    LDC " sessionId="
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LLOAD 4
+   L3
+    LINENUMBER 578 L3
+    INVOKESTATIC java/lang/Long.toHexString (J)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LDC " sessionPasswd="
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 6
+    IFNONNULL L4
+    LDC "<null>"
+    GOTO L5
+   L4
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/Watcher J [B I] [org/slf4j/Logger java/lang/StringBuilder]
+    LDC "<hidden>"
+   L5
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/Watcher J [B I] [org/slf4j/Logger java/lang/StringBuilder java/lang/String]
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+   L6
+    LINENUMBER 575 L6
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L7
+    LINENUMBER 582 L7
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    ALOAD 3
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$602 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;Lorg/apache/zookeeper/Watcher;)Lorg/apache/zookeeper/Watcher;
+    POP
+   L8
+    LINENUMBER 584 L8
+    NEW org/apache/zookeeper/client/ConnectStringParser
+    DUP
+    ALOAD 1
+    INVOKESPECIAL org/apache/zookeeper/client/ConnectStringParser.<init> (Ljava/lang/String;)V
+    ASTORE 8
+   L9
+    LINENUMBER 586 L9
+    NEW org/apache/zookeeper/client/StaticHostProvider
+    DUP
+    ALOAD 8
+   L10
+    LINENUMBER 587 L10
+    INVOKEVIRTUAL org/apache/zookeeper/client/ConnectStringParser.getServerAddresses ()Ljava/util/ArrayList;
+    INVOKESPECIAL org/apache/zookeeper/client/StaticHostProvider.<init> (Ljava/util/Collection;)V
+    ASTORE 9
+   L11
+    LINENUMBER 588 L11
+    ALOAD 0
+    NEW org/apache/zookeeper/ClientCnxn
+    DUP
+    ALOAD 8
+    INVOKEVIRTUAL org/apache/zookeeper/client/ConnectStringParser.getChrootPath ()Ljava/lang/String;
+    ALOAD 9
+    ILOAD 2
+    ALOAD 0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+   L12
+    LINENUMBER 590 L12
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper.getClientCnxnSocket ()Lorg/apache/zookeeper/ClientCnxnSocket;
+    LLOAD 4
+    ALOAD 6
+    ILOAD 7
+    INVOKESPECIAL org/apache/zookeeper/ClientCnxn.<init> (Ljava/lang/String;Lorg/apache/zookeeper/client/HostProvider;ILorg/apache/zookeeper/ZooKeeper;Lorg/apache/zookeeper/ClientWatchManager;Lorg/apache/zookeeper/ClientCnxnSocket;J[BZ)V
+    PUTFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+   L13
+    LINENUMBER 591 L13
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ICONST_1
+    PUTFIELD org/apache/zookeeper/ClientCnxn.seenRwServerBefore : Z
+   L14
+    LINENUMBER 592 L14
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.start ()V
+   L15
+    LINENUMBER 593 L15
+    RETURN
+   L16
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L16 0
+    LOCALVARIABLE connectString Ljava/lang/String; L0 L16 1
+    LOCALVARIABLE sessionTimeout I L0 L16 2
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L16 3
+    LOCALVARIABLE sessionId J L0 L16 4
+    LOCALVARIABLE sessionPasswd [B L0 L16 6
+    LOCALVARIABLE canBeReadOnly Z L0 L16 7
+    LOCALVARIABLE connectStringParser Lorg/apache/zookeeper/client/ConnectStringParser; L9 L16 8
+    LOCALVARIABLE hostProvider Lorg/apache/zookeeper/client/HostProvider; L11 L16 9
+    MAXSTACK = 13
+    MAXLOCALS = 10
+
+  // access flags 0x1
+  public getSessionId()J
+   L0
+    LINENUMBER 605 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.getSessionId ()J
+    LRETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L1 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public getSessionPasswd()[B
+   L0
+    LINENUMBER 618 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.getSessionPasswd ()[B
+    ARETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public getSessionTimeout()I
+   L0
+    LINENUMBER 631 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.getSessionTimeout ()I
+    IRETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public addAuthInfo(Ljava/lang/String;[B)V
+   L0
+    LINENUMBER 643 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 1
+    ALOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.addAuthInfo (Ljava/lang/String;[B)V
+   L1
+    LINENUMBER 644 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L2 0
+    LOCALVARIABLE scheme Ljava/lang/String; L0 L2 1
+    LOCALVARIABLE auth [B L0 L2 2
+    MAXSTACK = 3
+    MAXLOCALS = 3
+
+  // access flags 0x21
+  public synchronized register(Lorg/apache/zookeeper/Watcher;)V
+   L0
+    LINENUMBER 653 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    ALOAD 1
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$602 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;Lorg/apache/zookeeper/Watcher;)Lorg/apache/zookeeper/Watcher;
+    POP
+   L1
+    LINENUMBER 654 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L2 0
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L2 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x21
+  public synchronized close()V throws java/lang/InterruptedException 
+    TRYCATCHBLOCK L0 L1 L2 java/io/IOException
+   L3
+    LINENUMBER 665 L3
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.getState ()Lorg/apache/zookeeper/ZooKeeper$States;
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper$States.isAlive ()Z
+    IFNE L4
+   L5
+    LINENUMBER 666 L5
+    GETSTATIC org/apache/zookeeper/ZooKeeper.LOG : Lorg/slf4j/Logger;
+    INVOKEINTERFACE org/slf4j/Logger.isDebugEnabled ()Z (itf)
+    IFEQ L6
+   L7
+    LINENUMBER 667 L7
+    GETSTATIC org/apache/zookeeper/ZooKeeper.LOG : Lorg/slf4j/Logger;
+    LDC "Close called on already closed client"
+    INVOKEINTERFACE org/slf4j/Logger.debug (Ljava/lang/String;)V (itf)
+   L6
+    LINENUMBER 669 L6
+   FRAME FULL [org/apache/zookeeper/ZooKeeper] []
+    RETURN
+   L4
+    LINENUMBER 672 L4
+   FRAME FULL [org/apache/zookeeper/ZooKeeper] []
+    GETSTATIC org/apache/zookeeper/ZooKeeper.LOG : Lorg/slf4j/Logger;
+    INVOKEINTERFACE org/slf4j/Logger.isDebugEnabled ()Z (itf)
+    IFEQ L0
+   L8
+    LINENUMBER 673 L8
+    GETSTATIC org/apache/zookeeper/ZooKeeper.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Closing session: 0x"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper.getSessionId ()J
+    INVOKESTATIC java/lang/Long.toHexString (J)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.debug (Ljava/lang/String;)V (itf)
+   L0
+    LINENUMBER 677 L0
+   FRAME FULL [org/apache/zookeeper/ZooKeeper] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.close ()V
+   L1
+    LINENUMBER 682 L1
+    GOTO L9
+   L2
+    LINENUMBER 678 L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper] [java/io/IOException]
+    ASTORE 1
+   L10
+    LINENUMBER 679 L10
+    GETSTATIC org/apache/zookeeper/ZooKeeper.LOG : Lorg/slf4j/Logger;
+    INVOKEINTERFACE org/slf4j/Logger.isDebugEnabled ()Z (itf)
+    IFEQ L9
+   L11
+    LINENUMBER 680 L11
+    GETSTATIC org/apache/zookeeper/ZooKeeper.LOG : Lorg/slf4j/Logger;
+    LDC "Ignoring unexpected exception during close"
+    ALOAD 1
+    INVOKEINTERFACE org/slf4j/Logger.debug (Ljava/lang/String;Ljava/lang/Throwable;)V (itf)
+   L9
+    LINENUMBER 684 L9
+   FRAME FULL [org/apache/zookeeper/ZooKeeper] []
+    GETSTATIC org/apache/zookeeper/ZooKeeper.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Session: 0x"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper.getSessionId ()J
+    INVOKESTATIC java/lang/Long.toHexString (J)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LDC " closed"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L12
+    LINENUMBER 685 L12
+    RETURN
+   L13
+    LOCALVARIABLE e Ljava/io/IOException; L10 L9 1
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L3 L13 0
+    MAXSTACK = 4
+    MAXLOCALS = 2
+
+  // access flags 0x2
+  private prependChroot(Ljava/lang/String;)Ljava/lang/String;
+   L0
+    LINENUMBER 695 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    GETFIELD org/apache/zookeeper/ClientCnxn.chrootPath : Ljava/lang/String;
+    IFNULL L1
+   L2
+    LINENUMBER 697 L2
+    ALOAD 1
+    INVOKEVIRTUAL java/lang/String.length ()I
+    ICONST_1
+    IF_ICMPNE L3
+   L4
+    LINENUMBER 698 L4
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    GETFIELD org/apache/zookeeper/ClientCnxn.chrootPath : Ljava/lang/String;
+    ARETURN
+   L3
+    LINENUMBER 700 L3
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String] []
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    GETFIELD org/apache/zookeeper/ClientCnxn.chrootPath : Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    ARETURN
+   L1
+    LINENUMBER 702 L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String] []
+    ALOAD 1
+    ARETURN
+   L5
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L5 0
+    LOCALVARIABLE clientPath Ljava/lang/String; L0 L5 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature (Ljava/lang/String;[BLjava/util/List<Lorg/apache/zookeeper/data/ACL;>;Lorg/apache/zookeeper/CreateMode;)Ljava/lang/String;
+  // declaration: java.lang.String create(java.lang.String, byte[], java.util.List<org.apache.zookeeper.data.ACL>, org.apache.zookeeper.CreateMode)
+  public create(Ljava/lang/String;[BLjava/util/List;Lorg/apache/zookeeper/CreateMode;)Ljava/lang/String; throws org/apache/zookeeper/KeeperException java/lang/InterruptedException 
+   L0
+    LINENUMBER 765 L0
+    ALOAD 1
+    ASTORE 5
+   L1
+    LINENUMBER 766 L1
+    ALOAD 5
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/CreateMode.isSequential ()Z
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;Z)V
+   L2
+    LINENUMBER 768 L2
+    ALOAD 0
+    ALOAD 5
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 6
+   L3
+    LINENUMBER 770 L3
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 7
+   L4
+    LINENUMBER 771 L4
+    ALOAD 7
+    ICONST_1
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L5
+    LINENUMBER 772 L5
+    NEW org/apache/zookeeper/proto/CreateRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/CreateRequest.<init> ()V
+    ASTORE 8
+   L6
+    LINENUMBER 773 L6
+    NEW org/apache/zookeeper/proto/CreateResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/CreateResponse.<init> ()V
+    ASTORE 9
+   L7
+    LINENUMBER 774 L7
+    ALOAD 8
+    ALOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/proto/CreateRequest.setData ([B)V
+   L8
+    LINENUMBER 775 L8
+    ALOAD 8
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/CreateMode.toFlag ()I
+    INVOKEVIRTUAL org/apache/zookeeper/proto/CreateRequest.setFlags (I)V
+   L9
+    LINENUMBER 776 L9
+    ALOAD 8
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/proto/CreateRequest.setPath (Ljava/lang/String;)V
+   L10
+    LINENUMBER 777 L10
+    ALOAD 3
+    IFNULL L11
+    ALOAD 3
+    INVOKEINTERFACE java/util/List.size ()I (itf)
+    IFNE L11
+   L12
+    LINENUMBER 778 L12
+    NEW org/apache/zookeeper/KeeperException$InvalidACLException
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/KeeperException$InvalidACLException.<init> ()V
+    ATHROW
+   L11
+    LINENUMBER 780 L11
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String [B java/util/List org/apache/zookeeper/CreateMode java/lang/String java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/CreateRequest org/apache/zookeeper/proto/CreateResponse] []
+    ALOAD 8
+    ALOAD 3
+    INVOKEVIRTUAL org/apache/zookeeper/proto/CreateRequest.setAcl (Ljava/util/List;)V
+   L13
+    LINENUMBER 781 L13
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 7
+    ALOAD 8
+    ALOAD 9
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.submitRequest (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/proto/ReplyHeader;
+    ASTORE 10
+   L14
+    LINENUMBER 782 L14
+    ALOAD 10
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    IFEQ L15
+   L16
+    LINENUMBER 783 L16
+    ALOAD 10
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    INVOKESTATIC org/apache/zookeeper/KeeperException$Code.get (I)Lorg/apache/zookeeper/KeeperException$Code;
+    ALOAD 5
+    INVOKESTATIC org/apache/zookeeper/KeeperException.create (Lorg/apache/zookeeper/KeeperException$Code;Ljava/lang/String;)Lorg/apache/zookeeper/KeeperException;
+    ATHROW
+   L15
+    LINENUMBER 786 L15
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String [B java/util/List org/apache/zookeeper/CreateMode java/lang/String java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/CreateRequest org/apache/zookeeper/proto/CreateResponse org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    GETFIELD org/apache/zookeeper/ClientCnxn.chrootPath : Ljava/lang/String;
+    IFNONNULL L17
+   L18
+    LINENUMBER 787 L18
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/CreateResponse.getPath ()Ljava/lang/String;
+    ARETURN
+   L17
+    LINENUMBER 789 L17
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String [B java/util/List org/apache/zookeeper/CreateMode java/lang/String java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/CreateRequest org/apache/zookeeper/proto/CreateResponse org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/CreateResponse.getPath ()Ljava/lang/String;
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    GETFIELD org/apache/zookeeper/ClientCnxn.chrootPath : Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/String.length ()I
+    INVOKEVIRTUAL java/lang/String.substring (I)Ljava/lang/String;
+    ARETURN
+   L19
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L19 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L19 1
+    LOCALVARIABLE data [B L0 L19 2
+    LOCALVARIABLE acl Ljava/util/List; L0 L19 3
+    // signature Ljava/util/List<Lorg/apache/zookeeper/data/ACL;>;
+    // declaration: acl extends java.util.List<org.apache.zookeeper.data.ACL>
+    LOCALVARIABLE createMode Lorg/apache/zookeeper/CreateMode; L0 L19 4
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L19 5
+    LOCALVARIABLE serverPath Ljava/lang/String; L3 L19 6
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L4 L19 7
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/CreateRequest; L6 L19 8
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/CreateResponse; L7 L19 9
+    LOCALVARIABLE r Lorg/apache/zookeeper/proto/ReplyHeader; L14 L19 10
+    MAXSTACK = 5
+    MAXLOCALS = 11
+
+  // access flags 0x1
+  // signature (Ljava/lang/String;[BLjava/util/List<Lorg/apache/zookeeper/data/ACL;>;Lorg/apache/zookeeper/CreateMode;Lorg/apache/zookeeper/AsyncCallback$StringCallback;Ljava/lang/Object;)V
+  // declaration: void create(java.lang.String, byte[], java.util.List<org.apache.zookeeper.data.ACL>, org.apache.zookeeper.CreateMode, org.apache.zookeeper.AsyncCallback$StringCallback, java.lang.Object)
+  public create(Ljava/lang/String;[BLjava/util/List;Lorg/apache/zookeeper/CreateMode;Lorg/apache/zookeeper/AsyncCallback$StringCallback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 802 L0
+    ALOAD 1
+    ASTORE 7
+   L1
+    LINENUMBER 803 L1
+    ALOAD 7
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/CreateMode.isSequential ()Z
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;Z)V
+   L2
+    LINENUMBER 805 L2
+    ALOAD 0
+    ALOAD 7
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 8
+   L3
+    LINENUMBER 807 L3
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 9
+   L4
+    LINENUMBER 808 L4
+    ALOAD 9
+    ICONST_1
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L5
+    LINENUMBER 809 L5
+    NEW org/apache/zookeeper/proto/CreateRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/CreateRequest.<init> ()V
+    ASTORE 10
+   L6
+    LINENUMBER 810 L6
+    NEW org/apache/zookeeper/proto/CreateResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/CreateResponse.<init> ()V
+    ASTORE 11
+   L7
+    LINENUMBER 811 L7
+    NEW org/apache/zookeeper/proto/ReplyHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/ReplyHeader.<init> ()V
+    ASTORE 12
+   L8
+    LINENUMBER 812 L8
+    ALOAD 10
+    ALOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/proto/CreateRequest.setData ([B)V
+   L9
+    LINENUMBER 813 L9
+    ALOAD 10
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/CreateMode.toFlag ()I
+    INVOKEVIRTUAL org/apache/zookeeper/proto/CreateRequest.setFlags (I)V
+   L10
+    LINENUMBER 814 L10
+    ALOAD 10
+    ALOAD 8
+    INVOKEVIRTUAL org/apache/zookeeper/proto/CreateRequest.setPath (Ljava/lang/String;)V
+   L11
+    LINENUMBER 815 L11
+    ALOAD 10
+    ALOAD 3
+    INVOKEVIRTUAL org/apache/zookeeper/proto/CreateRequest.setAcl (Ljava/util/List;)V
+   L12
+    LINENUMBER 816 L12
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 9
+    ALOAD 12
+    ALOAD 10
+    ALOAD 11
+    ALOAD 5
+    ALOAD 7
+    ALOAD 8
+    ALOAD 6
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.queuePacket (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/zookeeper/proto/ReplyHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/AsyncCallback;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/ClientCnxn$Packet;
+    POP
+   L13
+    LINENUMBER 818 L13
+    RETURN
+   L14
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L14 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L14 1
+    LOCALVARIABLE data [B L0 L14 2
+    LOCALVARIABLE acl Ljava/util/List; L0 L14 3
+    // signature Ljava/util/List<Lorg/apache/zookeeper/data/ACL;>;
+    // declaration: acl extends java.util.List<org.apache.zookeeper.data.ACL>
+    LOCALVARIABLE createMode Lorg/apache/zookeeper/CreateMode; L0 L14 4
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$StringCallback; L0 L14 5
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L14 6
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L14 7
+    LOCALVARIABLE serverPath Ljava/lang/String; L3 L14 8
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L4 L14 9
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/CreateRequest; L6 L14 10
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/CreateResponse; L7 L14 11
+    LOCALVARIABLE r Lorg/apache/zookeeper/proto/ReplyHeader; L8 L14 12
+    MAXSTACK = 10
+    MAXLOCALS = 13
+
+  // access flags 0x1
+  public delete(Ljava/lang/String;I)V throws java/lang/InterruptedException org/apache/zookeeper/KeeperException 
+   L0
+    LINENUMBER 850 L0
+    ALOAD 1
+    ASTORE 3
+   L1
+    LINENUMBER 851 L1
+    ALOAD 3
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 858 L2
+    ALOAD 3
+    LDC "/"
+    INVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z
+    IFEQ L3
+   L4
+    LINENUMBER 861 L4
+    ALOAD 3
+    ASTORE 4
+   L5
+    GOTO L6
+   L3
+    LINENUMBER 863 L3
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I java/lang/String] []
+    ALOAD 0
+    ALOAD 3
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 4
+   L6
+    LINENUMBER 866 L6
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I java/lang/String java/lang/String] []
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 5
+   L7
+    LINENUMBER 867 L7
+    ALOAD 5
+    ICONST_2
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L8
+    LINENUMBER 868 L8
+    NEW org/apache/zookeeper/proto/DeleteRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/DeleteRequest.<init> ()V
+    ASTORE 6
+   L9
+    LINENUMBER 869 L9
+    ALOAD 6
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/proto/DeleteRequest.setPath (Ljava/lang/String;)V
+   L10
+    LINENUMBER 870 L10
+    ALOAD 6
+    ILOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/proto/DeleteRequest.setVersion (I)V
+   L11
+    LINENUMBER 871 L11
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 5
+    ALOAD 6
+    ACONST_NULL
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.submitRequest (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/proto/ReplyHeader;
+    ASTORE 7
+   L12
+    LINENUMBER 872 L12
+    ALOAD 7
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    IFEQ L13
+   L14
+    LINENUMBER 873 L14
+    ALOAD 7
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    INVOKESTATIC org/apache/zookeeper/KeeperException$Code.get (I)Lorg/apache/zookeeper/KeeperException$Code;
+    ALOAD 3
+    INVOKESTATIC org/apache/zookeeper/KeeperException.create (Lorg/apache/zookeeper/KeeperException$Code;Ljava/lang/String;)Lorg/apache/zookeeper/KeeperException;
+    ATHROW
+   L13
+    LINENUMBER 876 L13
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I java/lang/String java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/DeleteRequest org/apache/zookeeper/proto/ReplyHeader] []
+    RETURN
+   L15
+    LOCALVARIABLE serverPath Ljava/lang/String; L5 L3 4
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L15 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L15 1
+    LOCALVARIABLE version I L0 L15 2
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L15 3
+    LOCALVARIABLE serverPath Ljava/lang/String; L6 L15 4
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L7 L15 5
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/DeleteRequest; L9 L15 6
+    LOCALVARIABLE r Lorg/apache/zookeeper/proto/ReplyHeader; L12 L15 7
+    MAXSTACK = 5
+    MAXLOCALS = 8
+
+  // access flags 0x1
+  // signature (Ljava/lang/Iterable<Lorg/apache/zookeeper/Op;>;)Ljava/util/List<Lorg/apache/zookeeper/OpResult;>;
+  // declaration: java.util.List<org.apache.zookeeper.OpResult> multi(java.lang.Iterable<org.apache.zookeeper.Op>)
+  public multi(Ljava/lang/Iterable;)Ljava/util/List; throws java/lang/InterruptedException org/apache/zookeeper/KeeperException 
+   L0
+    LINENUMBER 907 L0
+    ALOAD 1
+    INVOKEINTERFACE java/lang/Iterable.iterator ()Ljava/util/Iterator; (itf)
+    ASTORE 2
+   L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/Iterable java/util/Iterator] []
+    ALOAD 2
+    INVOKEINTERFACE java/util/Iterator.hasNext ()Z (itf)
+    IFEQ L2
+    ALOAD 2
+    INVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object; (itf)
+    CHECKCAST org/apache/zookeeper/Op
+    ASTORE 3
+   L3
+    LINENUMBER 908 L3
+    ALOAD 3
+    INVOKEVIRTUAL org/apache/zookeeper/Op.validate ()V
+   L4
+    LINENUMBER 909 L4
+    GOTO L1
+   L2
+    LINENUMBER 910 L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/Iterable] []
+    ALOAD 0
+    ALOAD 0
+    ALOAD 1
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.generateMultiTransaction (Ljava/lang/Iterable;)Lorg/apache/zookeeper/MultiTransactionRecord;
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper.multiInternal (Lorg/apache/zookeeper/MultiTransactionRecord;)Ljava/util/List;
+    ARETURN
+   L5
+    LOCALVARIABLE op Lorg/apache/zookeeper/Op; L3 L4 3
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L5 0
+    LOCALVARIABLE ops Ljava/lang/Iterable; L0 L5 1
+    // signature Ljava/lang/Iterable<Lorg/apache/zookeeper/Op;>;
+    // declaration: ops extends java.lang.Iterable<org.apache.zookeeper.Op>
+    MAXSTACK = 3
+    MAXLOCALS = 4
+
+  // access flags 0x1
+  // signature (Ljava/lang/Iterable<Lorg/apache/zookeeper/Op;>;Lorg/apache/zookeeper/AsyncCallback$MultiCallback;Ljava/lang/Object;)V
+  // declaration: void multi(java.lang.Iterable<org.apache.zookeeper.Op>, org.apache.zookeeper.AsyncCallback$MultiCallback, java.lang.Object)
+  public multi(Ljava/lang/Iterable;Lorg/apache/zookeeper/AsyncCallback$MultiCallback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 920 L0
+    ALOAD 0
+    ALOAD 1
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.validatePath (Ljava/lang/Iterable;)Ljava/util/List;
+    ASTORE 4
+   L1
+    LINENUMBER 921 L1
+    ALOAD 4
+    INVOKEINTERFACE java/util/List.size ()I (itf)
+    IFLE L2
+   L3
+    LINENUMBER 922 L3
+    ALOAD 2
+    GETSTATIC org/apache/zookeeper/KeeperException$Code.BADARGUMENTS : Lorg/apache/zookeeper/KeeperException$Code;
+    INVOKEVIRTUAL org/apache/zookeeper/KeeperException$Code.intValue ()I
+    ACONST_NULL
+    ALOAD 3
+    ALOAD 4
+    INVOKEINTERFACE org/apache/zookeeper/AsyncCallback$MultiCallback.processResult (ILjava/lang/String;Ljava/lang/Object;Ljava/util/List;)V (itf)
+   L4
+    LINENUMBER 924 L4
+    RETURN
+   L2
+    LINENUMBER 926 L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/Iterable org/apache/zookeeper/AsyncCallback$MultiCallback java/lang/Object java/util/List] []
+    ALOAD 0
+    ALOAD 0
+    ALOAD 1
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.generateMultiTransaction (Ljava/lang/Iterable;)Lorg/apache/zookeeper/MultiTransactionRecord;
+    ALOAD 2
+    ALOAD 3
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper.multiInternal (Lorg/apache/zookeeper/MultiTransactionRecord;Lorg/apache/zookeeper/AsyncCallback$MultiCallback;Ljava/lang/Object;)V
+   L5
+    LINENUMBER 927 L5
+    RETURN
+   L6
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L6 0
+    LOCALVARIABLE ops Ljava/lang/Iterable; L0 L6 1
+    // signature Ljava/lang/Iterable<Lorg/apache/zookeeper/Op;>;
+    // declaration: ops extends java.lang.Iterable<org.apache.zookeeper.Op>
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$MultiCallback; L0 L6 2
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L6 3
+    LOCALVARIABLE results Ljava/util/List; L1 L6 4
+    // signature Ljava/util/List<Lorg/apache/zookeeper/OpResult;>;
+    // declaration: results extends java.util.List<org.apache.zookeeper.OpResult>
+    MAXSTACK = 5
+    MAXLOCALS = 5
+
+  // access flags 0x2
+  // signature (Ljava/lang/Iterable<Lorg/apache/zookeeper/Op;>;)Ljava/util/List<Lorg/apache/zookeeper/OpResult;>;
+  // declaration: java.util.List<org.apache.zookeeper.OpResult> validatePath(java.lang.Iterable<org.apache.zookeeper.Op>)
+  private validatePath(Ljava/lang/Iterable;)Ljava/util/List;
+    TRYCATCHBLOCK L0 L1 L2 java/lang/IllegalArgumentException
+    TRYCATCHBLOCK L0 L1 L3 org/apache/zookeeper/KeeperException
+   L4
+    LINENUMBER 930 L4
+    NEW java/util/ArrayList
+    DUP
+    INVOKESPECIAL java/util/ArrayList.<init> ()V
+    ASTORE 2
+   L5
+    LINENUMBER 931 L5
+    ICONST_0
+    ISTORE 3
+   L6
+    LINENUMBER 932 L6
+    ALOAD 1
+    INVOKEINTERFACE java/lang/Iterable.iterator ()Ljava/util/Iterator; (itf)
+    ASTORE 4
+   L7
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/Iterable java/util/List I java/util/Iterator] []
+    ALOAD 4
+    INVOKEINTERFACE java/util/Iterator.hasNext ()Z (itf)
+    IFEQ L8
+    ALOAD 4
+    INVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object; (itf)
+    CHECKCAST org/apache/zookeeper/Op
+    ASTORE 5
+   L0
+    LINENUMBER 934 L0
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/Op.validate ()V
+   L1
+    LINENUMBER 948 L1
+    GOTO L9
+   L2
+    LINENUMBER 935 L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/Iterable java/util/List I java/util/Iterator org/apache/zookeeper/Op] [java/lang/IllegalArgumentException]
+    ASTORE 6
+   L10
+    LINENUMBER 936 L10
+    GETSTATIC org/apache/zookeeper/ZooKeeper.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "IllegalArgumentException: "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 6
+    INVOKEVIRTUAL java/lang/IllegalArgumentException.getMessage ()Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.error (Ljava/lang/String;)V (itf)
+   L11
+    LINENUMBER 937 L11
+    NEW org/apache/zookeeper/OpResult$ErrorResult
+    DUP
+    GETSTATIC org/apache/zookeeper/KeeperException$Code.BADARGUMENTS : Lorg/apache/zookeeper/KeeperException$Code;
+   L12
+    LINENUMBER 938 L12
+    INVOKEVIRTUAL org/apache/zookeeper/KeeperException$Code.intValue ()I
+    INVOKESPECIAL org/apache/zookeeper/OpResult$ErrorResult.<init> (I)V
+    ASTORE 7
+   L13
+    LINENUMBER 939 L13
+    ALOAD 2
+    ALOAD 7
+    INVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z (itf)
+    POP
+   L14
+    LINENUMBER 940 L14
+    ICONST_1
+    ISTORE 3
+   L15
+    LINENUMBER 941 L15
+    GOTO L7
+   L3
+    LINENUMBER 942 L3
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/Iterable java/util/List I java/util/Iterator org/apache/zookeeper/Op] [org/apache/zookeeper/KeeperException]
+    ASTORE 6
+   L16
+    LINENUMBER 943 L16
+    GETSTATIC org/apache/zookeeper/ZooKeeper.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "KeeperException: "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/KeeperException.getMessage ()Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.error (Ljava/lang/String;)V (itf)
+   L17
+    LINENUMBER 944 L17
+    NEW org/apache/zookeeper/OpResult$ErrorResult
+    DUP
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/KeeperException.code ()Lorg/apache/zookeeper/KeeperException$Code;
+    INVOKEVIRTUAL org/apache/zookeeper/KeeperException$Code.intValue ()I
+    INVOKESPECIAL org/apache/zookeeper/OpResult$ErrorResult.<init> (I)V
+    ASTORE 7
+   L18
+    LINENUMBER 945 L18
+    ALOAD 2
+    ALOAD 7
+    INVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z (itf)
+    POP
+   L19
+    LINENUMBER 946 L19
+    ICONST_1
+    ISTORE 3
+   L20
+    LINENUMBER 947 L20
+    GOTO L7
+   L9
+    LINENUMBER 949 L9
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/Iterable java/util/List I java/util/Iterator org/apache/zookeeper/Op] []
+    NEW org/apache/zookeeper/OpResult$ErrorResult
+    DUP
+    GETSTATIC org/apache/zookeeper/KeeperException$Code.RUNTIMEINCONSISTENCY : Lorg/apache/zookeeper/KeeperException$Code;
+   L21
+    LINENUMBER 950 L21
+    INVOKEVIRTUAL org/apache/zookeeper/KeeperException$Code.intValue ()I
+    INVOKESPECIAL org/apache/zookeeper/OpResult$ErrorResult.<init> (I)V
+    ASTORE 6
+   L22
+    LINENUMBER 951 L22
+    ALOAD 2
+    ALOAD 6
+    INVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z (itf)
+    POP
+   L23
+    LINENUMBER 952 L23
+    GOTO L7
+   L8
+    LINENUMBER 953 L8
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/Iterable java/util/List I] []
+    ICONST_0
+    ILOAD 3
+    IF_ICMPNE L24
+   L25
+    LINENUMBER 954 L25
+    ALOAD 2
+    INVOKEINTERFACE java/util/List.clear ()V (itf)
+   L24
+    LINENUMBER 956 L24
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/Iterable java/util/List I] []
+    ALOAD 2
+    ARETURN
+   L26
+    LOCALVARIABLE err Lorg/apache/zookeeper/OpResult$ErrorResult; L13 L3 7
+    LOCALVARIABLE iae Ljava/lang/IllegalArgumentException; L10 L3 6
+    LOCALVARIABLE err Lorg/apache/zookeeper/OpResult$ErrorResult; L18 L9 7
+    LOCALVARIABLE ke Lorg/apache/zookeeper/KeeperException; L16 L9 6
+    LOCALVARIABLE err Lorg/apache/zookeeper/OpResult$ErrorResult; L22 L23 6
+    LOCALVARIABLE op Lorg/apache/zookeeper/Op; L0 L23 5
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L4 L26 0
+    LOCALVARIABLE ops Ljava/lang/Iterable; L4 L26 1
+    // signature Ljava/lang/Iterable<Lorg/apache/zookeeper/Op;>;
+    // declaration: ops extends java.lang.Iterable<org.apache.zookeeper.Op>
+    LOCALVARIABLE results Ljava/util/List; L5 L26 2
+    // signature Ljava/util/List<Lorg/apache/zookeeper/OpResult;>;
+    // declaration: results extends java.util.List<org.apache.zookeeper.OpResult>
+    LOCALVARIABLE error Z L6 L26 3
+    MAXSTACK = 3
+    MAXLOCALS = 8
+
+  // access flags 0x2
+  // signature (Ljava/lang/Iterable<Lorg/apache/zookeeper/Op;>;)Lorg/apache/zookeeper/MultiTransactionRecord;
+  // declaration: org.apache.zookeeper.MultiTransactionRecord generateMultiTransaction(java.lang.Iterable<org.apache.zookeeper.Op>)
+  private generateMultiTransaction(Ljava/lang/Iterable;)Lorg/apache/zookeeper/MultiTransactionRecord;
+   L0
+    LINENUMBER 960 L0
+    NEW java/util/ArrayList
+    DUP
+    INVOKESPECIAL java/util/ArrayList.<init> ()V
+    ASTORE 2
+   L1
+    LINENUMBER 962 L1
+    ALOAD 1
+    INVOKEINTERFACE java/lang/Iterable.iterator ()Ljava/util/Iterator; (itf)
+    ASTORE 3
+   L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/Iterable java/util/List java/util/Iterator] []
+    ALOAD 3
+    INVOKEINTERFACE java/util/Iterator.hasNext ()Z (itf)
+    IFEQ L3
+    ALOAD 3
+    INVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object; (itf)
+    CHECKCAST org/apache/zookeeper/Op
+    ASTORE 4
+   L4
+    LINENUMBER 963 L4
+    ALOAD 2
+    ALOAD 0
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.withRootPrefix (Lorg/apache/zookeeper/Op;)Lorg/apache/zookeeper/Op;
+    INVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z (itf)
+    POP
+   L5
+    LINENUMBER 964 L5
+    GOTO L2
+   L3
+    LINENUMBER 965 L3
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/Iterable java/util/List] []
+    NEW org/apache/zookeeper/MultiTransactionRecord
+    DUP
+    ALOAD 2
+    INVOKESPECIAL org/apache/zookeeper/MultiTransactionRecord.<init> (Ljava/lang/Iterable;)V
+    ARETURN
+   L6
+    LOCALVARIABLE op Lorg/apache/zookeeper/Op; L4 L5 4
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L6 0
+    LOCALVARIABLE ops Ljava/lang/Iterable; L0 L6 1
+    // signature Ljava/lang/Iterable<Lorg/apache/zookeeper/Op;>;
+    // declaration: ops extends java.lang.Iterable<org.apache.zookeeper.Op>
+    LOCALVARIABLE transaction Ljava/util/List; L1 L6 2
+    // signature Ljava/util/List<Lorg/apache/zookeeper/Op;>;
+    // declaration: transaction extends java.util.List<org.apache.zookeeper.Op>
+    MAXSTACK = 3
+    MAXLOCALS = 5
+
+  // access flags 0x2
+  private withRootPrefix(Lorg/apache/zookeeper/Op;)Lorg/apache/zookeeper/Op;
+   L0
+    LINENUMBER 969 L0
+    ACONST_NULL
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/Op.getPath ()Ljava/lang/String;
+    IF_ACMPEQ L1
+   L2
+    LINENUMBER 970 L2
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/Op.getPath ()Ljava/lang/String;
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 2
+   L3
+    LINENUMBER 971 L3
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/Op.getPath ()Ljava/lang/String;
+    ALOAD 2
+    INVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z
+    IFNE L1
+   L4
+    LINENUMBER 972 L4
+    ALOAD 1
+    ALOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/Op.withChroot (Ljava/lang/String;)Lorg/apache/zookeeper/Op;
+    ARETURN
+   L1
+    LINENUMBER 975 L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper org/apache/zookeeper/Op] []
+    ALOAD 1
+    ARETURN
+   L5
+    LOCALVARIABLE serverPath Ljava/lang/String; L3 L1 2
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L5 0
+    LOCALVARIABLE op Lorg/apache/zookeeper/Op; L0 L5 1
+    MAXSTACK = 2
+    MAXLOCALS = 3
+
+  // access flags 0x4
+  protected multiInternal(Lorg/apache/zookeeper/MultiTransactionRecord;Lorg/apache/zookeeper/AsyncCallback$MultiCallback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 979 L0
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 4
+   L1
+    LINENUMBER 980 L1
+    ALOAD 4
+    BIPUSH 14
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L2
+    LINENUMBER 981 L2
+    NEW org/apache/zookeeper/MultiResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/MultiResponse.<init> ()V
+    ASTORE 5
+   L3
+    LINENUMBER 982 L3
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 4
+    NEW org/apache/zookeeper/proto/ReplyHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/ReplyHeader.<init> ()V
+    ALOAD 1
+    ALOAD 5
+    ALOAD 2
+    ACONST_NULL
+    ACONST_NULL
+    ALOAD 3
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.queuePacket (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/zookeeper/proto/ReplyHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/AsyncCallback;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/ClientCnxn$Packet;
+    POP
+   L4
+    LINENUMBER 983 L4
+    RETURN
+   L5
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L5 0
+    LOCALVARIABLE request Lorg/apache/zookeeper/MultiTransactionRecord; L0 L5 1
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$MultiCallback; L0 L5 2
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L5 3
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L1 L5 4
+    LOCALVARIABLE response Lorg/apache/zookeeper/MultiResponse; L3 L5 5
+    MAXSTACK = 10
+    MAXLOCALS = 6
+
+  // access flags 0x4
+  // signature (Lorg/apache/zookeeper/MultiTransactionRecord;)Ljava/util/List<Lorg/apache/zookeeper/OpResult;>;
+  // declaration: java.util.List<org.apache.zookeeper.OpResult> multiInternal(org.apache.zookeeper.MultiTransactionRecord)
+  protected multiInternal(Lorg/apache/zookeeper/MultiTransactionRecord;)Ljava/util/List; throws java/lang/InterruptedException org/apache/zookeeper/KeeperException 
+   L0
+    LINENUMBER 987 L0
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 2
+   L1
+    LINENUMBER 988 L1
+    ALOAD 2
+    BIPUSH 14
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L2
+    LINENUMBER 989 L2
+    NEW org/apache/zookeeper/MultiResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/MultiResponse.<init> ()V
+    ASTORE 3
+   L3
+    LINENUMBER 990 L3
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 2
+    ALOAD 1
+    ALOAD 3
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.submitRequest (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/proto/ReplyHeader;
+    ASTORE 4
+   L4
+    LINENUMBER 991 L4
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    IFEQ L5
+   L6
+    LINENUMBER 992 L6
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    INVOKESTATIC org/apache/zookeeper/KeeperException$Code.get (I)Lorg/apache/zookeeper/KeeperException$Code;
+    INVOKESTATIC org/apache/zookeeper/KeeperException.create (Lorg/apache/zookeeper/KeeperException$Code;)Lorg/apache/zookeeper/KeeperException;
+    ATHROW
+   L5
+    LINENUMBER 995 L5
+   FRAME FULL [org/apache/zookeeper/ZooKeeper org/apache/zookeeper/MultiTransactionRecord org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/MultiResponse org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 3
+    INVOKEVIRTUAL org/apache/zookeeper/MultiResponse.getResultList ()Ljava/util/List;
+    ASTORE 5
+   L7
+    LINENUMBER 997 L7
+    ACONST_NULL
+    ASTORE 6
+   L8
+    LINENUMBER 998 L8
+    ALOAD 5
+    INVOKEINTERFACE java/util/List.iterator ()Ljava/util/Iterator; (itf)
+    ASTORE 7
+   L9
+   FRAME FULL [org/apache/zookeeper/ZooKeeper org/apache/zookeeper/MultiTransactionRecord org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/MultiResponse org/apache/zookeeper/proto/ReplyHeader java/util/List org/apache/zookeeper/OpResult$ErrorResult java/util/Iterator] []
+    ALOAD 7
+    INVOKEINTERFACE java/util/Iterator.hasNext ()Z (itf)
+    IFEQ L10
+    ALOAD 7
+    INVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object; (itf)
+    CHECKCAST org/apache/zookeeper/OpResult
+    ASTORE 8
+   L11
+    LINENUMBER 999 L11
+    ALOAD 8
+    INSTANCEOF org/apache/zookeeper/OpResult$ErrorResult
+    IFEQ L12
+    ALOAD 8
+    CHECKCAST org/apache/zookeeper/OpResult$ErrorResult
+    INVOKEVIRTUAL org/apache/zookeeper/OpResult$ErrorResult.getErr ()I
+    GETSTATIC org/apache/zookeeper/KeeperException$Code.OK : Lorg/apache/zookeeper/KeeperException$Code;
+    INVOKEVIRTUAL org/apache/zookeeper/KeeperException$Code.intValue ()I
+    IF_ICMPEQ L12
+   L13
+    LINENUMBER 1000 L13
+    ALOAD 8
+    CHECKCAST org/apache/zookeeper/OpResult$ErrorResult
+    ASTORE 6
+   L14
+    LINENUMBER 1001 L14
+    GOTO L10
+   L12
+    LINENUMBER 1003 L12
+   FRAME FULL [org/apache/zookeeper/ZooKeeper org/apache/zookeeper/MultiTransactionRecord org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/MultiResponse org/apache/zookeeper/proto/ReplyHeader java/util/List org/apache/zookeeper/OpResult$ErrorResult java/util/Iterator] []
+    GOTO L9
+   L10
+    LINENUMBER 1005 L10
+   FRAME FULL [org/apache/zookeeper/ZooKeeper org/apache/zookeeper/MultiTransactionRecord org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/MultiResponse org/apache/zookeeper/proto/ReplyHeader java/util/List org/apache/zookeeper/OpResult$ErrorResult] []
+    ALOAD 6
+    IFNONNULL L15
+   L16
+    LINENUMBER 1006 L16
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/OpResult$ErrorResult.getErr ()I
+    INVOKESTATIC org/apache/zookeeper/KeeperException$Code.get (I)Lorg/apache/zookeeper/KeeperException$Code;
+    INVOKESTATIC org/apache/zookeeper/KeeperException.create (Lorg/apache/zookeeper/KeeperException$Code;)Lorg/apache/zookeeper/KeeperException;
+    ASTORE 7
+   L17
+    LINENUMBER 1007 L17
+    ALOAD 7
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/KeeperException.setMultiResults (Ljava/util/List;)V
+   L18
+    LINENUMBER 1008 L18
+    ALOAD 7
+    ATHROW
+   L15
+    LINENUMBER 1011 L15
+   FRAME FULL [org/apache/zookeeper/ZooKeeper org/apache/zookeeper/MultiTransactionRecord org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/MultiResponse org/apache/zookeeper/proto/ReplyHeader java/util/List org/apache/zookeeper/OpResult$ErrorResult] []
+    ALOAD 5
+    ARETURN
+   L19
+    LOCALVARIABLE result Lorg/apache/zookeeper/OpResult; L11 L12 8
+    LOCALVARIABLE ex Lorg/apache/zookeeper/KeeperException; L17 L15 7
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L19 0
+    LOCALVARIABLE request Lorg/apache/zookeeper/MultiTransactionRecord; L0 L19 1
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L1 L19 2
+    LOCALVARIABLE response Lorg/apache/zookeeper/MultiResponse; L3 L19 3
+    LOCALVARIABLE r Lorg/apache/zookeeper/proto/ReplyHeader; L4 L19 4
+    LOCALVARIABLE results Ljava/util/List; L7 L19 5
+    // signature Ljava/util/List<Lorg/apache/zookeeper/OpResult;>;
+    // declaration: results extends java.util.List<org.apache.zookeeper.OpResult>
+    LOCALVARIABLE fatalError Lorg/apache/zookeeper/OpResult$ErrorResult; L8 L19 6
+    MAXSTACK = 5
+    MAXLOCALS = 9
+
+  // access flags 0x1
+  public transaction()Lorg/apache/zookeeper/Transaction;
+   L0
+    LINENUMBER 1024 L0
+    NEW org/apache/zookeeper/Transaction
+    DUP
+    ALOAD 0
+    INVOKESPECIAL org/apache/zookeeper/Transaction.<init> (Lorg/apache/zookeeper/ZooKeeper;)V
+    ARETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L1 0
+    MAXSTACK = 3
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public delete(Ljava/lang/String;ILorg/apache/zookeeper/AsyncCallback$VoidCallback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 1035 L0
+    ALOAD 1
+    ASTORE 5
+   L1
+    LINENUMBER 1036 L1
+    ALOAD 5
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1043 L2
+    ALOAD 5
+    LDC "/"
+    INVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z
+    IFEQ L3
+   L4
+    LINENUMBER 1046 L4
+    ALOAD 5
+    ASTORE 6
+   L5
+    GOTO L6
+   L3
+    LINENUMBER 1048 L3
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/AsyncCallback$VoidCallback java/lang/Object java/lang/String] []
+    ALOAD 0
+    ALOAD 5
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 6
+   L6
+    LINENUMBER 1051 L6
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/AsyncCallback$VoidCallback java/lang/Object java/lang/String java/lang/String] []
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 7
+   L7
+    LINENUMBER 1052 L7
+    ALOAD 7
+    ICONST_2
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L8
+    LINENUMBER 1053 L8
+    NEW org/apache/zookeeper/proto/DeleteRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/DeleteRequest.<init> ()V
+    ASTORE 8
+   L9
+    LINENUMBER 1054 L9
+    ALOAD 8
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/proto/DeleteRequest.setPath (Ljava/lang/String;)V
+   L10
+    LINENUMBER 1055 L10
+    ALOAD 8
+    ILOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/proto/DeleteRequest.setVersion (I)V
+   L11
+    LINENUMBER 1056 L11
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 7
+    NEW org/apache/zookeeper/proto/ReplyHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/ReplyHeader.<init> ()V
+    ALOAD 8
+    ACONST_NULL
+    ALOAD 3
+    ALOAD 5
+    ALOAD 6
+    ALOAD 4
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.queuePacket (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/zookeeper/proto/ReplyHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/AsyncCallback;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/ClientCnxn$Packet;
+    POP
+   L12
+    LINENUMBER 1058 L12
+    RETURN
+   L13
+    LOCALVARIABLE serverPath Ljava/lang/String; L5 L3 6
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L13 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L13 1
+    LOCALVARIABLE version I L0 L13 2
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$VoidCallback; L0 L13 3
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L13 4
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L13 5
+    LOCALVARIABLE serverPath Ljava/lang/String; L6 L13 6
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L7 L13 7
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/DeleteRequest; L9 L13 8
+    MAXSTACK = 10
+    MAXLOCALS = 9
+
+  // access flags 0x1
+  public exists(Ljava/lang/String;Lorg/apache/zookeeper/Watcher;)Lorg/apache/zookeeper/data/Stat; throws org/apache/zookeeper/KeeperException java/lang/InterruptedException 
+   L0
+    LINENUMBER 1080 L0
+    ALOAD 1
+    ASTORE 3
+   L1
+    LINENUMBER 1081 L1
+    ALOAD 3
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1084 L2
+    ACONST_NULL
+    ASTORE 4
+   L3
+    LINENUMBER 1085 L3
+    ALOAD 2
+    IFNULL L4
+   L5
+    LINENUMBER 1086 L5
+    NEW org/apache/zookeeper/ZooKeeper$ExistsWatchRegistration
+    DUP
+    ALOAD 0
+    ALOAD 2
+    ALOAD 3
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ExistsWatchRegistration.<init> (Lorg/apache/zookeeper/ZooKeeper;Lorg/apache/zookeeper/Watcher;Ljava/lang/String;)V
+    ASTORE 4
+   L4
+    LINENUMBER 1089 L4
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration] []
+    ALOAD 0
+    ALOAD 3
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 5
+   L6
+    LINENUMBER 1091 L6
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 6
+   L7
+    LINENUMBER 1092 L7
+    ALOAD 6
+    ICONST_3
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L8
+    LINENUMBER 1093 L8
+    NEW org/apache/zookeeper/proto/ExistsRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/ExistsRequest.<init> ()V
+    ASTORE 7
+   L9
+    LINENUMBER 1094 L9
+    ALOAD 7
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ExistsRequest.setPath (Ljava/lang/String;)V
+   L10
+    LINENUMBER 1095 L10
+    ALOAD 7
+    ALOAD 2
+    IFNULL L11
+    ICONST_1
+    GOTO L12
+   L11
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/ExistsRequest] [org/apache/zookeeper/proto/ExistsRequest]
+    ICONST_0
+   L12
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/ExistsRequest] [org/apache/zookeeper/proto/ExistsRequest I]
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ExistsRequest.setWatch (Z)V
+   L13
+    LINENUMBER 1096 L13
+    NEW org/apache/zookeeper/proto/SetDataResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/SetDataResponse.<init> ()V
+    ASTORE 8
+   L14
+    LINENUMBER 1097 L14
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 6
+    ALOAD 7
+    ALOAD 8
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.submitRequest (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/proto/ReplyHeader;
+    ASTORE 9
+   L15
+    LINENUMBER 1098 L15
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    IFEQ L16
+   L17
+    LINENUMBER 1099 L17
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    GETSTATIC org/apache/zookeeper/KeeperException$Code.NONODE : Lorg/apache/zookeeper/KeeperException$Code;
+    INVOKEVIRTUAL org/apache/zookeeper/KeeperException$Code.intValue ()I
+    IF_ICMPNE L18
+   L19
+    LINENUMBER 1100 L19
+    ACONST_NULL
+    ARETURN
+   L18
+    LINENUMBER 1102 L18
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/ExistsRequest org/apache/zookeeper/proto/SetDataResponse org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    INVOKESTATIC org/apache/zookeeper/KeeperException$Code.get (I)Lorg/apache/zookeeper/KeeperException$Code;
+    ALOAD 3
+    INVOKESTATIC org/apache/zookeeper/KeeperException.create (Lorg/apache/zookeeper/KeeperException$Code;Ljava/lang/String;)Lorg/apache/zookeeper/KeeperException;
+    ATHROW
+   L16
+    LINENUMBER 1106 L16
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/ExistsRequest org/apache/zookeeper/proto/SetDataResponse org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 8
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetDataResponse.getStat ()Lorg/apache/zookeeper/data/Stat;
+    INVOKEVIRTUAL org/apache/zookeeper/data/Stat.getCzxid ()J
+    LDC -1
+    LCMP
+    IFNE L20
+    ACONST_NULL
+    GOTO L21
+   L20
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/ExistsRequest org/apache/zookeeper/proto/SetDataResponse org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 8
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetDataResponse.getStat ()Lorg/apache/zookeeper/data/Stat;
+   L21
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/ExistsRequest org/apache/zookeeper/proto/SetDataResponse org/apache/zookeeper/proto/ReplyHeader] [org/apache/zookeeper/data/Stat]
+    ARETURN
+   L22
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L22 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L22 1
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L22 2
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L22 3
+    LOCALVARIABLE wcb Lorg/apache/zookeeper/ZooKeeper$WatchRegistration; L3 L22 4
+    LOCALVARIABLE serverPath Ljava/lang/String; L6 L22 5
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L7 L22 6
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/ExistsRequest; L9 L22 7
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/SetDataResponse; L14 L22 8
+    LOCALVARIABLE r Lorg/apache/zookeeper/proto/ReplyHeader; L15 L22 9
+    MAXSTACK = 5
+    MAXLOCALS = 10
+
+  // access flags 0x1
+  public exists(Ljava/lang/String;Z)Lorg/apache/zookeeper/data/Stat; throws org/apache/zookeeper/KeeperException java/lang/InterruptedException 
+   L0
+    LINENUMBER 1130 L0
+    ALOAD 0
+    ALOAD 1
+    ILOAD 2
+    IFEQ L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$600 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Lorg/apache/zookeeper/Watcher;
+    GOTO L2
+   L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I] [org/apache/zookeeper/ZooKeeper java/lang/String]
+    ACONST_NULL
+   L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I] [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher]
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper.exists (Ljava/lang/String;Lorg/apache/zookeeper/Watcher;)Lorg/apache/zookeeper/data/Stat;
+    ARETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L3 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L3 1
+    LOCALVARIABLE watch Z L0 L3 2
+    MAXSTACK = 3
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  public exists(Ljava/lang/String;Lorg/apache/zookeeper/Watcher;Lorg/apache/zookeeper/AsyncCallback$StatCallback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 1141 L0
+    ALOAD 1
+    ASTORE 5
+   L1
+    LINENUMBER 1142 L1
+    ALOAD 5
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1145 L2
+    ACONST_NULL
+    ASTORE 6
+   L3
+    LINENUMBER 1146 L3
+    ALOAD 2
+    IFNULL L4
+   L5
+    LINENUMBER 1147 L5
+    NEW org/apache/zookeeper/ZooKeeper$ExistsWatchRegistration
+    DUP
+    ALOAD 0
+    ALOAD 2
+    ALOAD 5
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ExistsWatchRegistration.<init> (Lorg/apache/zookeeper/ZooKeeper;Lorg/apache/zookeeper/Watcher;Ljava/lang/String;)V
+    ASTORE 6
+   L4
+    LINENUMBER 1150 L4
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/AsyncCallback$StatCallback java/lang/Object java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration] []
+    ALOAD 0
+    ALOAD 5
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 7
+   L6
+    LINENUMBER 1152 L6
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 8
+   L7
+    LINENUMBER 1153 L7
+    ALOAD 8
+    ICONST_3
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L8
+    LINENUMBER 1154 L8
+    NEW org/apache/zookeeper/proto/ExistsRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/ExistsRequest.<init> ()V
+    ASTORE 9
+   L9
+    LINENUMBER 1155 L9
+    ALOAD 9
+    ALOAD 7
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ExistsRequest.setPath (Ljava/lang/String;)V
+   L10
+    LINENUMBER 1156 L10
+    ALOAD 9
+    ALOAD 2
+    IFNULL L11
+    ICONST_1
+    GOTO L12
+   L11
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/AsyncCallback$StatCallback java/lang/Object java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/ExistsRequest] [org/apache/zookeeper/proto/ExistsRequest]
+    ICONST_0
+   L12
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/AsyncCallback$StatCallback java/lang/Object java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/ExistsRequest] [org/apache/zookeeper/proto/ExistsRequest I]
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ExistsRequest.setWatch (Z)V
+   L13
+    LINENUMBER 1157 L13
+    NEW org/apache/zookeeper/proto/SetDataResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/SetDataResponse.<init> ()V
+    ASTORE 10
+   L14
+    LINENUMBER 1158 L14
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 8
+    NEW org/apache/zookeeper/proto/ReplyHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/ReplyHeader.<init> ()V
+    ALOAD 9
+    ALOAD 10
+    ALOAD 3
+    ALOAD 5
+    ALOAD 7
+    ALOAD 4
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.queuePacket (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/zookeeper/proto/ReplyHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/AsyncCallback;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/ClientCnxn$Packet;
+    POP
+   L15
+    LINENUMBER 1160 L15
+    RETURN
+   L16
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L16 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L16 1
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L16 2
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$StatCallback; L0 L16 3
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L16 4
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L16 5
+    LOCALVARIABLE wcb Lorg/apache/zookeeper/ZooKeeper$WatchRegistration; L3 L16 6
+    LOCALVARIABLE serverPath Ljava/lang/String; L6 L16 7
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L7 L16 8
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/ExistsRequest; L9 L16 9
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/SetDataResponse; L14 L16 10
+    MAXSTACK = 10
+    MAXLOCALS = 11
+
+  // access flags 0x1
+  public exists(Ljava/lang/String;ZLorg/apache/zookeeper/AsyncCallback$StatCallback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 1168 L0
+    ALOAD 0
+    ALOAD 1
+    ILOAD 2
+    IFEQ L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$600 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Lorg/apache/zookeeper/Watcher;
+    GOTO L2
+   L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/AsyncCallback$StatCallback java/lang/Object] [org/apache/zookeeper/ZooKeeper java/lang/String]
+    ACONST_NULL
+   L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/AsyncCallback$StatCallback java/lang/Object] [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher]
+    ALOAD 3
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper.exists (Ljava/lang/String;Lorg/apache/zookeeper/Watcher;Lorg/apache/zookeeper/AsyncCallback$StatCallback;Ljava/lang/Object;)V
+   L3
+    LINENUMBER 1169 L3
+    RETURN
+   L4
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L4 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L4 1
+    LOCALVARIABLE watch Z L0 L4 2
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$StatCallback; L0 L4 3
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L4 4
+    MAXSTACK = 5
+    MAXLOCALS = 5
+
+  // access flags 0x1
+  public getData(Ljava/lang/String;Lorg/apache/zookeeper/Watcher;Lorg/apache/zookeeper/data/Stat;)[B throws org/apache/zookeeper/KeeperException java/lang/InterruptedException 
+   L0
+    LINENUMBER 1193 L0
+    ALOAD 1
+    ASTORE 4
+   L1
+    LINENUMBER 1194 L1
+    ALOAD 4
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1197 L2
+    ACONST_NULL
+    ASTORE 5
+   L3
+    LINENUMBER 1198 L3
+    ALOAD 2
+    IFNULL L4
+   L5
+    LINENUMBER 1199 L5
+    NEW org/apache/zookeeper/ZooKeeper$DataWatchRegistration
+    DUP
+    ALOAD 0
+    ALOAD 2
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$DataWatchRegistration.<init> (Lorg/apache/zookeeper/ZooKeeper;Lorg/apache/zookeeper/Watcher;Ljava/lang/String;)V
+    ASTORE 5
+   L4
+    LINENUMBER 1202 L4
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/data/Stat java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration] []
+    ALOAD 0
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 6
+   L6
+    LINENUMBER 1204 L6
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 7
+   L7
+    LINENUMBER 1205 L7
+    ALOAD 7
+    ICONST_4
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L8
+    LINENUMBER 1206 L8
+    NEW org/apache/zookeeper/proto/GetDataRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetDataRequest.<init> ()V
+    ASTORE 8
+   L9
+    LINENUMBER 1207 L9
+    ALOAD 8
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetDataRequest.setPath (Ljava/lang/String;)V
+   L10
+    LINENUMBER 1208 L10
+    ALOAD 8
+    ALOAD 2
+    IFNULL L11
+    ICONST_1
+    GOTO L12
+   L11
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/data/Stat java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetDataRequest] [org/apache/zookeeper/proto/GetDataRequest]
+    ICONST_0
+   L12
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/data/Stat java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetDataRequest] [org/apache/zookeeper/proto/GetDataRequest I]
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetDataRequest.setWatch (Z)V
+   L13
+    LINENUMBER 1209 L13
+    NEW org/apache/zookeeper/proto/GetDataResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetDataResponse.<init> ()V
+    ASTORE 9
+   L14
+    LINENUMBER 1210 L14
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 7
+    ALOAD 8
+    ALOAD 9
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.submitRequest (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/proto/ReplyHeader;
+    ASTORE 10
+   L15
+    LINENUMBER 1211 L15
+    ALOAD 10
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    IFEQ L16
+   L17
+    LINENUMBER 1212 L17
+    ALOAD 10
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    INVOKESTATIC org/apache/zookeeper/KeeperException$Code.get (I)Lorg/apache/zookeeper/KeeperException$Code;
+    ALOAD 4
+    INVOKESTATIC org/apache/zookeeper/KeeperException.create (Lorg/apache/zookeeper/KeeperException$Code;Ljava/lang/String;)Lorg/apache/zookeeper/KeeperException;
+    ATHROW
+   L16
+    LINENUMBER 1215 L16
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/data/Stat java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetDataRequest org/apache/zookeeper/proto/GetDataResponse org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 3
+    IFNULL L18
+   L19
+    LINENUMBER 1216 L19
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetDataResponse.getStat ()Lorg/apache/zookeeper/data/Stat;
+    ALOAD 3
+    INVOKESTATIC org/apache/zookeeper/server/DataTree.copyStat (Lorg/apache/zookeeper/data/Stat;Lorg/apache/zookeeper/data/Stat;)V
+   L18
+    LINENUMBER 1218 L18
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/data/Stat java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetDataRequest org/apache/zookeeper/proto/GetDataResponse org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetDataResponse.getData ()[B
+    ARETURN
+   L20
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L20 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L20 1
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L20 2
+    LOCALVARIABLE stat Lorg/apache/zookeeper/data/Stat; L0 L20 3
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L20 4
+    LOCALVARIABLE wcb Lorg/apache/zookeeper/ZooKeeper$WatchRegistration; L3 L20 5
+    LOCALVARIABLE serverPath Ljava/lang/String; L6 L20 6
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L7 L20 7
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/GetDataRequest; L9 L20 8
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/GetDataResponse; L14 L20 9
+    LOCALVARIABLE r Lorg/apache/zookeeper/proto/ReplyHeader; L15 L20 10
+    MAXSTACK = 5
+    MAXLOCALS = 11
+
+  // access flags 0x1
+  public getData(Ljava/lang/String;ZLorg/apache/zookeeper/data/Stat;)[B throws org/apache/zookeeper/KeeperException java/lang/InterruptedException 
+   L0
+    LINENUMBER 1241 L0
+    ALOAD 0
+    ALOAD 1
+    ILOAD 2
+    IFEQ L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$600 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Lorg/apache/zookeeper/Watcher;
+    GOTO L2
+   L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/data/Stat] [org/apache/zookeeper/ZooKeeper java/lang/String]
+    ACONST_NULL
+   L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/data/Stat] [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher]
+    ALOAD 3
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper.getData (Ljava/lang/String;Lorg/apache/zookeeper/Watcher;Lorg/apache/zookeeper/data/Stat;)[B
+    ARETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L3 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L3 1
+    LOCALVARIABLE watch Z L0 L3 2
+    LOCALVARIABLE stat Lorg/apache/zookeeper/data/Stat; L0 L3 3
+    MAXSTACK = 4
+    MAXLOCALS = 4
+
+  // access flags 0x1
+  public getData(Ljava/lang/String;Lorg/apache/zookeeper/Watcher;Lorg/apache/zookeeper/AsyncCallback$DataCallback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 1252 L0
+    ALOAD 1
+    ASTORE 5
+   L1
+    LINENUMBER 1253 L1
+    ALOAD 5
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1256 L2
+    ACONST_NULL
+    ASTORE 6
+   L3
+    LINENUMBER 1257 L3
+    ALOAD 2
+    IFNULL L4
+   L5
+    LINENUMBER 1258 L5
+    NEW org/apache/zookeeper/ZooKeeper$DataWatchRegistration
+    DUP
+    ALOAD 0
+    ALOAD 2
+    ALOAD 5
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$DataWatchRegistration.<init> (Lorg/apache/zookeeper/ZooKeeper;Lorg/apache/zookeeper/Watcher;Ljava/lang/String;)V
+    ASTORE 6
+   L4
+    LINENUMBER 1261 L4
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/AsyncCallback$DataCallback java/lang/Object java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration] []
+    ALOAD 0
+    ALOAD 5
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 7
+   L6
+    LINENUMBER 1263 L6
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 8
+   L7
+    LINENUMBER 1264 L7
+    ALOAD 8
+    ICONST_4
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L8
+    LINENUMBER 1265 L8
+    NEW org/apache/zookeeper/proto/GetDataRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetDataRequest.<init> ()V
+    ASTORE 9
+   L9
+    LINENUMBER 1266 L9
+    ALOAD 9
+    ALOAD 7
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetDataRequest.setPath (Ljava/lang/String;)V
+   L10
+    LINENUMBER 1267 L10
+    ALOAD 9
+    ALOAD 2
+    IFNULL L11
+    ICONST_1
+    GOTO L12
+   L11
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/AsyncCallback$DataCallback java/lang/Object java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetDataRequest] [org/apache/zookeeper/proto/GetDataRequest]
+    ICONST_0
+   L12
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/AsyncCallback$DataCallback java/lang/Object java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetDataRequest] [org/apache/zookeeper/proto/GetDataRequest I]
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetDataRequest.setWatch (Z)V
+   L13
+    LINENUMBER 1268 L13
+    NEW org/apache/zookeeper/proto/GetDataResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetDataResponse.<init> ()V
+    ASTORE 10
+   L14
+    LINENUMBER 1269 L14
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 8
+    NEW org/apache/zookeeper/proto/ReplyHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/ReplyHeader.<init> ()V
+    ALOAD 9
+    ALOAD 10
+    ALOAD 3
+    ALOAD 5
+    ALOAD 7
+    ALOAD 4
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.queuePacket (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/zookeeper/proto/ReplyHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/AsyncCallback;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/ClientCnxn$Packet;
+    POP
+   L15
+    LINENUMBER 1271 L15
+    RETURN
+   L16
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L16 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L16 1
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L16 2
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$DataCallback; L0 L16 3
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L16 4
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L16 5
+    LOCALVARIABLE wcb Lorg/apache/zookeeper/ZooKeeper$WatchRegistration; L3 L16 6
+    LOCALVARIABLE serverPath Ljava/lang/String; L6 L16 7
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L7 L16 8
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/GetDataRequest; L9 L16 9
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/GetDataResponse; L14 L16 10
+    MAXSTACK = 10
+    MAXLOCALS = 11
+
+  // access flags 0x1
+  public getData(Ljava/lang/String;ZLorg/apache/zookeeper/AsyncCallback$DataCallback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 1279 L0
+    ALOAD 0
+    ALOAD 1
+    ILOAD 2
+    IFEQ L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$600 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Lorg/apache/zookeeper/Watcher;
+    GOTO L2
+   L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/AsyncCallback$DataCallback java/lang/Object] [org/apache/zookeeper/ZooKeeper java/lang/String]
+    ACONST_NULL
+   L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/AsyncCallback$DataCallback java/lang/Object] [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher]
+    ALOAD 3
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper.getData (Ljava/lang/String;Lorg/apache/zookeeper/Watcher;Lorg/apache/zookeeper/AsyncCallback$DataCallback;Ljava/lang/Object;)V
+   L3
+    LINENUMBER 1280 L3
+    RETURN
+   L4
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L4 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L4 1
+    LOCALVARIABLE watch Z L0 L4 2
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$DataCallback; L0 L4 3
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L4 4
+    MAXSTACK = 5
+    MAXLOCALS = 5
+
+  // access flags 0x1
+  public setData(Ljava/lang/String;[BI)Lorg/apache/zookeeper/data/Stat; throws org/apache/zookeeper/KeeperException java/lang/InterruptedException 
+   L0
+    LINENUMBER 1313 L0
+    ALOAD 1
+    ASTORE 4
+   L1
+    LINENUMBER 1314 L1
+    ALOAD 4
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1316 L2
+    ALOAD 0
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 5
+   L3
+    LINENUMBER 1318 L3
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 6
+   L4
+    LINENUMBER 1319 L4
+    ALOAD 6
+    ICONST_5
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L5
+    LINENUMBER 1320 L5
+    NEW org/apache/zookeeper/proto/SetDataRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/SetDataRequest.<init> ()V
+    ASTORE 7
+   L6
+    LINENUMBER 1321 L6
+    ALOAD 7
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetDataRequest.setPath (Ljava/lang/String;)V
+   L7
+    LINENUMBER 1322 L7
+    ALOAD 7
+    ALOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetDataRequest.setData ([B)V
+   L8
+    LINENUMBER 1323 L8
+    ALOAD 7
+    ILOAD 3
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetDataRequest.setVersion (I)V
+   L9
+    LINENUMBER 1324 L9
+    NEW org/apache/zookeeper/proto/SetDataResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/SetDataResponse.<init> ()V
+    ASTORE 8
+   L10
+    LINENUMBER 1325 L10
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 6
+    ALOAD 7
+    ALOAD 8
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.submitRequest (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/proto/ReplyHeader;
+    ASTORE 9
+   L11
+    LINENUMBER 1326 L11
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    IFEQ L12
+   L13
+    LINENUMBER 1327 L13
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    INVOKESTATIC org/apache/zookeeper/KeeperException$Code.get (I)Lorg/apache/zookeeper/KeeperException$Code;
+    ALOAD 4
+    INVOKESTATIC org/apache/zookeeper/KeeperException.create (Lorg/apache/zookeeper/KeeperException$Code;Ljava/lang/String;)Lorg/apache/zookeeper/KeeperException;
+    ATHROW
+   L12
+    LINENUMBER 1330 L12
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String [B I java/lang/String java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/SetDataRequest org/apache/zookeeper/proto/SetDataResponse org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 8
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetDataResponse.getStat ()Lorg/apache/zookeeper/data/Stat;
+    ARETURN
+   L14
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L14 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L14 1
+    LOCALVARIABLE data [B L0 L14 2
+    LOCALVARIABLE version I L0 L14 3
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L14 4
+    LOCALVARIABLE serverPath Ljava/lang/String; L3 L14 5
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L4 L14 6
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/SetDataRequest; L6 L14 7
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/SetDataResponse; L10 L14 8
+    LOCALVARIABLE r Lorg/apache/zookeeper/proto/ReplyHeader; L11 L14 9
+    MAXSTACK = 5
+    MAXLOCALS = 10
+
+  // access flags 0x1
+  public setData(Ljava/lang/String;[BILorg/apache/zookeeper/AsyncCallback$StatCallback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 1341 L0
+    ALOAD 1
+    ASTORE 6
+   L1
+    LINENUMBER 1342 L1
+    ALOAD 6
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1344 L2
+    ALOAD 0
+    ALOAD 6
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 7
+   L3
+    LINENUMBER 1346 L3
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 8
+   L4
+    LINENUMBER 1347 L4
+    ALOAD 8
+    ICONST_5
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L5
+    LINENUMBER 1348 L5
+    NEW org/apache/zookeeper/proto/SetDataRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/SetDataRequest.<init> ()V
+    ASTORE 9
+   L6
+    LINENUMBER 1349 L6
+    ALOAD 9
+    ALOAD 7
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetDataRequest.setPath (Ljava/lang/String;)V
+   L7
+    LINENUMBER 1350 L7
+    ALOAD 9
+    ALOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetDataRequest.setData ([B)V
+   L8
+    LINENUMBER 1351 L8
+    ALOAD 9
+    ILOAD 3
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetDataRequest.setVersion (I)V
+   L9
+    LINENUMBER 1352 L9
+    NEW org/apache/zookeeper/proto/SetDataResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/SetDataResponse.<init> ()V
+    ASTORE 10
+   L10
+    LINENUMBER 1353 L10
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 8
+    NEW org/apache/zookeeper/proto/ReplyHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/ReplyHeader.<init> ()V
+    ALOAD 9
+    ALOAD 10
+    ALOAD 4
+    ALOAD 6
+    ALOAD 7
+    ALOAD 5
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.queuePacket (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/zookeeper/proto/ReplyHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/AsyncCallback;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/ClientCnxn$Packet;
+    POP
+   L11
+    LINENUMBER 1355 L11
+    RETURN
+   L12
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L12 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L12 1
+    LOCALVARIABLE data [B L0 L12 2
+    LOCALVARIABLE version I L0 L12 3
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$StatCallback; L0 L12 4
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L12 5
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L12 6
+    LOCALVARIABLE serverPath Ljava/lang/String; L3 L12 7
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L4 L12 8
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/SetDataRequest; L6 L12 9
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/SetDataResponse; L10 L12 10
+    MAXSTACK = 10
+    MAXLOCALS = 11
+
+  // access flags 0x1
+  // signature (Ljava/lang/String;Lorg/apache/zookeeper/data/Stat;)Ljava/util/List<Lorg/apache/zookeeper/data/ACL;>;
+  // declaration: java.util.List<org.apache.zookeeper.data.ACL> getACL(java.lang.String, org.apache.zookeeper.data.Stat)
+  public getACL(Ljava/lang/String;Lorg/apache/zookeeper/data/Stat;)Ljava/util/List; throws org/apache/zookeeper/KeeperException java/lang/InterruptedException 
+   L0
+    LINENUMBER 1376 L0
+    ALOAD 1
+    ASTORE 3
+   L1
+    LINENUMBER 1377 L1
+    ALOAD 3
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1379 L2
+    ALOAD 0
+    ALOAD 3
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 4
+   L3
+    LINENUMBER 1381 L3
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 5
+   L4
+    LINENUMBER 1382 L4
+    ALOAD 5
+    BIPUSH 6
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L5
+    LINENUMBER 1383 L5
+    NEW org/apache/zookeeper/proto/GetACLRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetACLRequest.<init> ()V
+    ASTORE 6
+   L6
+    LINENUMBER 1384 L6
+    ALOAD 6
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetACLRequest.setPath (Ljava/lang/String;)V
+   L7
+    LINENUMBER 1385 L7
+    NEW org/apache/zookeeper/proto/GetACLResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetACLResponse.<init> ()V
+    ASTORE 7
+   L8
+    LINENUMBER 1386 L8
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 5
+    ALOAD 6
+    ALOAD 7
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.submitRequest (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/proto/ReplyHeader;
+    ASTORE 8
+   L9
+    LINENUMBER 1387 L9
+    ALOAD 8
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    IFEQ L10
+   L11
+    LINENUMBER 1388 L11
+    ALOAD 8
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    INVOKESTATIC org/apache/zookeeper/KeeperException$Code.get (I)Lorg/apache/zookeeper/KeeperException$Code;
+    ALOAD 3
+    INVOKESTATIC org/apache/zookeeper/KeeperException.create (Lorg/apache/zookeeper/KeeperException$Code;Ljava/lang/String;)Lorg/apache/zookeeper/KeeperException;
+    ATHROW
+   L10
+    LINENUMBER 1391 L10
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/data/Stat java/lang/String java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetACLRequest org/apache/zookeeper/proto/GetACLResponse org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 2
+    IFNULL L12
+   L13
+    LINENUMBER 1392 L13
+    ALOAD 7
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetACLResponse.getStat ()Lorg/apache/zookeeper/data/Stat;
+    ALOAD 2
+    INVOKESTATIC org/apache/zookeeper/server/DataTree.copyStat (Lorg/apache/zookeeper/data/Stat;Lorg/apache/zookeeper/data/Stat;)V
+   L12
+    LINENUMBER 1394 L12
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/data/Stat java/lang/String java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetACLRequest org/apache/zookeeper/proto/GetACLResponse org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 7
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetACLResponse.getAcl ()Ljava/util/List;
+    ARETURN
+   L14
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L14 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L14 1
+    LOCALVARIABLE stat Lorg/apache/zookeeper/data/Stat; L0 L14 2
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L14 3
+    LOCALVARIABLE serverPath Ljava/lang/String; L3 L14 4
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L4 L14 5
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/GetACLRequest; L6 L14 6
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/GetACLResponse; L8 L14 7
+    LOCALVARIABLE r Lorg/apache/zookeeper/proto/ReplyHeader; L9 L14 8
+    MAXSTACK = 5
+    MAXLOCALS = 9
+
+  // access flags 0x1
+  public getACL(Ljava/lang/String;Lorg/apache/zookeeper/data/Stat;Lorg/apache/zookeeper/AsyncCallback$ACLCallback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 1405 L0
+    ALOAD 1
+    ASTORE 5
+   L1
+    LINENUMBER 1406 L1
+    ALOAD 5
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1408 L2
+    ALOAD 0
+    ALOAD 5
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 6
+   L3
+    LINENUMBER 1410 L3
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 7
+   L4
+    LINENUMBER 1411 L4
+    ALOAD 7
+    BIPUSH 6
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L5
+    LINENUMBER 1412 L5
+    NEW org/apache/zookeeper/proto/GetACLRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetACLRequest.<init> ()V
+    ASTORE 8
+   L6
+    LINENUMBER 1413 L6
+    ALOAD 8
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetACLRequest.setPath (Ljava/lang/String;)V
+   L7
+    LINENUMBER 1414 L7
+    NEW org/apache/zookeeper/proto/GetACLResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetACLResponse.<init> ()V
+    ASTORE 9
+   L8
+    LINENUMBER 1415 L8
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 7
+    NEW org/apache/zookeeper/proto/ReplyHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/ReplyHeader.<init> ()V
+    ALOAD 8
+    ALOAD 9
+    ALOAD 3
+    ALOAD 5
+    ALOAD 6
+    ALOAD 4
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.queuePacket (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/zookeeper/proto/ReplyHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/AsyncCallback;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/ClientCnxn$Packet;
+    POP
+   L9
+    LINENUMBER 1417 L9
+    RETURN
+   L10
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L10 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L10 1
+    LOCALVARIABLE stat Lorg/apache/zookeeper/data/Stat; L0 L10 2
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$ACLCallback; L0 L10 3
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L10 4
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L10 5
+    LOCALVARIABLE serverPath Ljava/lang/String; L3 L10 6
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L4 L10 7
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/GetACLRequest; L6 L10 8
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/GetACLResponse; L8 L10 9
+    MAXSTACK = 10
+    MAXLOCALS = 10
+
+  // access flags 0x1
+  // signature (Ljava/lang/String;Ljava/util/List<Lorg/apache/zookeeper/data/ACL;>;I)Lorg/apache/zookeeper/data/Stat;
+  // declaration: org.apache.zookeeper.data.Stat setACL(java.lang.String, java.util.List<org.apache.zookeeper.data.ACL>, int)
+  public setACL(Ljava/lang/String;Ljava/util/List;I)Lorg/apache/zookeeper/data/Stat; throws org/apache/zookeeper/KeeperException java/lang/InterruptedException 
+   L0
+    LINENUMBER 1442 L0
+    ALOAD 1
+    ASTORE 4
+   L1
+    LINENUMBER 1443 L1
+    ALOAD 4
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1445 L2
+    ALOAD 0
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 5
+   L3
+    LINENUMBER 1447 L3
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 6
+   L4
+    LINENUMBER 1448 L4
+    ALOAD 6
+    BIPUSH 7
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L5
+    LINENUMBER 1449 L5
+    NEW org/apache/zookeeper/proto/SetACLRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/SetACLRequest.<init> ()V
+    ASTORE 7
+   L6
+    LINENUMBER 1450 L6
+    ALOAD 7
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetACLRequest.setPath (Ljava/lang/String;)V
+   L7
+    LINENUMBER 1451 L7
+    ALOAD 2
+    IFNULL L8
+    ALOAD 2
+    INVOKEINTERFACE java/util/List.size ()I (itf)
+    IFNE L8
+   L9
+    LINENUMBER 1452 L9
+    NEW org/apache/zookeeper/KeeperException$InvalidACLException
+    DUP
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/KeeperException$InvalidACLException.<init> (Ljava/lang/String;)V
+    ATHROW
+   L8
+    LINENUMBER 1454 L8
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String java/util/List I java/lang/String java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/SetACLRequest] []
+    ALOAD 7
+    ALOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetACLRequest.setAcl (Ljava/util/List;)V
+   L10
+    LINENUMBER 1455 L10
+    ALOAD 7
+    ILOAD 3
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetACLRequest.setVersion (I)V
+   L11
+    LINENUMBER 1456 L11
+    NEW org/apache/zookeeper/proto/SetACLResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/SetACLResponse.<init> ()V
+    ASTORE 8
+   L12
+    LINENUMBER 1457 L12
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 6
+    ALOAD 7
+    ALOAD 8
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.submitRequest (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/proto/ReplyHeader;
+    ASTORE 9
+   L13
+    LINENUMBER 1458 L13
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    IFEQ L14
+   L15
+    LINENUMBER 1459 L15
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    INVOKESTATIC org/apache/zookeeper/KeeperException$Code.get (I)Lorg/apache/zookeeper/KeeperException$Code;
+    ALOAD 4
+    INVOKESTATIC org/apache/zookeeper/KeeperException.create (Lorg/apache/zookeeper/KeeperException$Code;Ljava/lang/String;)Lorg/apache/zookeeper/KeeperException;
+    ATHROW
+   L14
+    LINENUMBER 1462 L14
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String java/util/List I java/lang/String java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/SetACLRequest org/apache/zookeeper/proto/SetACLResponse org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 8
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetACLResponse.getStat ()Lorg/apache/zookeeper/data/Stat;
+    ARETURN
+   L16
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L16 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L16 1
+    LOCALVARIABLE acl Ljava/util/List; L0 L16 2
+    // signature Ljava/util/List<Lorg/apache/zookeeper/data/ACL;>;
+    // declaration: acl extends java.util.List<org.apache.zookeeper.data.ACL>
+    LOCALVARIABLE version I L0 L16 3
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L16 4
+    LOCALVARIABLE serverPath Ljava/lang/String; L3 L16 5
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L4 L16 6
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/SetACLRequest; L6 L16 7
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/SetACLResponse; L12 L16 8
+    LOCALVARIABLE r Lorg/apache/zookeeper/proto/ReplyHeader; L13 L16 9
+    MAXSTACK = 5
+    MAXLOCALS = 10
+
+  // access flags 0x1
+  // signature (Ljava/lang/String;Ljava/util/List<Lorg/apache/zookeeper/data/ACL;>;ILorg/apache/zookeeper/AsyncCallback$StatCallback;Ljava/lang/Object;)V
+  // declaration: void setACL(java.lang.String, java.util.List<org.apache.zookeeper.data.ACL>, int, org.apache.zookeeper.AsyncCallback$StatCallback, java.lang.Object)
+  public setACL(Ljava/lang/String;Ljava/util/List;ILorg/apache/zookeeper/AsyncCallback$StatCallback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 1473 L0
+    ALOAD 1
+    ASTORE 6
+   L1
+    LINENUMBER 1474 L1
+    ALOAD 6
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1476 L2
+    ALOAD 0
+    ALOAD 6
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 7
+   L3
+    LINENUMBER 1478 L3
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 8
+   L4
+    LINENUMBER 1479 L4
+    ALOAD 8
+    BIPUSH 7
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L5
+    LINENUMBER 1480 L5
+    NEW org/apache/zookeeper/proto/SetACLRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/SetACLRequest.<init> ()V
+    ASTORE 9
+   L6
+    LINENUMBER 1481 L6
+    ALOAD 9
+    ALOAD 7
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetACLRequest.setPath (Ljava/lang/String;)V
+   L7
+    LINENUMBER 1482 L7
+    ALOAD 9
+    ALOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetACLRequest.setAcl (Ljava/util/List;)V
+   L8
+    LINENUMBER 1483 L8
+    ALOAD 9
+    ILOAD 3
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SetACLRequest.setVersion (I)V
+   L9
+    LINENUMBER 1484 L9
+    NEW org/apache/zookeeper/proto/SetACLResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/SetACLResponse.<init> ()V
+    ASTORE 10
+   L10
+    LINENUMBER 1485 L10
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 8
+    NEW org/apache/zookeeper/proto/ReplyHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/ReplyHeader.<init> ()V
+    ALOAD 9
+    ALOAD 10
+    ALOAD 4
+    ALOAD 6
+    ALOAD 7
+    ALOAD 5
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.queuePacket (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/zookeeper/proto/ReplyHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/AsyncCallback;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/ClientCnxn$Packet;
+    POP
+   L11
+    LINENUMBER 1487 L11
+    RETURN
+   L12
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L12 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L12 1
+    LOCALVARIABLE acl Ljava/util/List; L0 L12 2
+    // signature Ljava/util/List<Lorg/apache/zookeeper/data/ACL;>;
+    // declaration: acl extends java.util.List<org.apache.zookeeper.data.ACL>
+    LOCALVARIABLE version I L0 L12 3
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$StatCallback; L0 L12 4
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L12 5
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L12 6
+    LOCALVARIABLE serverPath Ljava/lang/String; L3 L12 7
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L4 L12 8
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/SetACLRequest; L6 L12 9
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/SetACLResponse; L10 L12 10
+    MAXSTACK = 10
+    MAXLOCALS = 11
+
+  // access flags 0x1
+  // signature (Ljava/lang/String;Lorg/apache/zookeeper/Watcher;)Ljava/util/List<Ljava/lang/String;>;
+  // declaration: java.util.List<java.lang.String> getChildren(java.lang.String, org.apache.zookeeper.Watcher)
+  public getChildren(Ljava/lang/String;Lorg/apache/zookeeper/Watcher;)Ljava/util/List; throws org/apache/zookeeper/KeeperException java/lang/InterruptedException 
+   L0
+    LINENUMBER 1513 L0
+    ALOAD 1
+    ASTORE 3
+   L1
+    LINENUMBER 1514 L1
+    ALOAD 3
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1517 L2
+    ACONST_NULL
+    ASTORE 4
+   L3
+    LINENUMBER 1518 L3
+    ALOAD 2
+    IFNULL L4
+   L5
+    LINENUMBER 1519 L5
+    NEW org/apache/zookeeper/ZooKeeper$ChildWatchRegistration
+    DUP
+    ALOAD 0
+    ALOAD 2
+    ALOAD 3
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ChildWatchRegistration.<init> (Lorg/apache/zookeeper/ZooKeeper;Lorg/apache/zookeeper/Watcher;Ljava/lang/String;)V
+    ASTORE 4
+   L4
+    LINENUMBER 1522 L4
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration] []
+    ALOAD 0
+    ALOAD 3
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 5
+   L6
+    LINENUMBER 1524 L6
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 6
+   L7
+    LINENUMBER 1525 L7
+    ALOAD 6
+    BIPUSH 8
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L8
+    LINENUMBER 1526 L8
+    NEW org/apache/zookeeper/proto/GetChildrenRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetChildrenRequest.<init> ()V
+    ASTORE 7
+   L9
+    LINENUMBER 1527 L9
+    ALOAD 7
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetChildrenRequest.setPath (Ljava/lang/String;)V
+   L10
+    LINENUMBER 1528 L10
+    ALOAD 7
+    ALOAD 2
+    IFNULL L11
+    ICONST_1
+    GOTO L12
+   L11
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetChildrenRequest] [org/apache/zookeeper/proto/GetChildrenRequest]
+    ICONST_0
+   L12
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetChildrenRequest] [org/apache/zookeeper/proto/GetChildrenRequest I]
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetChildrenRequest.setWatch (Z)V
+   L13
+    LINENUMBER 1529 L13
+    NEW org/apache/zookeeper/proto/GetChildrenResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetChildrenResponse.<init> ()V
+    ASTORE 8
+   L14
+    LINENUMBER 1530 L14
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 6
+    ALOAD 7
+    ALOAD 8
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.submitRequest (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/proto/ReplyHeader;
+    ASTORE 9
+   L15
+    LINENUMBER 1531 L15
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    IFEQ L16
+   L17
+    LINENUMBER 1532 L17
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    INVOKESTATIC org/apache/zookeeper/KeeperException$Code.get (I)Lorg/apache/zookeeper/KeeperException$Code;
+    ALOAD 3
+    INVOKESTATIC org/apache/zookeeper/KeeperException.create (Lorg/apache/zookeeper/KeeperException$Code;Ljava/lang/String;)Lorg/apache/zookeeper/KeeperException;
+    ATHROW
+   L16
+    LINENUMBER 1535 L16
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetChildrenRequest org/apache/zookeeper/proto/GetChildrenResponse org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 8
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetChildrenResponse.getChildren ()Ljava/util/List;
+    ARETURN
+   L18
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L18 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L18 1
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L18 2
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L18 3
+    LOCALVARIABLE wcb Lorg/apache/zookeeper/ZooKeeper$WatchRegistration; L3 L18 4
+    LOCALVARIABLE serverPath Ljava/lang/String; L6 L18 5
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L7 L18 6
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/GetChildrenRequest; L9 L18 7
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/GetChildrenResponse; L14 L18 8
+    LOCALVARIABLE r Lorg/apache/zookeeper/proto/ReplyHeader; L15 L18 9
+    MAXSTACK = 5
+    MAXLOCALS = 10
+
+  // access flags 0x1
+  // signature (Ljava/lang/String;Z)Ljava/util/List<Ljava/lang/String;>;
+  // declaration: java.util.List<java.lang.String> getChildren(java.lang.String, boolean)
+  public getChildren(Ljava/lang/String;Z)Ljava/util/List; throws org/apache/zookeeper/KeeperException java/lang/InterruptedException 
+   L0
+    LINENUMBER 1560 L0
+    ALOAD 0
+    ALOAD 1
+    ILOAD 2
+    IFEQ L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$600 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Lorg/apache/zookeeper/Watcher;
+    GOTO L2
+   L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I] [org/apache/zookeeper/ZooKeeper java/lang/String]
+    ACONST_NULL
+   L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I] [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher]
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper.getChildren (Ljava/lang/String;Lorg/apache/zookeeper/Watcher;)Ljava/util/List;
+    ARETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L3 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L3 1
+    LOCALVARIABLE watch Z L0 L3 2
+    MAXSTACK = 3
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  public getChildren(Ljava/lang/String;Lorg/apache/zookeeper/Watcher;Lorg/apache/zookeeper/AsyncCallback$ChildrenCallback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 1571 L0
+    ALOAD 1
+    ASTORE 5
+   L1
+    LINENUMBER 1572 L1
+    ALOAD 5
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1575 L2
+    ACONST_NULL
+    ASTORE 6
+   L3
+    LINENUMBER 1576 L3
+    ALOAD 2
+    IFNULL L4
+   L5
+    LINENUMBER 1577 L5
+    NEW org/apache/zookeeper/ZooKeeper$ChildWatchRegistration
+    DUP
+    ALOAD 0
+    ALOAD 2
+    ALOAD 5
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ChildWatchRegistration.<init> (Lorg/apache/zookeeper/ZooKeeper;Lorg/apache/zookeeper/Watcher;Ljava/lang/String;)V
+    ASTORE 6
+   L4
+    LINENUMBER 1580 L4
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/AsyncCallback$ChildrenCallback java/lang/Object java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration] []
+    ALOAD 0
+    ALOAD 5
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 7
+   L6
+    LINENUMBER 1582 L6
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 8
+   L7
+    LINENUMBER 1583 L7
+    ALOAD 8
+    BIPUSH 8
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L8
+    LINENUMBER 1584 L8
+    NEW org/apache/zookeeper/proto/GetChildrenRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetChildrenRequest.<init> ()V
+    ASTORE 9
+   L9
+    LINENUMBER 1585 L9
+    ALOAD 9
+    ALOAD 7
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetChildrenRequest.setPath (Ljava/lang/String;)V
+   L10
+    LINENUMBER 1586 L10
+    ALOAD 9
+    ALOAD 2
+    IFNULL L11
+    ICONST_1
+    GOTO L12
+   L11
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/AsyncCallback$ChildrenCallback java/lang/Object java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetChildrenRequest] [org/apache/zookeeper/proto/GetChildrenRequest]
+    ICONST_0
+   L12
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/AsyncCallback$ChildrenCallback java/lang/Object java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetChildrenRequest] [org/apache/zookeeper/proto/GetChildrenRequest I]
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetChildrenRequest.setWatch (Z)V
+   L13
+    LINENUMBER 1587 L13
+    NEW org/apache/zookeeper/proto/GetChildrenResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetChildrenResponse.<init> ()V
+    ASTORE 10
+   L14
+    LINENUMBER 1588 L14
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 8
+    NEW org/apache/zookeeper/proto/ReplyHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/ReplyHeader.<init> ()V
+    ALOAD 9
+    ALOAD 10
+    ALOAD 3
+    ALOAD 5
+    ALOAD 7
+    ALOAD 4
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.queuePacket (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/zookeeper/proto/ReplyHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/AsyncCallback;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/ClientCnxn$Packet;
+    POP
+   L15
+    LINENUMBER 1590 L15
+    RETURN
+   L16
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L16 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L16 1
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L16 2
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$ChildrenCallback; L0 L16 3
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L16 4
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L16 5
+    LOCALVARIABLE wcb Lorg/apache/zookeeper/ZooKeeper$WatchRegistration; L3 L16 6
+    LOCALVARIABLE serverPath Ljava/lang/String; L6 L16 7
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L7 L16 8
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/GetChildrenRequest; L9 L16 9
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/GetChildrenResponse; L14 L16 10
+    MAXSTACK = 10
+    MAXLOCALS = 11
+
+  // access flags 0x1
+  public getChildren(Ljava/lang/String;ZLorg/apache/zookeeper/AsyncCallback$ChildrenCallback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 1600 L0
+    ALOAD 0
+    ALOAD 1
+    ILOAD 2
+    IFEQ L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$600 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Lorg/apache/zookeeper/Watcher;
+    GOTO L2
+   L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/AsyncCallback$ChildrenCallback java/lang/Object] [org/apache/zookeeper/ZooKeeper java/lang/String]
+    ACONST_NULL
+   L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/AsyncCallback$ChildrenCallback java/lang/Object] [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher]
+    ALOAD 3
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper.getChildren (Ljava/lang/String;Lorg/apache/zookeeper/Watcher;Lorg/apache/zookeeper/AsyncCallback$ChildrenCallback;Ljava/lang/Object;)V
+   L3
+    LINENUMBER 1601 L3
+    RETURN
+   L4
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L4 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L4 1
+    LOCALVARIABLE watch Z L0 L4 2
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$ChildrenCallback; L0 L4 3
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L4 4
+    MAXSTACK = 5
+    MAXLOCALS = 5
+
+  // access flags 0x1
+  // signature (Ljava/lang/String;Lorg/apache/zookeeper/Watcher;Lorg/apache/zookeeper/data/Stat;)Ljava/util/List<Ljava/lang/String;>;
+  // declaration: java.util.List<java.lang.String> getChildren(java.lang.String, org.apache.zookeeper.Watcher, org.apache.zookeeper.data.Stat)
+  public getChildren(Ljava/lang/String;Lorg/apache/zookeeper/Watcher;Lorg/apache/zookeeper/data/Stat;)Ljava/util/List; throws org/apache/zookeeper/KeeperException java/lang/InterruptedException 
+   L0
+    LINENUMBER 1631 L0
+    ALOAD 1
+    ASTORE 4
+   L1
+    LINENUMBER 1632 L1
+    ALOAD 4
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1635 L2
+    ACONST_NULL
+    ASTORE 5
+   L3
+    LINENUMBER 1636 L3
+    ALOAD 2
+    IFNULL L4
+   L5
+    LINENUMBER 1637 L5
+    NEW org/apache/zookeeper/ZooKeeper$ChildWatchRegistration
+    DUP
+    ALOAD 0
+    ALOAD 2
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ChildWatchRegistration.<init> (Lorg/apache/zookeeper/ZooKeeper;Lorg/apache/zookeeper/Watcher;Ljava/lang/String;)V
+    ASTORE 5
+   L4
+    LINENUMBER 1640 L4
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/data/Stat java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration] []
+    ALOAD 0
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 6
+   L6
+    LINENUMBER 1642 L6
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 7
+   L7
+    LINENUMBER 1643 L7
+    ALOAD 7
+    BIPUSH 12
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L8
+    LINENUMBER 1644 L8
+    NEW org/apache/zookeeper/proto/GetChildren2Request
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetChildren2Request.<init> ()V
+    ASTORE 8
+   L9
+    LINENUMBER 1645 L9
+    ALOAD 8
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetChildren2Request.setPath (Ljava/lang/String;)V
+   L10
+    LINENUMBER 1646 L10
+    ALOAD 8
+    ALOAD 2
+    IFNULL L11
+    ICONST_1
+    GOTO L12
+   L11
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/data/Stat java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetChildren2Request] [org/apache/zookeeper/proto/GetChildren2Request]
+    ICONST_0
+   L12
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/data/Stat java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetChildren2Request] [org/apache/zookeeper/proto/GetChildren2Request I]
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetChildren2Request.setWatch (Z)V
+   L13
+    LINENUMBER 1647 L13
+    NEW org/apache/zookeeper/proto/GetChildren2Response
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetChildren2Response.<init> ()V
+    ASTORE 9
+   L14
+    LINENUMBER 1648 L14
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 7
+    ALOAD 8
+    ALOAD 9
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.submitRequest (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/proto/ReplyHeader;
+    ASTORE 10
+   L15
+    LINENUMBER 1649 L15
+    ALOAD 10
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    IFEQ L16
+   L17
+    LINENUMBER 1650 L17
+    ALOAD 10
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ReplyHeader.getErr ()I
+    INVOKESTATIC org/apache/zookeeper/KeeperException$Code.get (I)Lorg/apache/zookeeper/KeeperException$Code;
+    ALOAD 4
+    INVOKESTATIC org/apache/zookeeper/KeeperException.create (Lorg/apache/zookeeper/KeeperException$Code;Ljava/lang/String;)Lorg/apache/zookeeper/KeeperException;
+    ATHROW
+   L16
+    LINENUMBER 1653 L16
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/data/Stat java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetChildren2Request org/apache/zookeeper/proto/GetChildren2Response org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 3
+    IFNULL L18
+   L19
+    LINENUMBER 1654 L19
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetChildren2Response.getStat ()Lorg/apache/zookeeper/data/Stat;
+    ALOAD 3
+    INVOKESTATIC org/apache/zookeeper/server/DataTree.copyStat (Lorg/apache/zookeeper/data/Stat;Lorg/apache/zookeeper/data/Stat;)V
+   L18
+    LINENUMBER 1656 L18
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/data/Stat java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetChildren2Request org/apache/zookeeper/proto/GetChildren2Response org/apache/zookeeper/proto/ReplyHeader] []
+    ALOAD 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetChildren2Response.getChildren ()Ljava/util/List;
+    ARETURN
+   L20
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L20 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L20 1
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L20 2
+    LOCALVARIABLE stat Lorg/apache/zookeeper/data/Stat; L0 L20 3
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L20 4
+    LOCALVARIABLE wcb Lorg/apache/zookeeper/ZooKeeper$WatchRegistration; L3 L20 5
+    LOCALVARIABLE serverPath Ljava/lang/String; L6 L20 6
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L7 L20 7
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/GetChildren2Request; L9 L20 8
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/GetChildren2Response; L14 L20 9
+    LOCALVARIABLE r Lorg/apache/zookeeper/proto/ReplyHeader; L15 L20 10
+    MAXSTACK = 5
+    MAXLOCALS = 11
+
+  // access flags 0x1
+  // signature (Ljava/lang/String;ZLorg/apache/zookeeper/data/Stat;)Ljava/util/List<Ljava/lang/String;>;
+  // declaration: java.util.List<java.lang.String> getChildren(java.lang.String, boolean, org.apache.zookeeper.data.Stat)
+  public getChildren(Ljava/lang/String;ZLorg/apache/zookeeper/data/Stat;)Ljava/util/List; throws org/apache/zookeeper/KeeperException java/lang/InterruptedException 
+   L0
+    LINENUMBER 1685 L0
+    ALOAD 0
+    ALOAD 1
+    ILOAD 2
+    IFEQ L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$600 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Lorg/apache/zookeeper/Watcher;
+    GOTO L2
+   L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/data/Stat] [org/apache/zookeeper/ZooKeeper java/lang/String]
+    ACONST_NULL
+   L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/data/Stat] [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher]
+    ALOAD 3
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper.getChildren (Ljava/lang/String;Lorg/apache/zookeeper/Watcher;Lorg/apache/zookeeper/data/Stat;)Ljava/util/List;
+    ARETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L3 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L3 1
+    LOCALVARIABLE watch Z L0 L3 2
+    LOCALVARIABLE stat Lorg/apache/zookeeper/data/Stat; L0 L3 3
+    MAXSTACK = 4
+    MAXLOCALS = 4
+
+  // access flags 0x1
+  public getChildren(Ljava/lang/String;Lorg/apache/zookeeper/Watcher;Lorg/apache/zookeeper/AsyncCallback$Children2Callback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 1699 L0
+    ALOAD 1
+    ASTORE 5
+   L1
+    LINENUMBER 1700 L1
+    ALOAD 5
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1703 L2
+    ACONST_NULL
+    ASTORE 6
+   L3
+    LINENUMBER 1704 L3
+    ALOAD 2
+    IFNULL L4
+   L5
+    LINENUMBER 1705 L5
+    NEW org/apache/zookeeper/ZooKeeper$ChildWatchRegistration
+    DUP
+    ALOAD 0
+    ALOAD 2
+    ALOAD 5
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ChildWatchRegistration.<init> (Lorg/apache/zookeeper/ZooKeeper;Lorg/apache/zookeeper/Watcher;Ljava/lang/String;)V
+    ASTORE 6
+   L4
+    LINENUMBER 1708 L4
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/AsyncCallback$Children2Callback java/lang/Object java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration] []
+    ALOAD 0
+    ALOAD 5
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 7
+   L6
+    LINENUMBER 1710 L6
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 8
+   L7
+    LINENUMBER 1711 L7
+    ALOAD 8
+    BIPUSH 12
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L8
+    LINENUMBER 1712 L8
+    NEW org/apache/zookeeper/proto/GetChildren2Request
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetChildren2Request.<init> ()V
+    ASTORE 9
+   L9
+    LINENUMBER 1713 L9
+    ALOAD 9
+    ALOAD 7
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetChildren2Request.setPath (Ljava/lang/String;)V
+   L10
+    LINENUMBER 1714 L10
+    ALOAD 9
+    ALOAD 2
+    IFNULL L11
+    ICONST_1
+    GOTO L12
+   L11
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/AsyncCallback$Children2Callback java/lang/Object java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetChildren2Request] [org/apache/zookeeper/proto/GetChildren2Request]
+    ICONST_0
+   L12
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher org/apache/zookeeper/AsyncCallback$Children2Callback java/lang/Object java/lang/String org/apache/zookeeper/ZooKeeper$WatchRegistration java/lang/String org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/GetChildren2Request] [org/apache/zookeeper/proto/GetChildren2Request I]
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetChildren2Request.setWatch (Z)V
+   L13
+    LINENUMBER 1715 L13
+    NEW org/apache/zookeeper/proto/GetChildren2Response
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetChildren2Response.<init> ()V
+    ASTORE 10
+   L14
+    LINENUMBER 1716 L14
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 8
+    NEW org/apache/zookeeper/proto/ReplyHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/ReplyHeader.<init> ()V
+    ALOAD 9
+    ALOAD 10
+    ALOAD 3
+    ALOAD 5
+    ALOAD 7
+    ALOAD 4
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.queuePacket (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/zookeeper/proto/ReplyHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/AsyncCallback;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/ClientCnxn$Packet;
+    POP
+   L15
+    LINENUMBER 1718 L15
+    RETURN
+   L16
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L16 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L16 1
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L16 2
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$Children2Callback; L0 L16 3
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L16 4
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L16 5
+    LOCALVARIABLE wcb Lorg/apache/zookeeper/ZooKeeper$WatchRegistration; L3 L16 6
+    LOCALVARIABLE serverPath Ljava/lang/String; L6 L16 7
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L7 L16 8
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/GetChildren2Request; L9 L16 9
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/GetChildren2Response; L14 L16 10
+    MAXSTACK = 10
+    MAXLOCALS = 11
+
+  // access flags 0x1
+  public getChildren(Ljava/lang/String;ZLorg/apache/zookeeper/AsyncCallback$Children2Callback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 1730 L0
+    ALOAD 0
+    ALOAD 1
+    ILOAD 2
+    IFEQ L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$600 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Lorg/apache/zookeeper/Watcher;
+    GOTO L2
+   L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/AsyncCallback$Children2Callback java/lang/Object] [org/apache/zookeeper/ZooKeeper java/lang/String]
+    ACONST_NULL
+   L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper java/lang/String I org/apache/zookeeper/AsyncCallback$Children2Callback java/lang/Object] [org/apache/zookeeper/ZooKeeper java/lang/String org/apache/zookeeper/Watcher]
+    ALOAD 3
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper.getChildren (Ljava/lang/String;Lorg/apache/zookeeper/Watcher;Lorg/apache/zookeeper/AsyncCallback$Children2Callback;Ljava/lang/Object;)V
+   L3
+    LINENUMBER 1731 L3
+    RETURN
+   L4
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L4 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L4 1
+    LOCALVARIABLE watch Z L0 L4 2
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$Children2Callback; L0 L4 3
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L4 4
+    MAXSTACK = 5
+    MAXLOCALS = 5
+
+  // access flags 0x1
+  public sync(Ljava/lang/String;Lorg/apache/zookeeper/AsyncCallback$VoidCallback;Ljava/lang/Object;)V
+   L0
+    LINENUMBER 1741 L0
+    ALOAD 1
+    ASTORE 4
+   L1
+    LINENUMBER 1742 L1
+    ALOAD 4
+    INVOKESTATIC org/apache/zookeeper/common/PathUtils.validatePath (Ljava/lang/String;)V
+   L2
+    LINENUMBER 1744 L2
+    ALOAD 0
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper.prependChroot (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 5
+   L3
+    LINENUMBER 1746 L3
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 6
+   L4
+    LINENUMBER 1747 L4
+    ALOAD 6
+    BIPUSH 9
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.setType (I)V
+   L5
+    LINENUMBER 1748 L5
+    NEW org/apache/zookeeper/proto/SyncRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/SyncRequest.<init> ()V
+    ASTORE 7
+   L6
+    LINENUMBER 1749 L6
+    NEW org/apache/zookeeper/proto/SyncResponse
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/SyncResponse.<init> ()V
+    ASTORE 8
+   L7
+    LINENUMBER 1750 L7
+    ALOAD 7
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/proto/SyncRequest.setPath (Ljava/lang/String;)V
+   L8
+    LINENUMBER 1751 L8
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    ALOAD 6
+    NEW org/apache/zookeeper/proto/ReplyHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/ReplyHeader.<init> ()V
+    ALOAD 7
+    ALOAD 8
+    ALOAD 2
+    ALOAD 4
+    ALOAD 5
+    ALOAD 3
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.queuePacket (Lorg/apache/zookeeper/proto/RequestHeader;Lorg/apache/zookeeper/proto/ReplyHeader;Lorg/apache/jute/Record;Lorg/apache/jute/Record;Lorg/apache/zookeeper/AsyncCallback;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lorg/apache/zookeeper/ZooKeeper$WatchRegistration;)Lorg/apache/zookeeper/ClientCnxn$Packet;
+    POP
+   L9
+    LINENUMBER 1753 L9
+    RETURN
+   L10
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L10 0
+    LOCALVARIABLE path Ljava/lang/String; L0 L10 1
+    LOCALVARIABLE cb Lorg/apache/zookeeper/AsyncCallback$VoidCallback; L0 L10 2
+    LOCALVARIABLE ctx Ljava/lang/Object; L0 L10 3
+    LOCALVARIABLE clientPath Ljava/lang/String; L1 L10 4
+    LOCALVARIABLE serverPath Ljava/lang/String; L3 L10 5
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L4 L10 6
+    LOCALVARIABLE request Lorg/apache/zookeeper/proto/SyncRequest; L6 L10 7
+    LOCALVARIABLE response Lorg/apache/zookeeper/proto/SyncResponse; L7 L10 8
+    MAXSTACK = 10
+    MAXLOCALS = 9
+
+  // access flags 0x1
+  public getState()Lorg/apache/zookeeper/ZooKeeper$States;
+   L0
+    LINENUMBER 1756 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn.getState ()Lorg/apache/zookeeper/ZooKeeper$States;
+    ARETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public toString()Ljava/lang/String;
+   L0
+    LINENUMBER 1770 L0
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper.getState ()Lorg/apache/zookeeper/ZooKeeper$States;
+    ASTORE 1
+   L1
+    LINENUMBER 1771 L1
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "State:"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper$States.toString ()Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L2
+    LINENUMBER 1772 L2
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper$States.isConnected ()Z
+    IFEQ L3
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC " Timeout:"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 0
+   L4
+    LINENUMBER 1773 L4
+    INVOKEVIRTUAL org/apache/zookeeper/ZooKeeper.getSessionTimeout ()I
+    INVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;
+    LDC " "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    GOTO L5
+   L3
+   FRAME FULL [org/apache/zookeeper/ZooKeeper org/apache/zookeeper/ZooKeeper$States] [java/lang/StringBuilder]
+    LDC " "
+   L5
+   FRAME FULL [org/apache/zookeeper/ZooKeeper org/apache/zookeeper/ZooKeeper$States] [java/lang/StringBuilder java/lang/String]
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+   L6
+    LINENUMBER 1771 L6
+    ARETURN
+   L7
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L7 0
+    LOCALVARIABLE state Lorg/apache/zookeeper/ZooKeeper$States; L1 L7 1
+    MAXSTACK = 3
+    MAXLOCALS = 2
+
+  // access flags 0x4
+  protected testableWaitForShutdown(I)Z throws java/lang/InterruptedException 
+   L0
+    LINENUMBER 1796 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    GETFIELD org/apache/zookeeper/ClientCnxn.sendThread : Lorg/apache/zookeeper/ClientCnxn$SendThread;
+    ILOAD 1
+    I2L
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn$SendThread.join (J)V
+   L1
+    LINENUMBER 1797 L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    GETFIELD org/apache/zookeeper/ClientCnxn.sendThread : Lorg/apache/zookeeper/ClientCnxn$SendThread;
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn$SendThread.isAlive ()Z
+    IFEQ L2
+    ICONST_0
+    IRETURN
+   L2
+    LINENUMBER 1798 L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper I] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    GETFIELD org/apache/zookeeper/ClientCnxn.eventThread : Lorg/apache/zookeeper/ClientCnxn$EventThread;
+    ILOAD 1
+    I2L
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn$EventThread.join (J)V
+   L3
+    LINENUMBER 1799 L3
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    GETFIELD org/apache/zookeeper/ClientCnxn.eventThread : Lorg/apache/zookeeper/ClientCnxn$EventThread;
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn$EventThread.isAlive ()Z
+    IFEQ L4
+    ICONST_0
+    IRETURN
+   L4
+    LINENUMBER 1800 L4
+   FRAME FULL [org/apache/zookeeper/ZooKeeper I] []
+    ICONST_1
+    IRETURN
+   L5
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L5 0
+    LOCALVARIABLE wait I L0 L5 1
+    MAXSTACK = 3
+    MAXLOCALS = 2
+
+  // access flags 0x4
+  protected testableRemoteSocketAddress()Ljava/net/SocketAddress;
+   L0
+    LINENUMBER 1816 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    GETFIELD org/apache/zookeeper/ClientCnxn.sendThread : Lorg/apache/zookeeper/ClientCnxn$SendThread;
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn$SendThread.getClientCnxnSocket ()Lorg/apache/zookeeper/ClientCnxnSocket;
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxnSocket.getRemoteSocketAddress ()Ljava/net/SocketAddress;
+    ARETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x4
+  protected testableLocalSocketAddress()Ljava/net/SocketAddress;
+   L0
+    LINENUMBER 1829 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.cnxn : Lorg/apache/zookeeper/ClientCnxn;
+    GETFIELD org/apache/zookeeper/ClientCnxn.sendThread : Lorg/apache/zookeeper/ClientCnxn$SendThread;
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxn$SendThread.getClientCnxnSocket ()Lorg/apache/zookeeper/ClientCnxnSocket;
+    INVOKEVIRTUAL org/apache/zookeeper/ClientCnxnSocket.getLocalSocketAddress ()Ljava/net/SocketAddress;
+    ARETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0xA
+  private static getClientCnxnSocket()Lorg/apache/zookeeper/ClientCnxnSocket; throws java/io/IOException 
+    TRYCATCHBLOCK L0 L1 L2 java/lang/Exception
+   L3
+    LINENUMBER 1833 L3
+    LDC "zookeeper.clientCnxnSocket"
+   L4
+    LINENUMBER 1834 L4
+    INVOKESTATIC java/lang/System.getProperty (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 0
+   L5
+    LINENUMBER 1835 L5
+    ALOAD 0
+    IFNONNULL L0
+   L6
+    LINENUMBER 1836 L6
+    LDC Lorg/apache/zookeeper/ClientCnxnSocketNIO;.class
+    INVOKEVIRTUAL java/lang/Class.getName ()Ljava/lang/String;
+    ASTORE 0
+   L0
+    LINENUMBER 1839 L0
+   FRAME FULL [java/lang/String] []
+    ALOAD 0
+    INVOKESTATIC java/lang/Class.forName (Ljava/lang/String;)Ljava/lang/Class;
+   L7
+    LINENUMBER 1840 L7
+    INVOKEVIRTUAL java/lang/Class.newInstance ()Ljava/lang/Object;
+    CHECKCAST org/apache/zookeeper/ClientCnxnSocket
+   L1
+    LINENUMBER 1839 L1
+    ARETURN
+   L2
+    LINENUMBER 1841 L2
+   FRAME FULL [java/lang/String] [java/lang/Exception]
+    ASTORE 1
+   L8
+    LINENUMBER 1842 L8
+    NEW java/io/IOException
+    DUP
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Couldn't instantiate "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 0
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKESPECIAL java/io/IOException.<init> (Ljava/lang/String;)V
+    ASTORE 2
+   L9
+    LINENUMBER 1844 L9
+    ALOAD 2
+    ALOAD 1
+    INVOKEVIRTUAL java/io/IOException.initCause (Ljava/lang/Throwable;)Ljava/lang/Throwable;
+    POP
+   L10
+    LINENUMBER 1845 L10
+    ALOAD 2
+    ATHROW
+   L11
+    LOCALVARIABLE ioe Ljava/io/IOException; L9 L11 2
+    LOCALVARIABLE e Ljava/lang/Exception; L8 L11 1
+    LOCALVARIABLE clientCnxnSocketName Ljava/lang/String; L5 L11 0
+    MAXSTACK = 4
+    MAXLOCALS = 3
+
+  // access flags 0x1008
+  static synthetic access$400()Lorg/slf4j/Logger;
+   L0
+    LINENUMBER 86 L0
+    GETSTATIC org/apache/zookeeper/ZooKeeper.LOG : Lorg/slf4j/Logger;
+    ARETURN
+    MAXSTACK = 1
+    MAXLOCALS = 0
+
+  // access flags 0x1008
+  static synthetic access$500(Lorg/apache/zookeeper/ZooKeeper;)Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+   L0
+    LINENUMBER 86 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper.watchManager : Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    ARETURN
+   L1
+    LOCALVARIABLE x0 Lorg/apache/zookeeper/ZooKeeper; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x8
+  static <clinit>()V
+   L0
+    LINENUMBER 94 L0
+    LDC Lorg/apache/zookeeper/ZooKeeper;.class
+    INVOKESTATIC org/slf4j/LoggerFactory.getLogger (Ljava/lang/Class;)Lorg/slf4j/Logger;
+    PUTSTATIC org/apache/zookeeper/ZooKeeper.LOG : Lorg/slf4j/Logger;
+   L1
+    LINENUMBER 95 L1
+    LDC "Client environment:"
+    GETSTATIC org/apache/zookeeper/ZooKeeper.LOG : Lorg/slf4j/Logger;
+    INVOKESTATIC org/apache/zookeeper/Environment.logEnv (Ljava/lang/String;Lorg/slf4j/Logger;)V
+   L2
+    LINENUMBER 96 L2
+    RETURN
+    MAXSTACK = 2
+    MAXLOCALS = 0
+}
+

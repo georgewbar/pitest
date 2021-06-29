@@ -1,0 +1,58 @@
+// class version 50.0 (50)
+// access flags 0x20
+class org/apache/zookeeper/ZooKeeper$DataWatchRegistration extends org/apache/zookeeper/ZooKeeper$WatchRegistration {
+
+  // compiled from: ZooKeeper.java
+  // access flags 0x0
+  INNERCLASS org/apache/zookeeper/ZooKeeper$DataWatchRegistration org/apache/zookeeper/ZooKeeper DataWatchRegistration
+  // access flags 0x400
+  abstract INNERCLASS org/apache/zookeeper/ZooKeeper$WatchRegistration org/apache/zookeeper/ZooKeeper WatchRegistration
+  // access flags 0xA
+  private static INNERCLASS org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/ZooKeeper ZKWatchManager
+
+  // access flags 0x1010
+  final synthetic Lorg/apache/zookeeper/ZooKeeper; this$0
+
+  // access flags 0x1
+  public <init>(Lorg/apache/zookeeper/ZooKeeper;Lorg/apache/zookeeper/Watcher;Ljava/lang/String;)V
+   L0
+    LINENUMBER 295 L0
+    ALOAD 0
+    ALOAD 1
+    PUTFIELD org/apache/zookeeper/ZooKeeper$DataWatchRegistration.this$0 : Lorg/apache/zookeeper/ZooKeeper;
+   L1
+    LINENUMBER 296 L1
+    ALOAD 0
+    ALOAD 1
+    ALOAD 2
+    ALOAD 3
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$WatchRegistration.<init> (Lorg/apache/zookeeper/ZooKeeper;Lorg/apache/zookeeper/Watcher;Ljava/lang/String;)V
+   L2
+    LINENUMBER 297 L2
+    RETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper$DataWatchRegistration; L0 L3 0
+    LOCALVARIABLE this$0 Lorg/apache/zookeeper/ZooKeeper; L0 L3 1
+    LOCALVARIABLE watcher Lorg/apache/zookeeper/Watcher; L0 L3 2
+    LOCALVARIABLE clientPath Ljava/lang/String; L0 L3 3
+    MAXSTACK = 4
+    MAXLOCALS = 4
+
+  // access flags 0x4
+  // signature (I)Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;>;
+  // declaration: java.util.Map<java.lang.String, java.util.Set<org.apache.zookeeper.Watcher>> getWatches(int)
+  protected getWatches(I)Ljava/util/Map;
+   L0
+    LINENUMBER 301 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$DataWatchRegistration.this$0 : Lorg/apache/zookeeper/ZooKeeper;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper.access$500 (Lorg/apache/zookeeper/ZooKeeper;)Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper$ZKWatchManager.access$100 (Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Ljava/util/Map;
+    ARETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper$DataWatchRegistration; L0 L1 0
+    LOCALVARIABLE rc I L0 L1 1
+    MAXSTACK = 1
+    MAXLOCALS = 2
+}
+

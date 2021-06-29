@@ -1,0 +1,129 @@
+// class version 50.0 (50)
+// access flags 0x20
+class org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord {
+
+  // compiled from: ZooKeeperServer.java
+  // access flags 0x8
+  static INNERCLASS org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord org/apache/zookeeper/server/ZooKeeperServer ChangeRecord
+
+  // access flags 0x0
+  J zxid
+
+  // access flags 0x0
+  Ljava/lang/String; path
+
+  // access flags 0x0
+  Lorg/apache/zookeeper/data/StatPersisted; stat
+
+  // access flags 0x0
+  I childCount
+
+  // access flags 0x0
+  // signature Ljava/util/List<Lorg/apache/zookeeper/data/ACL;>;
+  // declaration: acl extends java.util.List<org.apache.zookeeper.data.ACL>
+  Ljava/util/List; acl
+
+  // access flags 0x0
+  // signature (JLjava/lang/String;Lorg/apache/zookeeper/data/StatPersisted;ILjava/util/List<Lorg/apache/zookeeper/data/ACL;>;)V
+  // declaration: void <init>(long, java.lang.String, org.apache.zookeeper.data.StatPersisted, int, java.util.List<org.apache.zookeeper.data.ACL>)
+  <init>(JLjava/lang/String;Lorg/apache/zookeeper/data/StatPersisted;ILjava/util/List;)V
+   L0
+    LINENUMBER 569 L0
+    ALOAD 0
+    INVOKESPECIAL java/lang/Object.<init> ()V
+   L1
+    LINENUMBER 570 L1
+    ALOAD 0
+    LLOAD 1
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord.zxid : J
+   L2
+    LINENUMBER 571 L2
+    ALOAD 0
+    ALOAD 3
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord.path : Ljava/lang/String;
+   L3
+    LINENUMBER 572 L3
+    ALOAD 0
+    ALOAD 4
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord.stat : Lorg/apache/zookeeper/data/StatPersisted;
+   L4
+    LINENUMBER 573 L4
+    ALOAD 0
+    ILOAD 5
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord.childCount : I
+   L5
+    LINENUMBER 574 L5
+    ALOAD 0
+    ALOAD 6
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord.acl : Ljava/util/List;
+   L6
+    LINENUMBER 575 L6
+    RETURN
+   L7
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer$ChangeRecord; L0 L7 0
+    LOCALVARIABLE zxid J L0 L7 1
+    LOCALVARIABLE path Ljava/lang/String; L0 L7 3
+    LOCALVARIABLE stat Lorg/apache/zookeeper/data/StatPersisted; L0 L7 4
+    LOCALVARIABLE childCount I L0 L7 5
+    LOCALVARIABLE acl Ljava/util/List; L0 L7 6
+    // signature Ljava/util/List<Lorg/apache/zookeeper/data/ACL;>;
+    // declaration: acl extends java.util.List<org.apache.zookeeper.data.ACL>
+    MAXSTACK = 3
+    MAXLOCALS = 7
+
+  // access flags 0x0
+  duplicate(J)Lorg/apache/zookeeper/server/ZooKeeperServer$ChangeRecord;
+   L0
+    LINENUMBER 589 L0
+    NEW org/apache/zookeeper/data/StatPersisted
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/data/StatPersisted.<init> ()V
+    ASTORE 3
+   L1
+    LINENUMBER 590 L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord.stat : Lorg/apache/zookeeper/data/StatPersisted;
+    IFNULL L2
+   L3
+    LINENUMBER 591 L3
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord.stat : Lorg/apache/zookeeper/data/StatPersisted;
+    ALOAD 3
+    INVOKESTATIC org/apache/zookeeper/server/DataTree.copyStatPersisted (Lorg/apache/zookeeper/data/StatPersisted;Lorg/apache/zookeeper/data/StatPersisted;)V
+   L2
+    LINENUMBER 593 L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord J org/apache/zookeeper/data/StatPersisted] []
+    NEW org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord
+    DUP
+    LLOAD 1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord.path : Ljava/lang/String;
+    ALOAD 3
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord.childCount : I
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord.acl : Ljava/util/List;
+    IFNONNULL L4
+    NEW java/util/ArrayList
+    DUP
+    INVOKESPECIAL java/util/ArrayList.<init> ()V
+    GOTO L5
+   L4
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord J org/apache/zookeeper/data/StatPersisted] [L2 L2 J java/lang/String org/apache/zookeeper/data/StatPersisted I]
+    NEW java/util/ArrayList
+    DUP
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord.acl : Ljava/util/List;
+    INVOKESPECIAL java/util/ArrayList.<init> (Ljava/util/Collection;)V
+   L5
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord J org/apache/zookeeper/data/StatPersisted] [L2 L2 J java/lang/String org/apache/zookeeper/data/StatPersisted I java/util/ArrayList]
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord.<init> (JLjava/lang/String;Lorg/apache/zookeeper/data/StatPersisted;ILjava/util/List;)V
+    ARETURN
+   L6
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer$ChangeRecord; L0 L6 0
+    LOCALVARIABLE zxid J L0 L6 1
+    LOCALVARIABLE stat Lorg/apache/zookeeper/data/StatPersisted; L1 L6 3
+    MAXSTACK = 10
+    MAXLOCALS = 4
+}
+

@@ -1,0 +1,95 @@
+// class version 50.0 (50)
+// access flags 0x1020
+synthetic class org/apache/zookeeper/ZooKeeper$1 {
+
+  // compiled from: ZooKeeper.java
+  OUTERCLASS org/apache/zookeeper/ZooKeeper null
+  // access flags 0x1008
+  static synthetic INNERCLASS org/apache/zookeeper/ZooKeeper$1 null null
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/Watcher$Event org/apache/zookeeper/Watcher Event
+  // access flags 0x4019
+  public final static enum INNERCLASS org/apache/zookeeper/Watcher$Event$EventType org/apache/zookeeper/Watcher$Event EventType
+
+  // access flags 0x1018
+  final static synthetic [I $SwitchMap$org$apache$zookeeper$Watcher$Event$EventType
+
+  // access flags 0x8
+  static <clinit>()V
+    TRYCATCHBLOCK L0 L1 L2 java/lang/NoSuchFieldError
+    TRYCATCHBLOCK L3 L4 L5 java/lang/NoSuchFieldError
+    TRYCATCHBLOCK L6 L7 L8 java/lang/NoSuchFieldError
+    TRYCATCHBLOCK L9 L10 L11 java/lang/NoSuchFieldError
+    TRYCATCHBLOCK L12 L13 L14 java/lang/NoSuchFieldError
+   L15
+    LINENUMBER 157 L15
+    INVOKESTATIC org/apache/zookeeper/Watcher$Event$EventType.values ()[Lorg/apache/zookeeper/Watcher$Event$EventType;
+    ARRAYLENGTH
+    NEWARRAY T_INT
+    PUTSTATIC org/apache/zookeeper/ZooKeeper$1.$SwitchMap$org$apache$zookeeper$Watcher$Event$EventType : [I
+   L0
+    GETSTATIC org/apache/zookeeper/ZooKeeper$1.$SwitchMap$org$apache$zookeeper$Watcher$Event$EventType : [I
+    GETSTATIC org/apache/zookeeper/Watcher$Event$EventType.None : Lorg/apache/zookeeper/Watcher$Event$EventType;
+    INVOKEVIRTUAL org/apache/zookeeper/Watcher$Event$EventType.ordinal ()I
+    ICONST_1
+    IASTORE
+   L1
+    GOTO L3
+   L2
+   FRAME FULL [] [java/lang/NoSuchFieldError]
+    ASTORE 0
+   L3
+   FRAME FULL [] []
+    GETSTATIC org/apache/zookeeper/ZooKeeper$1.$SwitchMap$org$apache$zookeeper$Watcher$Event$EventType : [I
+    GETSTATIC org/apache/zookeeper/Watcher$Event$EventType.NodeDataChanged : Lorg/apache/zookeeper/Watcher$Event$EventType;
+    INVOKEVIRTUAL org/apache/zookeeper/Watcher$Event$EventType.ordinal ()I
+    ICONST_2
+    IASTORE
+   L4
+    GOTO L6
+   L5
+   FRAME FULL [] [java/lang/NoSuchFieldError]
+    ASTORE 0
+   L6
+   FRAME FULL [] []
+    GETSTATIC org/apache/zookeeper/ZooKeeper$1.$SwitchMap$org$apache$zookeeper$Watcher$Event$EventType : [I
+    GETSTATIC org/apache/zookeeper/Watcher$Event$EventType.NodeCreated : Lorg/apache/zookeeper/Watcher$Event$EventType;
+    INVOKEVIRTUAL org/apache/zookeeper/Watcher$Event$EventType.ordinal ()I
+    ICONST_3
+    IASTORE
+   L7
+    GOTO L9
+   L8
+   FRAME FULL [] [java/lang/NoSuchFieldError]
+    ASTORE 0
+   L9
+   FRAME FULL [] []
+    GETSTATIC org/apache/zookeeper/ZooKeeper$1.$SwitchMap$org$apache$zookeeper$Watcher$Event$EventType : [I
+    GETSTATIC org/apache/zookeeper/Watcher$Event$EventType.NodeChildrenChanged : Lorg/apache/zookeeper/Watcher$Event$EventType;
+    INVOKEVIRTUAL org/apache/zookeeper/Watcher$Event$EventType.ordinal ()I
+    ICONST_4
+    IASTORE
+   L10
+    GOTO L12
+   L11
+   FRAME FULL [] [java/lang/NoSuchFieldError]
+    ASTORE 0
+   L12
+   FRAME FULL [] []
+    GETSTATIC org/apache/zookeeper/ZooKeeper$1.$SwitchMap$org$apache$zookeeper$Watcher$Event$EventType : [I
+    GETSTATIC org/apache/zookeeper/Watcher$Event$EventType.NodeDeleted : Lorg/apache/zookeeper/Watcher$Event$EventType;
+    INVOKEVIRTUAL org/apache/zookeeper/Watcher$Event$EventType.ordinal ()I
+    ICONST_5
+    IASTORE
+   L13
+    GOTO L16
+   L14
+   FRAME FULL [] [java/lang/NoSuchFieldError]
+    ASTORE 0
+   L16
+   FRAME FULL [] []
+    RETURN
+    MAXSTACK = 3
+    MAXLOCALS = 1
+}
+

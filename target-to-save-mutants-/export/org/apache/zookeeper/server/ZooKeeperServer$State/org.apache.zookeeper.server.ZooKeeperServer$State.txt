@@ -1,0 +1,120 @@
+// class version 50.0 (50)
+// access flags 0x4031
+// signature Ljava/lang/Enum<Lorg/apache/zookeeper/server/ZooKeeperServer$State;>;
+// declaration: org/apache/zookeeper/server/ZooKeeperServer$State extends java.lang.Enum<org.apache.zookeeper.server.ZooKeeperServer$State>
+public final enum org/apache/zookeeper/server/ZooKeeperServer$State extends java/lang/Enum {
+
+  // compiled from: ZooKeeperServer.java
+  // access flags 0x401C
+  protected final static enum INNERCLASS org/apache/zookeeper/server/ZooKeeperServer$State org/apache/zookeeper/server/ZooKeeperServer State
+
+  // access flags 0x4019
+  public final static enum Lorg/apache/zookeeper/server/ZooKeeperServer$State; INITIAL
+
+  // access flags 0x4019
+  public final static enum Lorg/apache/zookeeper/server/ZooKeeperServer$State; RUNNING
+
+  // access flags 0x4019
+  public final static enum Lorg/apache/zookeeper/server/ZooKeeperServer$State; SHUTDOWN
+
+  // access flags 0x4019
+  public final static enum Lorg/apache/zookeeper/server/ZooKeeperServer$State; ERROR
+
+  // access flags 0x101A
+  private final static synthetic [Lorg/apache/zookeeper/server/ZooKeeperServer$State; $VALUES
+
+  // access flags 0x9
+  public static values()[Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+   L0
+    LINENUMBER 117 L0
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.$VALUES : [Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    INVOKEVIRTUAL [Lorg/apache/zookeeper/server/ZooKeeperServer$State;.clone ()Ljava/lang/Object;
+    CHECKCAST [Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    ARETURN
+    MAXSTACK = 1
+    MAXLOCALS = 0
+
+  // access flags 0x9
+  public static valueOf(Ljava/lang/String;)Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+   L0
+    LINENUMBER 117 L0
+    LDC Lorg/apache/zookeeper/server/ZooKeeperServer$State;.class
+    ALOAD 0
+    INVOKESTATIC java/lang/Enum.valueOf (Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+    CHECKCAST org/apache/zookeeper/server/ZooKeeperServer$State
+    ARETURN
+   L1
+    LOCALVARIABLE name Ljava/lang/String; L0 L1 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x2
+  // signature ()V
+  // declaration: void <init>()
+  private <init>(Ljava/lang/String;I)V
+   L0
+    LINENUMBER 117 L0
+    ALOAD 0
+    ALOAD 1
+    ILOAD 2
+    INVOKESPECIAL java/lang/Enum.<init> (Ljava/lang/String;I)V
+    RETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer$State; L0 L1 0
+    MAXSTACK = 3
+    MAXLOCALS = 3
+
+  // access flags 0x8
+  static <clinit>()V
+   L0
+    LINENUMBER 118 L0
+    NEW org/apache/zookeeper/server/ZooKeeperServer$State
+    DUP
+    LDC "INITIAL"
+    ICONST_0
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer$State.<init> (Ljava/lang/String;I)V
+    PUTSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.INITIAL : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    NEW org/apache/zookeeper/server/ZooKeeperServer$State
+    DUP
+    LDC "RUNNING"
+    ICONST_1
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer$State.<init> (Ljava/lang/String;I)V
+    PUTSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.RUNNING : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    NEW org/apache/zookeeper/server/ZooKeeperServer$State
+    DUP
+    LDC "SHUTDOWN"
+    ICONST_2
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer$State.<init> (Ljava/lang/String;I)V
+    PUTSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.SHUTDOWN : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    NEW org/apache/zookeeper/server/ZooKeeperServer$State
+    DUP
+    LDC "ERROR"
+    ICONST_3
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer$State.<init> (Ljava/lang/String;I)V
+    PUTSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.ERROR : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+   L1
+    LINENUMBER 117 L1
+    ICONST_4
+    ANEWARRAY org/apache/zookeeper/server/ZooKeeperServer$State
+    DUP
+    ICONST_0
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.INITIAL : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    AASTORE
+    DUP
+    ICONST_1
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.RUNNING : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    AASTORE
+    DUP
+    ICONST_2
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.SHUTDOWN : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    AASTORE
+    DUP
+    ICONST_3
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.ERROR : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    AASTORE
+    PUTSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.$VALUES : [Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    RETURN
+    MAXSTACK = 4
+    MAXLOCALS = 0
+}
+

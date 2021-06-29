@@ -1,0 +1,12 @@
+// class version 50.0 (50)
+// access flags 0x601
+public abstract interface org/apache/zookeeper/server/ZooKeeperServer$DataTreeBuilder {
+
+  // compiled from: ZooKeeperServer.java
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/server/ZooKeeperServer$DataTreeBuilder org/apache/zookeeper/server/ZooKeeperServer DataTreeBuilder
+
+  // access flags 0x401
+  public abstract build()Lorg/apache/zookeeper/server/DataTree;
+}
+

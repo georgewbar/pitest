@@ -1,0 +1,209 @@
+// class version 50.0 (50)
+// access flags 0x4031
+// signature Ljava/lang/Enum<Lorg/apache/zookeeper/ZooKeeper$States;>;
+// declaration: org/apache/zookeeper/ZooKeeper$States extends java.lang.Enum<org.apache.zookeeper.ZooKeeper$States>
+public final enum org/apache/zookeeper/ZooKeeper$States extends java/lang/Enum {
+
+  // compiled from: ZooKeeper.java
+  // access flags 0x4019
+  public final static enum INNERCLASS org/apache/zookeeper/ZooKeeper$States org/apache/zookeeper/ZooKeeper States
+
+  // access flags 0x4019
+  public final static enum Lorg/apache/zookeeper/ZooKeeper$States; CONNECTING
+
+  // access flags 0x4019
+  public final static enum Lorg/apache/zookeeper/ZooKeeper$States; ASSOCIATING
+
+  // access flags 0x4019
+  public final static enum Lorg/apache/zookeeper/ZooKeeper$States; CONNECTED
+
+  // access flags 0x4019
+  public final static enum Lorg/apache/zookeeper/ZooKeeper$States; CONNECTEDREADONLY
+
+  // access flags 0x4019
+  public final static enum Lorg/apache/zookeeper/ZooKeeper$States; CLOSED
+
+  // access flags 0x4019
+  public final static enum Lorg/apache/zookeeper/ZooKeeper$States; AUTH_FAILED
+
+  // access flags 0x4019
+  public final static enum Lorg/apache/zookeeper/ZooKeeper$States; NOT_CONNECTED
+
+  // access flags 0x101A
+  private final static synthetic [Lorg/apache/zookeeper/ZooKeeper$States; $VALUES
+
+  // access flags 0x9
+  public static values()[Lorg/apache/zookeeper/ZooKeeper$States;
+   L0
+    LINENUMBER 316 L0
+    GETSTATIC org/apache/zookeeper/ZooKeeper$States.$VALUES : [Lorg/apache/zookeeper/ZooKeeper$States;
+    INVOKEVIRTUAL [Lorg/apache/zookeeper/ZooKeeper$States;.clone ()Ljava/lang/Object;
+    CHECKCAST [Lorg/apache/zookeeper/ZooKeeper$States;
+    ARETURN
+    MAXSTACK = 1
+    MAXLOCALS = 0
+
+  // access flags 0x9
+  public static valueOf(Ljava/lang/String;)Lorg/apache/zookeeper/ZooKeeper$States;
+   L0
+    LINENUMBER 316 L0
+    LDC Lorg/apache/zookeeper/ZooKeeper$States;.class
+    ALOAD 0
+    INVOKESTATIC java/lang/Enum.valueOf (Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+    CHECKCAST org/apache/zookeeper/ZooKeeper$States
+    ARETURN
+   L1
+    LOCALVARIABLE name Ljava/lang/String; L0 L1 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x2
+  // signature ()V
+  // declaration: void <init>()
+  private <init>(Ljava/lang/String;I)V
+   L0
+    LINENUMBER 316 L0
+    ALOAD 0
+    ALOAD 1
+    ILOAD 2
+    INVOKESPECIAL java/lang/Enum.<init> (Ljava/lang/String;I)V
+    RETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper$States; L0 L1 0
+    MAXSTACK = 3
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  public isAlive()Z
+   L0
+    LINENUMBER 321 L0
+    ALOAD 0
+    GETSTATIC org/apache/zookeeper/ZooKeeper$States.CLOSED : Lorg/apache/zookeeper/ZooKeeper$States;
+    IF_ACMPEQ L1
+    ALOAD 0
+    GETSTATIC org/apache/zookeeper/ZooKeeper$States.AUTH_FAILED : Lorg/apache/zookeeper/ZooKeeper$States;
+    IF_ACMPEQ L1
+    ICONST_1
+    GOTO L2
+   L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$States] []
+    ICONST_0
+   L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$States] [I]
+    IRETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper$States; L0 L3 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public isConnected()Z
+   L0
+    LINENUMBER 330 L0
+    ALOAD 0
+    GETSTATIC org/apache/zookeeper/ZooKeeper$States.CONNECTED : Lorg/apache/zookeeper/ZooKeeper$States;
+    IF_ACMPNE L1
+    ALOAD 0
+    GETSTATIC org/apache/zookeeper/ZooKeeper$States.CONNECTEDREADONLY : Lorg/apache/zookeeper/ZooKeeper$States;
+    IF_ACMPNE L2
+   L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$States] []
+    ICONST_1
+    GOTO L3
+   L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$States] []
+    ICONST_0
+   L3
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$States] [I]
+    IRETURN
+   L4
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper$States; L0 L4 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x8
+  static <clinit>()V
+   L0
+    LINENUMBER 317 L0
+    NEW org/apache/zookeeper/ZooKeeper$States
+    DUP
+    LDC "CONNECTING"
+    ICONST_0
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$States.<init> (Ljava/lang/String;I)V
+    PUTSTATIC org/apache/zookeeper/ZooKeeper$States.CONNECTING : Lorg/apache/zookeeper/ZooKeeper$States;
+    NEW org/apache/zookeeper/ZooKeeper$States
+    DUP
+    LDC "ASSOCIATING"
+    ICONST_1
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$States.<init> (Ljava/lang/String;I)V
+    PUTSTATIC org/apache/zookeeper/ZooKeeper$States.ASSOCIATING : Lorg/apache/zookeeper/ZooKeeper$States;
+    NEW org/apache/zookeeper/ZooKeeper$States
+    DUP
+    LDC "CONNECTED"
+    ICONST_2
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$States.<init> (Ljava/lang/String;I)V
+    PUTSTATIC org/apache/zookeeper/ZooKeeper$States.CONNECTED : Lorg/apache/zookeeper/ZooKeeper$States;
+    NEW org/apache/zookeeper/ZooKeeper$States
+    DUP
+    LDC "CONNECTEDREADONLY"
+    ICONST_3
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$States.<init> (Ljava/lang/String;I)V
+    PUTSTATIC org/apache/zookeeper/ZooKeeper$States.CONNECTEDREADONLY : Lorg/apache/zookeeper/ZooKeeper$States;
+   L1
+    LINENUMBER 318 L1
+    NEW org/apache/zookeeper/ZooKeeper$States
+    DUP
+    LDC "CLOSED"
+    ICONST_4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$States.<init> (Ljava/lang/String;I)V
+    PUTSTATIC org/apache/zookeeper/ZooKeeper$States.CLOSED : Lorg/apache/zookeeper/ZooKeeper$States;
+    NEW org/apache/zookeeper/ZooKeeper$States
+    DUP
+    LDC "AUTH_FAILED"
+    ICONST_5
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$States.<init> (Ljava/lang/String;I)V
+    PUTSTATIC org/apache/zookeeper/ZooKeeper$States.AUTH_FAILED : Lorg/apache/zookeeper/ZooKeeper$States;
+    NEW org/apache/zookeeper/ZooKeeper$States
+    DUP
+    LDC "NOT_CONNECTED"
+    BIPUSH 6
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$States.<init> (Ljava/lang/String;I)V
+    PUTSTATIC org/apache/zookeeper/ZooKeeper$States.NOT_CONNECTED : Lorg/apache/zookeeper/ZooKeeper$States;
+   L2
+    LINENUMBER 316 L2
+    BIPUSH 7
+    ANEWARRAY org/apache/zookeeper/ZooKeeper$States
+    DUP
+    ICONST_0
+    GETSTATIC org/apache/zookeeper/ZooKeeper$States.CONNECTING : Lorg/apache/zookeeper/ZooKeeper$States;
+    AASTORE
+    DUP
+    ICONST_1
+    GETSTATIC org/apache/zookeeper/ZooKeeper$States.ASSOCIATING : Lorg/apache/zookeeper/ZooKeeper$States;
+    AASTORE
+    DUP
+    ICONST_2
+    GETSTATIC org/apache/zookeeper/ZooKeeper$States.CONNECTED : Lorg/apache/zookeeper/ZooKeeper$States;
+    AASTORE
+    DUP
+    ICONST_3
+    GETSTATIC org/apache/zookeeper/ZooKeeper$States.CONNECTEDREADONLY : Lorg/apache/zookeeper/ZooKeeper$States;
+    AASTORE
+    DUP
+    ICONST_4
+    GETSTATIC org/apache/zookeeper/ZooKeeper$States.CLOSED : Lorg/apache/zookeeper/ZooKeeper$States;
+    AASTORE
+    DUP
+    ICONST_5
+    GETSTATIC org/apache/zookeeper/ZooKeeper$States.AUTH_FAILED : Lorg/apache/zookeeper/ZooKeeper$States;
+    AASTORE
+    DUP
+    BIPUSH 6
+    GETSTATIC org/apache/zookeeper/ZooKeeper$States.NOT_CONNECTED : Lorg/apache/zookeeper/ZooKeeper$States;
+    AASTORE
+    PUTSTATIC org/apache/zookeeper/ZooKeeper$States.$VALUES : [Lorg/apache/zookeeper/ZooKeeper$States;
+    RETURN
+    MAXSTACK = 4
+    MAXLOCALS = 0
+}
+

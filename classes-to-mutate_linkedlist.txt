@@ -1,0 +1,5 @@
+modified.java.utils.LinkedList
+modified.java.utils.LinkedList$Node
+modified.java.utils.LinkedList$DescendingIterator
+modified.java.utils.LinkedList$ListItr
+modified.java.utils.LinkedList$LLSpliterator

@@ -1,0 +1,699 @@
+// class version 50.0 (50)
+// access flags 0x20
+class org/apache/zookeeper/ZooKeeper$ZKWatchManager implements org/apache/zookeeper/ClientWatchManager {
+
+  // compiled from: ZooKeeper.java
+  // access flags 0xA
+  private static INNERCLASS org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/ZooKeeper ZKWatchManager
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/Watcher$Event org/apache/zookeeper/Watcher Event
+  // access flags 0x4019
+  public final static enum INNERCLASS org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event KeeperState
+  // access flags 0x4019
+  public final static enum INNERCLASS org/apache/zookeeper/Watcher$Event$EventType org/apache/zookeeper/Watcher$Event EventType
+  // access flags 0x1008
+  static synthetic INNERCLASS org/apache/zookeeper/ZooKeeper$1 null null
+
+  // access flags 0x12
+  // signature Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;>;
+  // declaration: dataWatches extends java.util.Map<java.lang.String, java.util.Set<org.apache.zookeeper.Watcher>>
+  private final Ljava/util/Map; dataWatches
+
+  // access flags 0x12
+  // signature Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;>;
+  // declaration: existWatches extends java.util.Map<java.lang.String, java.util.Set<org.apache.zookeeper.Watcher>>
+  private final Ljava/util/Map; existWatches
+
+  // access flags 0x12
+  // signature Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;>;
+  // declaration: childWatches extends java.util.Map<java.lang.String, java.util.Set<org.apache.zookeeper.Watcher>>
+  private final Ljava/util/Map; childWatches
+
+  // access flags 0x42
+  private volatile Lorg/apache/zookeeper/Watcher; defaultWatcher
+
+  // access flags 0x2
+  private <init>()V
+   L0
+    LINENUMBER 130 L0
+    ALOAD 0
+    INVOKESPECIAL java/lang/Object.<init> ()V
+   L1
+    LINENUMBER 131 L1
+    ALOAD 0
+    NEW java/util/HashMap
+    DUP
+    INVOKESPECIAL java/util/HashMap.<init> ()V
+    PUTFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.dataWatches : Ljava/util/Map;
+   L2
+    LINENUMBER 133 L2
+    ALOAD 0
+    NEW java/util/HashMap
+    DUP
+    INVOKESPECIAL java/util/HashMap.<init> ()V
+    PUTFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.existWatches : Ljava/util/Map;
+   L3
+    LINENUMBER 135 L3
+    ALOAD 0
+    NEW java/util/HashMap
+    DUP
+    INVOKESPECIAL java/util/HashMap.<init> ()V
+    PUTFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.childWatches : Ljava/util/Map;
+    RETURN
+   L4
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager; L0 L4 0
+    MAXSTACK = 3
+    MAXLOCALS = 1
+
+  // access flags 0x12
+  // signature (Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;)V
+  // declaration: void addTo(java.util.Set<org.apache.zookeeper.Watcher>, java.util.Set<org.apache.zookeeper.Watcher>)
+  private final addTo(Ljava/util/Set;Ljava/util/Set;)V
+   L0
+    LINENUMBER 141 L0
+    ALOAD 1
+    IFNULL L1
+   L2
+    LINENUMBER 142 L2
+    ALOAD 2
+    ALOAD 1
+    INVOKEINTERFACE java/util/Set.addAll (Ljava/util/Collection;)Z (itf)
+    POP
+   L1
+    LINENUMBER 144 L1
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager java/util/Set java/util/Set] []
+    RETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager; L0 L3 0
+    LOCALVARIABLE from Ljava/util/Set; L0 L3 1
+    // signature Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;
+    // declaration: from extends java.util.Set<org.apache.zookeeper.Watcher>
+    LOCALVARIABLE to Ljava/util/Set; L0 L3 2
+    // signature Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;
+    // declaration: to extends java.util.Set<org.apache.zookeeper.Watcher>
+    MAXSTACK = 2
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  // signature (Lorg/apache/zookeeper/Watcher$Event$KeeperState;Lorg/apache/zookeeper/Watcher$Event$EventType;Ljava/lang/String;)Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;
+  // declaration: java.util.Set<org.apache.zookeeper.Watcher> materialize(org.apache.zookeeper.Watcher$Event$KeeperState, org.apache.zookeeper.Watcher$Event$EventType, java.lang.String)
+  public materialize(Lorg/apache/zookeeper/Watcher$Event$KeeperState;Lorg/apache/zookeeper/Watcher$Event$EventType;Ljava/lang/String;)Ljava/util/Set;
+    TRYCATCHBLOCK L0 L1 L2 null
+    TRYCATCHBLOCK L2 L3 L2 null
+    TRYCATCHBLOCK L4 L5 L6 null
+    TRYCATCHBLOCK L6 L7 L6 null
+    TRYCATCHBLOCK L8 L9 L10 null
+    TRYCATCHBLOCK L10 L11 L10 null
+    TRYCATCHBLOCK L12 L13 L14 null
+    TRYCATCHBLOCK L14 L15 L14 null
+    TRYCATCHBLOCK L16 L17 L18 null
+    TRYCATCHBLOCK L18 L19 L18 null
+    TRYCATCHBLOCK L20 L21 L22 null
+    TRYCATCHBLOCK L22 L23 L22 null
+    TRYCATCHBLOCK L24 L25 L26 null
+    TRYCATCHBLOCK L26 L27 L26 null
+    TRYCATCHBLOCK L28 L29 L30 null
+    TRYCATCHBLOCK L30 L31 L30 null
+    TRYCATCHBLOCK L32 L33 L34 null
+    TRYCATCHBLOCK L34 L35 L34 null
+   L36
+    LINENUMBER 155 L36
+    NEW java/util/HashSet
+    DUP
+    INVOKESPECIAL java/util/HashSet.<init> ()V
+    ASTORE 4
+   L37
+    LINENUMBER 157 L37
+    GETSTATIC org/apache/zookeeper/ZooKeeper$1.$SwitchMap$org$apache$zookeeper$Watcher$Event$EventType : [I
+    ALOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/Watcher$Event$EventType.ordinal ()I
+    IALOAD
+    TABLESWITCH
+      1: L38
+      2: L39
+      3: L39
+      4: L40
+      5: L41
+      default: L42
+   L38
+    LINENUMBER 159 L38
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set] []
+    ALOAD 4
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.defaultWatcher : Lorg/apache/zookeeper/Watcher;
+    INVOKEINTERFACE java/util/Set.add (Ljava/lang/Object;)Z (itf)
+    POP
+   L43
+    LINENUMBER 160 L43
+    INVOKESTATIC org/apache/zookeeper/ClientCnxn.getDisableAutoResetWatch ()Z
+    IFEQ L44
+    ALOAD 1
+    GETSTATIC org/apache/zookeeper/Watcher$Event$KeeperState.SyncConnected : Lorg/apache/zookeeper/Watcher$Event$KeeperState;
+    IF_ACMPEQ L44
+    ICONST_1
+    GOTO L45
+   L44
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set] []
+    ICONST_0
+   L45
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set] [I]
+    ISTORE 5
+   L46
+    LINENUMBER 163 L46
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.dataWatches : Ljava/util/Map;
+    DUP
+    ASTORE 6
+    MONITORENTER
+   L0
+    LINENUMBER 164 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.dataWatches : Ljava/util/Map;
+    INVOKEINTERFACE java/util/Map.values ()Ljava/util/Collection; (itf)
+    INVOKEINTERFACE java/util/Collection.iterator ()Ljava/util/Iterator; (itf)
+    ASTORE 7
+   L47
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I java/lang/Object java/util/Iterator] []
+    ALOAD 7
+    INVOKEINTERFACE java/util/Iterator.hasNext ()Z (itf)
+    IFEQ L48
+    ALOAD 7
+    INVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object; (itf)
+    CHECKCAST java/util/Set
+    ASTORE 8
+   L49
+    LINENUMBER 165 L49
+    ALOAD 4
+    ALOAD 8
+    INVOKEINTERFACE java/util/Set.addAll (Ljava/util/Collection;)Z (itf)
+    POP
+   L50
+    LINENUMBER 166 L50
+    GOTO L47
+   L48
+    LINENUMBER 167 L48
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I java/lang/Object] []
+    ILOAD 5
+    IFEQ L51
+   L52
+    LINENUMBER 168 L52
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.dataWatches : Ljava/util/Map;
+    INVOKEINTERFACE java/util/Map.clear ()V (itf)
+   L51
+    LINENUMBER 170 L51
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I java/lang/Object] []
+    ALOAD 6
+    MONITOREXIT
+   L1
+    GOTO L53
+   L2
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I java/lang/Object] [java/lang/Throwable]
+    ASTORE 9
+    ALOAD 6
+    MONITOREXIT
+   L3
+    ALOAD 9
+    ATHROW
+   L53
+    LINENUMBER 172 L53
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.existWatches : Ljava/util/Map;
+    DUP
+    ASTORE 6
+    MONITORENTER
+   L4
+    LINENUMBER 173 L4
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.existWatches : Ljava/util/Map;
+    INVOKEINTERFACE java/util/Map.values ()Ljava/util/Collection; (itf)
+    INVOKEINTERFACE java/util/Collection.iterator ()Ljava/util/Iterator; (itf)
+    ASTORE 7
+   L54
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I java/lang/Object java/util/Iterator] []
+    ALOAD 7
+    INVOKEINTERFACE java/util/Iterator.hasNext ()Z (itf)
+    IFEQ L55
+    ALOAD 7
+    INVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object; (itf)
+    CHECKCAST java/util/Set
+    ASTORE 8
+   L56
+    LINENUMBER 174 L56
+    ALOAD 4
+    ALOAD 8
+    INVOKEINTERFACE java/util/Set.addAll (Ljava/util/Collection;)Z (itf)
+    POP
+   L57
+    LINENUMBER 175 L57
+    GOTO L54
+   L55
+    LINENUMBER 176 L55
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I java/lang/Object] []
+    ILOAD 5
+    IFEQ L58
+   L59
+    LINENUMBER 177 L59
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.existWatches : Ljava/util/Map;
+    INVOKEINTERFACE java/util/Map.clear ()V (itf)
+   L58
+    LINENUMBER 179 L58
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I java/lang/Object] []
+    ALOAD 6
+    MONITOREXIT
+   L5
+    GOTO L60
+   L6
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I java/lang/Object] [java/lang/Throwable]
+    ASTORE 10
+    ALOAD 6
+    MONITOREXIT
+   L7
+    ALOAD 10
+    ATHROW
+   L60
+    LINENUMBER 181 L60
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.childWatches : Ljava/util/Map;
+    DUP
+    ASTORE 6
+    MONITORENTER
+   L8
+    LINENUMBER 182 L8
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.childWatches : Ljava/util/Map;
+    INVOKEINTERFACE java/util/Map.values ()Ljava/util/Collection; (itf)
+    INVOKEINTERFACE java/util/Collection.iterator ()Ljava/util/Iterator; (itf)
+    ASTORE 7
+   L61
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I java/lang/Object java/util/Iterator] []
+    ALOAD 7
+    INVOKEINTERFACE java/util/Iterator.hasNext ()Z (itf)
+    IFEQ L62
+    ALOAD 7
+    INVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object; (itf)
+    CHECKCAST java/util/Set
+    ASTORE 8
+   L63
+    LINENUMBER 183 L63
+    ALOAD 4
+    ALOAD 8
+    INVOKEINTERFACE java/util/Set.addAll (Ljava/util/Collection;)Z (itf)
+    POP
+   L64
+    LINENUMBER 184 L64
+    GOTO L61
+   L62
+    LINENUMBER 185 L62
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I java/lang/Object] []
+    ILOAD 5
+    IFEQ L65
+   L66
+    LINENUMBER 186 L66
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.childWatches : Ljava/util/Map;
+    POP
+   L65
+    LINENUMBER 188 L65
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I java/lang/Object] []
+    ALOAD 6
+    MONITOREXIT
+   L9
+    GOTO L67
+   L10
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I java/lang/Object] [java/lang/Throwable]
+    ASTORE 11
+    ALOAD 6
+    MONITOREXIT
+   L11
+    ALOAD 11
+    ATHROW
+   L67
+    LINENUMBER 190 L67
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set I] []
+    ALOAD 4
+    ARETURN
+   L39
+    LINENUMBER 193 L39
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.dataWatches : Ljava/util/Map;
+    DUP
+    ASTORE 6
+    MONITORENTER
+   L12
+    LINENUMBER 194 L12
+    ALOAD 0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.dataWatches : Ljava/util/Map;
+    ALOAD 3
+    INVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object; (itf)
+    CHECKCAST java/util/Set
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ZKWatchManager.addTo (Ljava/util/Set;Ljava/util/Set;)V
+   L68
+    LINENUMBER 195 L68
+    ALOAD 6
+    MONITOREXIT
+   L13
+    GOTO L69
+   L14
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set T java/lang/Object] [java/lang/Throwable]
+    ASTORE 12
+    ALOAD 6
+    MONITOREXIT
+   L15
+    ALOAD 12
+    ATHROW
+   L69
+    LINENUMBER 196 L69
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.existWatches : Ljava/util/Map;
+    DUP
+    ASTORE 6
+    MONITORENTER
+   L16
+    LINENUMBER 197 L16
+    ALOAD 0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.existWatches : Ljava/util/Map;
+    ALOAD 3
+    INVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object; (itf)
+    CHECKCAST java/util/Set
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ZKWatchManager.addTo (Ljava/util/Set;Ljava/util/Set;)V
+   L70
+    LINENUMBER 198 L70
+    ALOAD 6
+    MONITOREXIT
+   L17
+    GOTO L71
+   L18
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set T java/lang/Object] [java/lang/Throwable]
+    ASTORE 13
+    ALOAD 6
+    MONITOREXIT
+   L19
+    ALOAD 13
+    ATHROW
+   L71
+    LINENUMBER 199 L71
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set] []
+    GOTO L72
+   L40
+    LINENUMBER 201 L40
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.childWatches : Ljava/util/Map;
+    DUP
+    ASTORE 6
+    MONITORENTER
+   L20
+    LINENUMBER 202 L20
+    ALOAD 0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.childWatches : Ljava/util/Map;
+    ALOAD 3
+    INVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object; (itf)
+    CHECKCAST java/util/Set
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ZKWatchManager.addTo (Ljava/util/Set;Ljava/util/Set;)V
+   L73
+    LINENUMBER 203 L73
+    ALOAD 6
+    MONITOREXIT
+   L21
+    GOTO L74
+   L22
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set T java/lang/Object] [java/lang/Throwable]
+    ASTORE 14
+    ALOAD 6
+    MONITOREXIT
+   L23
+    ALOAD 14
+    ATHROW
+   L74
+    LINENUMBER 204 L74
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set] []
+    GOTO L72
+   L41
+    LINENUMBER 206 L41
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.dataWatches : Ljava/util/Map;
+    DUP
+    ASTORE 6
+    MONITORENTER
+   L24
+    LINENUMBER 207 L24
+    ALOAD 0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.dataWatches : Ljava/util/Map;
+    ALOAD 3
+    INVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object; (itf)
+    CHECKCAST java/util/Set
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ZKWatchManager.addTo (Ljava/util/Set;Ljava/util/Set;)V
+   L75
+    LINENUMBER 208 L75
+    ALOAD 6
+    MONITOREXIT
+   L25
+    GOTO L76
+   L26
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set T java/lang/Object] [java/lang/Throwable]
+    ASTORE 15
+    ALOAD 6
+    MONITOREXIT
+   L27
+    ALOAD 15
+    ATHROW
+   L76
+    LINENUMBER 210 L76
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.existWatches : Ljava/util/Map;
+    DUP
+    ASTORE 6
+    MONITORENTER
+   L28
+    LINENUMBER 211 L28
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.existWatches : Ljava/util/Map;
+    ALOAD 3
+    INVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object; (itf)
+    CHECKCAST java/util/Set
+    ASTORE 7
+   L77
+    LINENUMBER 212 L77
+    ALOAD 7
+    IFNULL L78
+   L79
+    LINENUMBER 213 L79
+    ALOAD 0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.existWatches : Ljava/util/Map;
+    ALOAD 3
+    INVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object; (itf)
+    CHECKCAST java/util/Set
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ZKWatchManager.addTo (Ljava/util/Set;Ljava/util/Set;)V
+   L80
+    LINENUMBER 214 L80
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper.access$400 ()Lorg/slf4j/Logger;
+    LDC "We are triggering an exists watch for delete! Shouldn't happen!"
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;)V (itf)
+   L78
+    LINENUMBER 216 L78
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set T java/lang/Object] []
+    ALOAD 6
+    MONITOREXIT
+   L29
+    GOTO L81
+   L30
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set T java/lang/Object] [java/lang/Throwable]
+    ASTORE 16
+    ALOAD 6
+    MONITOREXIT
+   L31
+    ALOAD 16
+    ATHROW
+   L81
+    LINENUMBER 217 L81
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.childWatches : Ljava/util/Map;
+    DUP
+    ASTORE 6
+    MONITORENTER
+   L32
+    LINENUMBER 218 L32
+    ALOAD 0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.childWatches : Ljava/util/Map;
+    ALOAD 3
+    INVOKEINTERFACE java/util/Map.remove (Ljava/lang/Object;)Ljava/lang/Object; (itf)
+    CHECKCAST java/util/Set
+    ALOAD 4
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ZKWatchManager.addTo (Ljava/util/Set;Ljava/util/Set;)V
+   L82
+    LINENUMBER 219 L82
+    ALOAD 6
+    MONITOREXIT
+   L33
+    GOTO L83
+   L34
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set T java/lang/Object] [java/lang/Throwable]
+    ASTORE 17
+    ALOAD 6
+    MONITOREXIT
+   L35
+    ALOAD 17
+    ATHROW
+   L83
+    LINENUMBER 220 L83
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set] []
+    GOTO L72
+   L42
+    LINENUMBER 222 L42
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set] []
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Unhandled watch event type "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 2
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    LDC " with state "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    LDC " on path "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 3
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    ASTORE 6
+   L84
+    LINENUMBER 224 L84
+    INVOKESTATIC org/apache/zookeeper/ZooKeeper.access$400 ()Lorg/slf4j/Logger;
+    ALOAD 6
+    INVOKEINTERFACE org/slf4j/Logger.error (Ljava/lang/String;)V (itf)
+   L85
+    LINENUMBER 225 L85
+    NEW java/lang/RuntimeException
+    DUP
+    ALOAD 6
+    INVOKESPECIAL java/lang/RuntimeException.<init> (Ljava/lang/String;)V
+    ATHROW
+   L72
+    LINENUMBER 228 L72
+   FRAME FULL [org/apache/zookeeper/ZooKeeper$ZKWatchManager org/apache/zookeeper/Watcher$Event$KeeperState org/apache/zookeeper/Watcher$Event$EventType java/lang/String java/util/Set] []
+    ALOAD 4
+    ARETURN
+   L86
+    LOCALVARIABLE ws Ljava/util/Set; L49 L50 8
+    // signature Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;
+    // declaration: ws extends java.util.Set<org.apache.zookeeper.Watcher>
+    LOCALVARIABLE ws Ljava/util/Set; L56 L57 8
+    // signature Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;
+    // declaration: ws extends java.util.Set<org.apache.zookeeper.Watcher>
+    LOCALVARIABLE ws Ljava/util/Set; L63 L64 8
+    // signature Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;
+    // declaration: ws extends java.util.Set<org.apache.zookeeper.Watcher>
+    LOCALVARIABLE clear Z L46 L39 5
+    LOCALVARIABLE list Ljava/util/Set; L77 L78 7
+    // signature Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;
+    // declaration: list extends java.util.Set<org.apache.zookeeper.Watcher>
+    LOCALVARIABLE msg Ljava/lang/String; L84 L72 6
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager; L36 L86 0
+    LOCALVARIABLE state Lorg/apache/zookeeper/Watcher$Event$KeeperState; L36 L86 1
+    LOCALVARIABLE type Lorg/apache/zookeeper/Watcher$Event$EventType; L36 L86 2
+    LOCALVARIABLE clientPath Ljava/lang/String; L36 L86 3
+    LOCALVARIABLE result Ljava/util/Set; L37 L86 4
+    // signature Ljava/util/Set<Lorg/apache/zookeeper/Watcher;>;
+    // declaration: result extends java.util.Set<org.apache.zookeeper.Watcher>
+    MAXSTACK = 3
+    MAXLOCALS = 18
+
+  // access flags 0x1000
+  synthetic <init>(Lorg/apache/zookeeper/ZooKeeper$1;)V
+   L0
+    LINENUMBER 130 L0
+    ALOAD 0
+    INVOKESPECIAL org/apache/zookeeper/ZooKeeper$ZKWatchManager.<init> ()V
+    RETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager; L0 L1 0
+    LOCALVARIABLE x0 Lorg/apache/zookeeper/ZooKeeper$1; L0 L1 1
+    MAXSTACK = 1
+    MAXLOCALS = 2
+
+  // access flags 0x1008
+  static synthetic access$100(Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Ljava/util/Map;
+   L0
+    LINENUMBER 130 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.dataWatches : Ljava/util/Map;
+    ARETURN
+   L1
+    LOCALVARIABLE x0 Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1008
+  static synthetic access$200(Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Ljava/util/Map;
+   L0
+    LINENUMBER 130 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.existWatches : Ljava/util/Map;
+    ARETURN
+   L1
+    LOCALVARIABLE x0 Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1008
+  static synthetic access$300(Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Ljava/util/Map;
+   L0
+    LINENUMBER 130 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.childWatches : Ljava/util/Map;
+    ARETURN
+   L1
+    LOCALVARIABLE x0 Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1008
+  static synthetic access$602(Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;Lorg/apache/zookeeper/Watcher;)Lorg/apache/zookeeper/Watcher;
+   L0
+    LINENUMBER 130 L0
+    ALOAD 0
+    ALOAD 1
+    DUP_X1
+    PUTFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.defaultWatcher : Lorg/apache/zookeeper/Watcher;
+    ARETURN
+   L1
+    LOCALVARIABLE x0 Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager; L0 L1 0
+    LOCALVARIABLE x1 Lorg/apache/zookeeper/Watcher; L0 L1 1
+    MAXSTACK = 3
+    MAXLOCALS = 2
+
+  // access flags 0x1008
+  static synthetic access$600(Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager;)Lorg/apache/zookeeper/Watcher;
+   L0
+    LINENUMBER 130 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/ZooKeeper$ZKWatchManager.defaultWatcher : Lorg/apache/zookeeper/Watcher;
+    ARETURN
+   L1
+    LOCALVARIABLE x0 Lorg/apache/zookeeper/ZooKeeper$ZKWatchManager; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+}
+

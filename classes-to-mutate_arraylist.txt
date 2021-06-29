@@ -1,0 +1,7 @@
+modified.java.utils.ArrayList
+modified.java.utils.ArrayList$SubList
+modified.java.utils.ArrayList$SubList$2
+modified.java.utils.ArrayList$SubList$1
+modified.java.utils.ArrayList$ListItr
+modified.java.utils.ArrayList$Itr
+modified.java.utils.ArrayList$ArrayListSpliterator

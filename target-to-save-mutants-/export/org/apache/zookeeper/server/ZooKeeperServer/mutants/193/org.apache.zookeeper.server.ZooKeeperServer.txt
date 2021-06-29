@@ -1,0 +1,3754 @@
+// class version 50.0 (50)
+// access flags 0x21
+public class org/apache/zookeeper/server/ZooKeeperServer implements org/apache/zookeeper/server/SessionTracker$SessionExpirer org/apache/zookeeper/server/ServerStats$Provider {
+
+  // compiled from: ZooKeeperServer.java
+  // access flags 0x8
+  static INNERCLASS org/apache/zookeeper/server/ZooKeeperServer$ChangeRecord org/apache/zookeeper/server/ZooKeeperServer ChangeRecord
+  // access flags 0x9
+  public static INNERCLASS org/apache/zookeeper/server/ZooKeeperServer$MissingSessionException org/apache/zookeeper/server/ZooKeeperServer MissingSessionException
+  // access flags 0x401C
+  protected final static enum INNERCLASS org/apache/zookeeper/server/ZooKeeperServer$State org/apache/zookeeper/server/ZooKeeperServer State
+  // access flags 0x9
+  public static INNERCLASS org/apache/zookeeper/server/ZooKeeperServer$BasicDataTreeBuilder org/apache/zookeeper/server/ZooKeeperServer BasicDataTreeBuilder
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/server/ZooKeeperServer$DataTreeBuilder org/apache/zookeeper/server/ZooKeeperServer DataTreeBuilder
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/server/SessionTracker$Session org/apache/zookeeper/server/SessionTracker Session
+  // access flags 0x9
+  public static INNERCLASS org/apache/zookeeper/server/RequestProcessor$RequestProcessorException org/apache/zookeeper/server/RequestProcessor RequestProcessorException
+  // access flags 0x4019
+  public final static enum INNERCLASS org/apache/zookeeper/KeeperException$Code org/apache/zookeeper/KeeperException Code
+  // access flags 0x9
+  public static INNERCLASS org/apache/zookeeper/server/DataTree$ProcessTxnResult org/apache/zookeeper/server/DataTree ProcessTxnResult
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/ZooDefs$OpCode org/apache/zookeeper/ZooDefs OpCode
+  // access flags 0xC
+  protected static INNERCLASS org/apache/zookeeper/server/ServerCnxn$CloseRequestException org/apache/zookeeper/server/ServerCnxn CloseRequestException
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/server/SessionTracker$SessionExpirer org/apache/zookeeper/server/SessionTracker SessionExpirer
+  // access flags 0x609
+  public static abstract INNERCLASS org/apache/zookeeper/server/ServerStats$Provider org/apache/zookeeper/server/ServerStats Provider
+  // access flags 0x9
+  public static INNERCLASS org/apache/zookeeper/KeeperException$SessionExpiredException org/apache/zookeeper/KeeperException SessionExpiredException
+
+  // access flags 0x1C
+  protected final static Lorg/slf4j/Logger; LOG
+
+  // access flags 0x4
+  protected Lorg/apache/zookeeper/server/ZooKeeperServerBean; jmxServerBean
+
+  // access flags 0x4
+  protected Lorg/apache/zookeeper/server/DataTreeBean; jmxDataTreeBean
+
+  // access flags 0x19
+  public final static I DEFAULT_TICK_TIME = 3000
+
+  // access flags 0x4
+  protected I tickTime
+
+  // access flags 0x4
+  protected I minSessionTimeout
+
+  // access flags 0x4
+  protected I maxSessionTimeout
+
+  // access flags 0x4
+  protected Lorg/apache/zookeeper/server/SessionTracker; sessionTracker
+
+  // access flags 0x2
+  private Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog; txnLogFactory
+
+  // access flags 0x2
+  private Lorg/apache/zookeeper/server/ZKDatabase; zkDb
+
+  // access flags 0x12
+  private final Ljava/util/concurrent/atomic/AtomicLong; hzxid
+
+  // access flags 0x19
+  public final static Ljava/lang/Exception; ok
+
+  // access flags 0x4
+  protected Lorg/apache/zookeeper/server/RequestProcessor; firstProcessor
+
+  // access flags 0x44
+  protected volatile Lorg/apache/zookeeper/server/ZooKeeperServer$State; state
+
+  // access flags 0x1A
+  private final static J superSecret = 3007405056
+
+  // access flags 0x12
+  private final Ljava/util/concurrent/atomic/AtomicInteger; requestsInProcess
+
+  // access flags 0x10
+  // signature Ljava/util/List<Lorg/apache/zookeeper/server/ZooKeeperServer$ChangeRecord;>;
+  // declaration: outstandingChanges extends java.util.List<org.apache.zookeeper.server.ZooKeeperServer$ChangeRecord>
+  final Ljava/util/List; outstandingChanges
+
+  // access flags 0x10
+  // signature Ljava/util/HashMap<Ljava/lang/String;Lorg/apache/zookeeper/server/ZooKeeperServer$ChangeRecord;>;
+  // declaration: outstandingChangesForPath extends java.util.HashMap<java.lang.String, org.apache.zookeeper.server.ZooKeeperServer$ChangeRecord>
+  final Ljava/util/HashMap; outstandingChangesForPath
+
+  // access flags 0x2
+  private Lorg/apache/zookeeper/server/ServerCnxnFactory; serverCnxnFactory
+
+  // access flags 0x12
+  private final Lorg/apache/zookeeper/server/ServerStats; serverStats
+
+  // access flags 0x12
+  private final Lorg/apache/zookeeper/server/ZooKeeperServerListener; listener
+
+  // access flags 0x2
+  private Lorg/apache/zookeeper/server/ZooKeeperServerShutdownHandler; zkShutdownHandler
+
+  // access flags 0x0
+  removeCnxn(Lorg/apache/zookeeper/server/ServerCnxn;)V
+   L0
+    LINENUMBER 140 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.removeCnxn (Lorg/apache/zookeeper/server/ServerCnxn;)V
+   L1
+    LINENUMBER 141 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    LOCALVARIABLE cnxn Lorg/apache/zookeeper/server/ServerCnxn; L0 L2 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public <init>()V
+   L0
+    LINENUMBER 150 L0
+    ALOAD 0
+    INVOKESPECIAL java/lang/Object.<init> ()V
+   L1
+    LINENUMBER 104 L1
+    ALOAD 0
+    SIPUSH 3000
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.tickTime : I
+   L2
+    LINENUMBER 106 L2
+    ALOAD 0
+    ICONST_M1
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.minSessionTimeout : I
+   L3
+    LINENUMBER 108 L3
+    ALOAD 0
+    ICONST_M1
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.maxSessionTimeout : I
+   L4
+    LINENUMBER 110 L4
+    ALOAD 0
+    ACONST_NULL
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.txnLogFactory : Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;
+   L5
+    LINENUMBER 112 L5
+    ALOAD 0
+    NEW java/util/concurrent/atomic/AtomicLong
+    DUP
+    LCONST_0
+    INVOKESPECIAL java/util/concurrent/atomic/AtomicLong.<init> (J)V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.hzxid : Ljava/util/concurrent/atomic/AtomicLong;
+   L6
+    LINENUMBER 115 L6
+    ALOAD 0
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.INITIAL : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.state : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+   L7
+    LINENUMBER 127 L7
+    ALOAD 0
+    NEW java/util/concurrent/atomic/AtomicInteger
+    DUP
+    ICONST_0
+    INVOKESPECIAL java/util/concurrent/atomic/AtomicInteger.<init> (I)V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.requestsInProcess : Ljava/util/concurrent/atomic/AtomicInteger;
+   L8
+    LINENUMBER 128 L8
+    ALOAD 0
+    NEW java/util/ArrayList
+    DUP
+    INVOKESPECIAL java/util/ArrayList.<init> ()V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.outstandingChanges : Ljava/util/List;
+   L9
+    LINENUMBER 130 L9
+    ALOAD 0
+    NEW java/util/HashMap
+    DUP
+    INVOKESPECIAL java/util/HashMap.<init> ()V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.outstandingChangesForPath : Ljava/util/HashMap;
+   L10
+    LINENUMBER 151 L10
+    ALOAD 0
+    NEW org/apache/zookeeper/server/ServerStats
+    DUP
+    ALOAD 0
+    INVOKESPECIAL org/apache/zookeeper/server/ServerStats.<init> (Lorg/apache/zookeeper/server/ServerStats$Provider;)V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.serverStats : Lorg/apache/zookeeper/server/ServerStats;
+   L11
+    LINENUMBER 152 L11
+    ALOAD 0
+    NEW org/apache/zookeeper/server/ZooKeeperServerListenerImpl
+    DUP
+    ALOAD 0
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServerListenerImpl.<init> (Lorg/apache/zookeeper/server/ZooKeeperServer;)V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.listener : Lorg/apache/zookeeper/server/ZooKeeperServerListener;
+   L12
+    LINENUMBER 153 L12
+    RETURN
+   L13
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L13 0
+    MAXSTACK = 5
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public <init>(Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;IIILorg/apache/zookeeper/server/ZooKeeperServer$DataTreeBuilder;Lorg/apache/zookeeper/server/ZKDatabase;)V
+   L0
+    LINENUMBER 163 L0
+    ALOAD 0
+    INVOKESPECIAL java/lang/Object.<init> ()V
+   L1
+    LINENUMBER 104 L1
+    ALOAD 0
+    SIPUSH 3000
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.tickTime : I
+   L2
+    LINENUMBER 106 L2
+    ALOAD 0
+    ICONST_M1
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.minSessionTimeout : I
+   L3
+    LINENUMBER 108 L3
+    ALOAD 0
+    ICONST_M1
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.maxSessionTimeout : I
+   L4
+    LINENUMBER 110 L4
+    ALOAD 0
+    ACONST_NULL
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.txnLogFactory : Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;
+   L5
+    LINENUMBER 112 L5
+    ALOAD 0
+    NEW java/util/concurrent/atomic/AtomicLong
+    DUP
+    LCONST_0
+    INVOKESPECIAL java/util/concurrent/atomic/AtomicLong.<init> (J)V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.hzxid : Ljava/util/concurrent/atomic/AtomicLong;
+   L6
+    LINENUMBER 115 L6
+    ALOAD 0
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.INITIAL : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.state : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+   L7
+    LINENUMBER 127 L7
+    ALOAD 0
+    NEW java/util/concurrent/atomic/AtomicInteger
+    DUP
+    ICONST_0
+    INVOKESPECIAL java/util/concurrent/atomic/AtomicInteger.<init> (I)V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.requestsInProcess : Ljava/util/concurrent/atomic/AtomicInteger;
+   L8
+    LINENUMBER 128 L8
+    ALOAD 0
+    NEW java/util/ArrayList
+    DUP
+    INVOKESPECIAL java/util/ArrayList.<init> ()V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.outstandingChanges : Ljava/util/List;
+   L9
+    LINENUMBER 130 L9
+    ALOAD 0
+    NEW java/util/HashMap
+    DUP
+    INVOKESPECIAL java/util/HashMap.<init> ()V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.outstandingChangesForPath : Ljava/util/HashMap;
+   L10
+    LINENUMBER 164 L10
+    ALOAD 0
+    NEW org/apache/zookeeper/server/ServerStats
+    DUP
+    ALOAD 0
+    INVOKESPECIAL org/apache/zookeeper/server/ServerStats.<init> (Lorg/apache/zookeeper/server/ServerStats$Provider;)V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.serverStats : Lorg/apache/zookeeper/server/ServerStats;
+   L11
+    LINENUMBER 165 L11
+    ALOAD 0
+    ALOAD 1
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.txnLogFactory : Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;
+   L12
+    LINENUMBER 166 L12
+    ALOAD 0
+    ALOAD 6
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+   L13
+    LINENUMBER 167 L13
+    ALOAD 0
+    ILOAD 2
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.tickTime : I
+   L14
+    LINENUMBER 168 L14
+    ALOAD 0
+    ILOAD 3
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.minSessionTimeout : I
+   L15
+    LINENUMBER 169 L15
+    ALOAD 0
+    ILOAD 4
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.maxSessionTimeout : I
+   L16
+    LINENUMBER 171 L16
+    ALOAD 0
+    NEW org/apache/zookeeper/server/ZooKeeperServerListenerImpl
+    DUP
+    ALOAD 0
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServerListenerImpl.<init> (Lorg/apache/zookeeper/server/ZooKeeperServer;)V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.listener : Lorg/apache/zookeeper/server/ZooKeeperServerListener;
+   L17
+    LINENUMBER 173 L17
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Created server with tickTime "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ILOAD 2
+    INVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;
+    LDC " minSessionTimeout "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 0
+   L18
+    LINENUMBER 174 L18
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getMinSessionTimeout ()I
+    INVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;
+    LDC " maxSessionTimeout "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 0
+   L19
+    LINENUMBER 175 L19
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getMaxSessionTimeout ()I
+    INVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;
+    LDC " datadir "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L20
+    LINENUMBER 176 L20
+    INVOKEVIRTUAL org/apache/zookeeper/server/persistence/FileTxnSnapLog.getDataDir ()Ljava/io/File;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    LDC " snapdir "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L21
+    LINENUMBER 177 L21
+    INVOKEVIRTUAL org/apache/zookeeper/server/persistence/FileTxnSnapLog.getSnapDir ()Ljava/io/File;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+   L22
+    LINENUMBER 173 L22
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L23
+    LINENUMBER 178 L23
+    RETURN
+   L24
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L24 0
+    LOCALVARIABLE txnLogFactory Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog; L0 L24 1
+    LOCALVARIABLE tickTime I L0 L24 2
+    LOCALVARIABLE minSessionTimeout I L0 L24 3
+    LOCALVARIABLE maxSessionTimeout I L0 L24 4
+    LOCALVARIABLE treeBuilder Lorg/apache/zookeeper/server/ZooKeeperServer$DataTreeBuilder; L0 L24 5
+    LOCALVARIABLE zkDb Lorg/apache/zookeeper/server/ZKDatabase; L0 L24 6
+    MAXSTACK = 5
+    MAXLOCALS = 7
+
+  // access flags 0x1
+  public <init>(Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;ILorg/apache/zookeeper/server/ZooKeeperServer$DataTreeBuilder;)V throws java/io/IOException 
+   L0
+    LINENUMBER 189 L0
+    ALOAD 0
+    ALOAD 1
+    ILOAD 2
+    ICONST_M1
+    ICONST_M1
+    ALOAD 3
+    NEW org/apache/zookeeper/server/ZKDatabase
+    DUP
+    ALOAD 1
+    INVOKESPECIAL org/apache/zookeeper/server/ZKDatabase.<init> (Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;)V
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer.<init> (Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;IIILorg/apache/zookeeper/server/ZooKeeperServer$DataTreeBuilder;Lorg/apache/zookeeper/server/ZKDatabase;)V
+   L1
+    LINENUMBER 191 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    LOCALVARIABLE txnLogFactory Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog; L0 L2 1
+    LOCALVARIABLE tickTime I L0 L2 2
+    LOCALVARIABLE treeBuilder Lorg/apache/zookeeper/server/ZooKeeperServer$DataTreeBuilder; L0 L2 3
+    MAXSTACK = 9
+    MAXLOCALS = 4
+
+  // access flags 0x1
+  public serverStats()Lorg/apache/zookeeper/server/ServerStats;
+   L0
+    LINENUMBER 194 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.serverStats : Lorg/apache/zookeeper/server/ServerStats;
+    ARETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public dumpConf(Ljava/io/PrintWriter;)V
+   L0
+    LINENUMBER 198 L0
+    ALOAD 1
+    LDC "clientPort="
+    INVOKEVIRTUAL java/io/PrintWriter.print (Ljava/lang/String;)V
+   L1
+    LINENUMBER 199 L1
+    ALOAD 1
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getClientPort ()I
+    INVOKEVIRTUAL java/io/PrintWriter.println (I)V
+   L2
+    LINENUMBER 200 L2
+    ALOAD 1
+    LDC "dataDir="
+    INVOKEVIRTUAL java/io/PrintWriter.print (Ljava/lang/String;)V
+   L3
+    LINENUMBER 201 L3
+    ALOAD 1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    GETFIELD org/apache/zookeeper/server/ZKDatabase.snapLog : Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;
+    INVOKEVIRTUAL org/apache/zookeeper/server/persistence/FileTxnSnapLog.getSnapDir ()Ljava/io/File;
+    INVOKEVIRTUAL java/io/File.getAbsolutePath ()Ljava/lang/String;
+    INVOKEVIRTUAL java/io/PrintWriter.println (Ljava/lang/String;)V
+   L4
+    LINENUMBER 202 L4
+    ALOAD 1
+    LDC "dataLogDir="
+    INVOKEVIRTUAL java/io/PrintWriter.print (Ljava/lang/String;)V
+   L5
+    LINENUMBER 203 L5
+    ALOAD 1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    GETFIELD org/apache/zookeeper/server/ZKDatabase.snapLog : Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;
+    INVOKEVIRTUAL org/apache/zookeeper/server/persistence/FileTxnSnapLog.getDataDir ()Ljava/io/File;
+    INVOKEVIRTUAL java/io/File.getAbsolutePath ()Ljava/lang/String;
+    INVOKEVIRTUAL java/io/PrintWriter.println (Ljava/lang/String;)V
+   L6
+    LINENUMBER 204 L6
+    ALOAD 1
+    LDC "tickTime="
+    INVOKEVIRTUAL java/io/PrintWriter.print (Ljava/lang/String;)V
+   L7
+    LINENUMBER 205 L7
+    ALOAD 1
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getTickTime ()I
+    INVOKEVIRTUAL java/io/PrintWriter.println (I)V
+   L8
+    LINENUMBER 206 L8
+    ALOAD 1
+    LDC "maxClientCnxns="
+    INVOKEVIRTUAL java/io/PrintWriter.print (Ljava/lang/String;)V
+   L9
+    LINENUMBER 207 L9
+    ALOAD 1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.serverCnxnFactory : Lorg/apache/zookeeper/server/ServerCnxnFactory;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxnFactory.getMaxClientCnxnsPerHost ()I
+    INVOKEVIRTUAL java/io/PrintWriter.println (I)V
+   L10
+    LINENUMBER 208 L10
+    ALOAD 1
+    LDC "minSessionTimeout="
+    INVOKEVIRTUAL java/io/PrintWriter.print (Ljava/lang/String;)V
+   L11
+    LINENUMBER 209 L11
+    ALOAD 1
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getMinSessionTimeout ()I
+    INVOKEVIRTUAL java/io/PrintWriter.println (I)V
+   L12
+    LINENUMBER 210 L12
+    ALOAD 1
+    LDC "maxSessionTimeout="
+    INVOKEVIRTUAL java/io/PrintWriter.print (Ljava/lang/String;)V
+   L13
+    LINENUMBER 211 L13
+    ALOAD 1
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getMaxSessionTimeout ()I
+    INVOKEVIRTUAL java/io/PrintWriter.println (I)V
+   L14
+    LINENUMBER 213 L14
+    ALOAD 1
+    LDC "serverId="
+    INVOKEVIRTUAL java/io/PrintWriter.print (Ljava/lang/String;)V
+   L15
+    LINENUMBER 214 L15
+    ALOAD 1
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getServerId ()J
+    INVOKEVIRTUAL java/io/PrintWriter.println (J)V
+   L16
+    LINENUMBER 215 L16
+    RETURN
+   L17
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L17 0
+    LOCALVARIABLE pwriter Ljava/io/PrintWriter; L0 L17 1
+    MAXSTACK = 3
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public <init>(Ljava/io/File;Ljava/io/File;I)V throws java/io/IOException 
+   L0
+    LINENUMBER 224 L0
+    ALOAD 0
+    NEW org/apache/zookeeper/server/persistence/FileTxnSnapLog
+    DUP
+    ALOAD 1
+    ALOAD 2
+    INVOKESPECIAL org/apache/zookeeper/server/persistence/FileTxnSnapLog.<init> (Ljava/io/File;Ljava/io/File;)V
+    ILOAD 3
+    NEW org/apache/zookeeper/server/ZooKeeperServer$BasicDataTreeBuilder
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer$BasicDataTreeBuilder.<init> ()V
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer.<init> (Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;ILorg/apache/zookeeper/server/ZooKeeperServer$DataTreeBuilder;)V
+   L1
+    LINENUMBER 226 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    LOCALVARIABLE snapDir Ljava/io/File; L0 L2 1
+    LOCALVARIABLE logDir Ljava/io/File; L0 L2 2
+    LOCALVARIABLE tickTime I L0 L2 3
+    MAXSTACK = 5
+    MAXLOCALS = 4
+
+  // access flags 0x1
+  public <init>(Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;Lorg/apache/zookeeper/server/ZooKeeperServer$DataTreeBuilder;)V throws java/io/IOException 
+   L0
+    LINENUMBER 237 L0
+    ALOAD 0
+    ALOAD 1
+    SIPUSH 3000
+    ICONST_M1
+    ICONST_M1
+    ALOAD 2
+    NEW org/apache/zookeeper/server/ZKDatabase
+    DUP
+    ALOAD 1
+    INVOKESPECIAL org/apache/zookeeper/server/ZKDatabase.<init> (Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;)V
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer.<init> (Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;IIILorg/apache/zookeeper/server/ZooKeeperServer$DataTreeBuilder;Lorg/apache/zookeeper/server/ZKDatabase;)V
+   L1
+    LINENUMBER 239 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    LOCALVARIABLE txnLogFactory Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog; L0 L2 1
+    LOCALVARIABLE treeBuilder Lorg/apache/zookeeper/server/ZooKeeperServer$DataTreeBuilder; L0 L2 2
+    MAXSTACK = 9
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  public getZKDatabase()Lorg/apache/zookeeper/server/ZKDatabase;
+   L0
+    LINENUMBER 246 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    ARETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public setZKDatabase(Lorg/apache/zookeeper/server/ZKDatabase;)V
+   L0
+    LINENUMBER 254 L0
+    ALOAD 0
+    ALOAD 1
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+   L1
+    LINENUMBER 255 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    LOCALVARIABLE zkDb Lorg/apache/zookeeper/server/ZKDatabase; L0 L2 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public loadData()V throws java/io/IOException java/lang/InterruptedException 
+   L0
+    LINENUMBER 279 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.isInitialized ()Z
+    IFEQ L1
+   L2
+    LINENUMBER 280 L2
+    ALOAD 0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.getDataTreeLastProcessedZxid ()J
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.setZxid (J)V
+    GOTO L3
+   L1
+    LINENUMBER 283 L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    ALOAD 0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.loadDataBase ()J
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.setZxid (J)V
+   L3
+    LINENUMBER 287 L3
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    NEW java/util/LinkedList
+    DUP
+    INVOKESPECIAL java/util/LinkedList.<init> ()V
+    ASTORE 1
+   L4
+    LINENUMBER 288 L4
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.getSessions ()Ljava/util/Collection;
+    INVOKEINTERFACE java/util/Collection.iterator ()Ljava/util/Iterator; (itf)
+    ASTORE 2
+   L5
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer java/util/LinkedList java/util/Iterator] []
+    ALOAD 2
+    INVOKEINTERFACE java/util/Iterator.hasNext ()Z (itf)
+    IFEQ L6
+    ALOAD 2
+    INVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object; (itf)
+    CHECKCAST java/lang/Long
+    ASTORE 3
+   L7
+    LINENUMBER 289 L7
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.getSessionWithTimeOuts ()Ljava/util/concurrent/ConcurrentHashMap;
+    ALOAD 3
+    INVOKEVIRTUAL java/util/concurrent/ConcurrentHashMap.get (Ljava/lang/Object;)Ljava/lang/Object;
+    IFNONNULL L8
+   L9
+    LINENUMBER 290 L9
+    ALOAD 1
+    ALOAD 3
+    INVOKEVIRTUAL java/util/LinkedList.add (Ljava/lang/Object;)Z
+    POP
+   L8
+    LINENUMBER 292 L8
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer java/util/LinkedList java/util/Iterator] []
+    GOTO L5
+   L6
+    LINENUMBER 293 L6
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer java/util/LinkedList] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    ICONST_1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.setDataTreeInit (Z)V
+   L10
+    LINENUMBER 294 L10
+    ALOAD 1
+    INVOKEVIRTUAL java/util/LinkedList.iterator ()Ljava/util/Iterator;
+    ASTORE 2
+   L11
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer java/util/LinkedList java/util/Iterator] []
+    ALOAD 2
+    INVOKEINTERFACE java/util/Iterator.hasNext ()Z (itf)
+    IFEQ L12
+    ALOAD 2
+    INVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object; (itf)
+    CHECKCAST java/lang/Long
+    INVOKEVIRTUAL java/lang/Long.longValue ()J
+    LSTORE 3
+   L13
+    LINENUMBER 296 L13
+    ALOAD 0
+    LLOAD 3
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.getDataTreeLastProcessedZxid ()J
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.killSession (JJ)V
+   L14
+    LINENUMBER 297 L14
+    GOTO L11
+   L12
+    LINENUMBER 298 L12
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer java/util/LinkedList] []
+    RETURN
+   L15
+    LOCALVARIABLE session Ljava/lang/Long; L7 L8 3
+    LOCALVARIABLE session J L13 L14 3
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L15 0
+    LOCALVARIABLE deadSessions Ljava/util/LinkedList; L4 L15 1
+    // signature Ljava/util/LinkedList<Ljava/lang/Long;>;
+    // declaration: deadSessions extends java.util.LinkedList<java.lang.Long>
+    MAXSTACK = 5
+    MAXLOCALS = 5
+
+  // access flags 0x1
+  public takeSnapshot()V
+    TRYCATCHBLOCK L0 L1 L2 java/io/IOException
+   L0
+    LINENUMBER 303 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.txnLogFactory : Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.getDataTree ()Lorg/apache/zookeeper/server/DataTree;
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.getSessionWithTimeOuts ()Ljava/util/concurrent/ConcurrentHashMap;
+    INVOKEVIRTUAL org/apache/zookeeper/server/persistence/FileTxnSnapLog.save (Lorg/apache/zookeeper/server/DataTree;Ljava/util/concurrent/ConcurrentHashMap;)V
+   L1
+    LINENUMBER 309 L1
+    GOTO L3
+   L2
+    LINENUMBER 304 L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] [java/io/IOException]
+    ASTORE 1
+   L4
+    LINENUMBER 305 L4
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "Severe unrecoverable error, exiting"
+    ALOAD 1
+    INVOKEINTERFACE org/slf4j/Logger.error (Ljava/lang/String;Ljava/lang/Throwable;)V (itf)
+   L5
+    LINENUMBER 308 L5
+    BIPUSH 10
+    INVOKESTATIC java/lang/System.exit (I)V
+   L3
+    LINENUMBER 310 L3
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    RETURN
+   L6
+    LOCALVARIABLE e Ljava/io/IOException; L4 L3 1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L6 0
+    MAXSTACK = 3
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public getZxid()J
+   L0
+    LINENUMBER 317 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.hzxid : Ljava/util/concurrent/atomic/AtomicLong;
+    INVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.get ()J
+    LRETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x0
+  getNextZxid()J
+   L0
+    LINENUMBER 321 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.hzxid : Ljava/util/concurrent/atomic/AtomicLong;
+    INVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.incrementAndGet ()J
+    LRETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public setZxid(J)V
+   L0
+    LINENUMBER 325 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.hzxid : Ljava/util/concurrent/atomic/AtomicLong;
+    LLOAD 1
+    INVOKEVIRTUAL java/util/concurrent/atomic/AtomicLong.set (J)V
+   L1
+    LINENUMBER 326 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    LOCALVARIABLE zxid J L0 L2 1
+    MAXSTACK = 3
+    MAXLOCALS = 3
+
+  // access flags 0x0
+  getTime()J
+   L0
+    LINENUMBER 329 L0
+    INVOKESTATIC java/lang/System.currentTimeMillis ()J
+    LRETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x2
+  private close(J)V
+   L0
+    LINENUMBER 333 L0
+    ALOAD 0
+    ACONST_NULL
+    LLOAD 1
+    BIPUSH -11
+    ICONST_0
+    ACONST_NULL
+    ACONST_NULL
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer.submitRequest (Lorg/apache/zookeeper/server/ServerCnxn;JIILjava/nio/ByteBuffer;Ljava/util/List;)V
+   L1
+    LINENUMBER 334 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    LOCALVARIABLE sessionId J L0 L2 1
+    MAXSTACK = 8
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  public closeSession(J)V
+   L0
+    LINENUMBER 337 L0
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Closing session 0x"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LLOAD 1
+    INVOKESTATIC java/lang/Long.toHexString (J)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L1
+    LINENUMBER 341 L1
+    ALOAD 0
+    LLOAD 1
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer.close (J)V
+   L2
+    LINENUMBER 342 L2
+    RETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L3 0
+    LOCALVARIABLE sessionId J L0 L3 1
+    MAXSTACK = 4
+    MAXLOCALS = 3
+
+  // access flags 0x4
+  protected killSession(JJ)V
+   L0
+    LINENUMBER 345 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    LLOAD 1
+    LLOAD 3
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.killSession (JJ)V
+   L1
+    LINENUMBER 346 L1
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    INVOKEINTERFACE org/slf4j/Logger.isTraceEnabled ()Z (itf)
+    IFEQ L2
+   L3
+    LINENUMBER 347 L3
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC 32
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "ZooKeeperServer --- killSession: 0x"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LLOAD 1
+   L4
+    LINENUMBER 349 L4
+    INVOKESTATIC java/lang/Long.toHexString (J)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+   L5
+    LINENUMBER 347 L5
+    INVOKESTATIC org/apache/zookeeper/server/ZooTrace.logTraceMessage (Lorg/slf4j/Logger;JLjava/lang/String;)V
+   L2
+    LINENUMBER 351 L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer J J] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.sessionTracker : Lorg/apache/zookeeper/server/SessionTracker;
+    IFNULL L6
+   L7
+    LINENUMBER 352 L7
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.sessionTracker : Lorg/apache/zookeeper/server/SessionTracker;
+    LLOAD 1
+    INVOKEINTERFACE org/apache/zookeeper/server/SessionTracker.removeSession (J)V (itf)
+   L6
+    LINENUMBER 354 L6
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer J J] []
+    RETURN
+   L8
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L8 0
+    LOCALVARIABLE sessionId J L0 L8 1
+    LOCALVARIABLE zxid J L0 L8 3
+    MAXSTACK = 6
+    MAXLOCALS = 5
+
+  // access flags 0x1
+  public expire(Lorg/apache/zookeeper/server/SessionTracker$Session;)V
+   L0
+    LINENUMBER 357 L0
+    ALOAD 1
+    INVOKEINTERFACE org/apache/zookeeper/server/SessionTracker$Session.getSessionId ()J (itf)
+    LSTORE 2
+   L1
+    LINENUMBER 358 L1
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Expiring session 0x"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LLOAD 2
+    INVOKESTATIC java/lang/Long.toHexString (J)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LDC ", timeout of "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L2
+    LINENUMBER 359 L2
+    INVOKEINTERFACE org/apache/zookeeper/server/SessionTracker$Session.getTimeout ()I (itf)
+    INVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;
+    LDC "ms exceeded"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+   L3
+    LINENUMBER 358 L3
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L4
+    LINENUMBER 360 L4
+    ALOAD 0
+    LLOAD 2
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer.close (J)V
+   L5
+    LINENUMBER 361 L5
+    RETURN
+   L6
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L6 0
+    LOCALVARIABLE session Lorg/apache/zookeeper/server/SessionTracker$Session; L0 L6 1
+    LOCALVARIABLE sessionId J L1 L6 2
+    MAXSTACK = 4
+    MAXLOCALS = 4
+
+  // access flags 0x0
+  touch(Lorg/apache/zookeeper/server/ServerCnxn;)V throws org/apache/zookeeper/server/ZooKeeperServer$MissingSessionException 
+   L0
+    LINENUMBER 372 L0
+    ALOAD 1
+    IFNONNULL L1
+   L2
+    LINENUMBER 373 L2
+    RETURN
+   L1
+    LINENUMBER 375 L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn] []
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getSessionId ()J
+    LSTORE 2
+   L3
+    LINENUMBER 376 L3
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getSessionTimeout ()I
+    ISTORE 4
+   L4
+    LINENUMBER 377 L4
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.sessionTracker : Lorg/apache/zookeeper/server/SessionTracker;
+    LLOAD 2
+    ILOAD 4
+    INVOKEINTERFACE org/apache/zookeeper/server/SessionTracker.touchSession (JI)Z (itf)
+    IFNE L5
+   L6
+    LINENUMBER 378 L6
+    NEW org/apache/zookeeper/server/ZooKeeperServer$MissingSessionException
+    DUP
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "No session with sessionid 0x"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LLOAD 2
+   L7
+    LINENUMBER 379 L7
+    INVOKESTATIC java/lang/Long.toHexString (J)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LDC " exists, probably expired and removed"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer$MissingSessionException.<init> (Ljava/lang/String;)V
+    ATHROW
+   L5
+    LINENUMBER 382 L5
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn J I] []
+    RETURN
+   L8
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L8 0
+    LOCALVARIABLE cnxn Lorg/apache/zookeeper/server/ServerCnxn; L0 L8 1
+    LOCALVARIABLE id J L3 L8 2
+    LOCALVARIABLE to I L4 L8 4
+    MAXSTACK = 5
+    MAXLOCALS = 5
+
+  // access flags 0x4
+  protected registerJMX()V
+    TRYCATCHBLOCK L0 L1 L2 java/lang/Exception
+    TRYCATCHBLOCK L3 L4 L5 java/lang/Exception
+   L3
+    LINENUMBER 387 L3
+    ALOAD 0
+    NEW org/apache/zookeeper/server/ZooKeeperServerBean
+    DUP
+    ALOAD 0
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServerBean.<init> (Lorg/apache/zookeeper/server/ZooKeeperServer;)V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.jmxServerBean : Lorg/apache/zookeeper/server/ZooKeeperServerBean;
+   L6
+    LINENUMBER 388 L6
+    INVOKESTATIC org/apache/zookeeper/jmx/MBeanRegistry.getInstance ()Lorg/apache/zookeeper/jmx/MBeanRegistry;
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.jmxServerBean : Lorg/apache/zookeeper/server/ZooKeeperServerBean;
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/jmx/MBeanRegistry.register (Lorg/apache/zookeeper/jmx/ZKMBeanInfo;Lorg/apache/zookeeper/jmx/ZKMBeanInfo;)V
+   L0
+    LINENUMBER 391 L0
+    ALOAD 0
+    NEW org/apache/zookeeper/server/DataTreeBean
+    DUP
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.getDataTree ()Lorg/apache/zookeeper/server/DataTree;
+    INVOKESPECIAL org/apache/zookeeper/server/DataTreeBean.<init> (Lorg/apache/zookeeper/server/DataTree;)V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.jmxDataTreeBean : Lorg/apache/zookeeper/server/DataTreeBean;
+   L7
+    LINENUMBER 392 L7
+    INVOKESTATIC org/apache/zookeeper/jmx/MBeanRegistry.getInstance ()Lorg/apache/zookeeper/jmx/MBeanRegistry;
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.jmxDataTreeBean : Lorg/apache/zookeeper/server/DataTreeBean;
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.jmxServerBean : Lorg/apache/zookeeper/server/ZooKeeperServerBean;
+    INVOKEVIRTUAL org/apache/zookeeper/jmx/MBeanRegistry.register (Lorg/apache/zookeeper/jmx/ZKMBeanInfo;Lorg/apache/zookeeper/jmx/ZKMBeanInfo;)V
+   L1
+    LINENUMBER 396 L1
+    GOTO L4
+   L2
+    LINENUMBER 393 L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] [java/lang/Exception]
+    ASTORE 1
+   L8
+    LINENUMBER 394 L8
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "Failed to register with JMX"
+    ALOAD 1
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;Ljava/lang/Throwable;)V (itf)
+   L9
+    LINENUMBER 395 L9
+    ALOAD 0
+    ACONST_NULL
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.jmxDataTreeBean : Lorg/apache/zookeeper/server/DataTreeBean;
+   L4
+    LINENUMBER 400 L4
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    GOTO L10
+   L5
+    LINENUMBER 397 L5
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] [java/lang/Exception]
+    ASTORE 1
+   L11
+    LINENUMBER 398 L11
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "Failed to register with JMX"
+    ALOAD 1
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;Ljava/lang/Throwable;)V (itf)
+   L12
+    LINENUMBER 399 L12
+    ALOAD 0
+    ACONST_NULL
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.jmxServerBean : Lorg/apache/zookeeper/server/ZooKeeperServerBean;
+   L10
+    LINENUMBER 401 L10
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    RETURN
+   L13
+    LOCALVARIABLE e Ljava/lang/Exception; L8 L4 1
+    LOCALVARIABLE e Ljava/lang/Exception; L11 L10 1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L3 L13 0
+    MAXSTACK = 4
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public startdata()V throws java/io/IOException java/lang/InterruptedException 
+   L0
+    LINENUMBER 406 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    IFNONNULL L1
+   L2
+    LINENUMBER 407 L2
+    ALOAD 0
+    NEW org/apache/zookeeper/server/ZKDatabase
+    DUP
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.txnLogFactory : Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;
+    INVOKESPECIAL org/apache/zookeeper/server/ZKDatabase.<init> (Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;)V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+   L1
+    LINENUMBER 409 L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.isInitialized ()Z
+    IFNE L3
+   L4
+    LINENUMBER 410 L4
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.loadData ()V
+   L3
+    LINENUMBER 412 L3
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    RETURN
+   L5
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L5 0
+    MAXSTACK = 4
+    MAXLOCALS = 1
+
+  // access flags 0x21
+  public synchronized startup()V
+   L0
+    LINENUMBER 415 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.sessionTracker : Lorg/apache/zookeeper/server/SessionTracker;
+    IFNONNULL L1
+   L2
+    LINENUMBER 416 L2
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.createSessionTracker ()V
+   L1
+    LINENUMBER 418 L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.startSessionTracker ()V
+   L3
+    LINENUMBER 419 L3
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.setupRequestProcessors ()V
+   L4
+    LINENUMBER 421 L4
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.registerJMX ()V
+   L5
+    LINENUMBER 423 L5
+    ALOAD 0
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.RUNNING : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.setState (Lorg/apache/zookeeper/server/ZooKeeperServer$State;)V
+   L6
+    LINENUMBER 424 L6
+    ALOAD 0
+    INVOKEVIRTUAL java/lang/Object.notifyAll ()V
+   L7
+    LINENUMBER 425 L7
+    RETURN
+   L8
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L8 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x4
+  protected setupRequestProcessors()V
+   L0
+    LINENUMBER 428 L0
+    NEW org/apache/zookeeper/server/FinalRequestProcessor
+    DUP
+    ALOAD 0
+    INVOKESPECIAL org/apache/zookeeper/server/FinalRequestProcessor.<init> (Lorg/apache/zookeeper/server/ZooKeeperServer;)V
+    ASTORE 1
+   L1
+    LINENUMBER 429 L1
+    NEW org/apache/zookeeper/server/SyncRequestProcessor
+    DUP
+    ALOAD 0
+    ALOAD 1
+    INVOKESPECIAL org/apache/zookeeper/server/SyncRequestProcessor.<init> (Lorg/apache/zookeeper/server/ZooKeeperServer;Lorg/apache/zookeeper/server/RequestProcessor;)V
+    ASTORE 2
+   L2
+    LINENUMBER 431 L2
+    ALOAD 2
+    CHECKCAST org/apache/zookeeper/server/SyncRequestProcessor
+    INVOKEVIRTUAL org/apache/zookeeper/server/SyncRequestProcessor.start ()V
+   L3
+    LINENUMBER 432 L3
+    ALOAD 0
+    NEW org/apache/zookeeper/server/PrepRequestProcessor
+    DUP
+    ALOAD 0
+    ALOAD 2
+    INVOKESPECIAL org/apache/zookeeper/server/PrepRequestProcessor.<init> (Lorg/apache/zookeeper/server/ZooKeeperServer;Lorg/apache/zookeeper/server/RequestProcessor;)V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.firstProcessor : Lorg/apache/zookeeper/server/RequestProcessor;
+   L4
+    LINENUMBER 433 L4
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.firstProcessor : Lorg/apache/zookeeper/server/RequestProcessor;
+    CHECKCAST org/apache/zookeeper/server/PrepRequestProcessor
+    INVOKEVIRTUAL org/apache/zookeeper/server/PrepRequestProcessor.start ()V
+   L5
+    LINENUMBER 434 L5
+    RETURN
+   L6
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L6 0
+    LOCALVARIABLE finalProcessor Lorg/apache/zookeeper/server/RequestProcessor; L1 L6 1
+    LOCALVARIABLE syncProcessor Lorg/apache/zookeeper/server/RequestProcessor; L2 L6 2
+    MAXSTACK = 5
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  public getZooKeeperServerListener()Lorg/apache/zookeeper/server/ZooKeeperServerListener;
+   L0
+    LINENUMBER 437 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.listener : Lorg/apache/zookeeper/server/ZooKeeperServerListener;
+    ARETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x4
+  protected createSessionTracker()V
+   L0
+    LINENUMBER 441 L0
+    ALOAD 0
+    NEW org/apache/zookeeper/server/SessionTrackerImpl
+    DUP
+    ALOAD 0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.getSessionWithTimeOuts ()Ljava/util/concurrent/ConcurrentHashMap;
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.tickTime : I
+    LCONST_1
+    ALOAD 0
+   L1
+    LINENUMBER 442 L1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getZooKeeperServerListener ()Lorg/apache/zookeeper/server/ZooKeeperServerListener;
+    INVOKESPECIAL org/apache/zookeeper/server/SessionTrackerImpl.<init> (Lorg/apache/zookeeper/server/SessionTracker$SessionExpirer;Ljava/util/concurrent/ConcurrentHashMap;IJLorg/apache/zookeeper/server/ZooKeeperServerListener;)V
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.sessionTracker : Lorg/apache/zookeeper/server/SessionTracker;
+   L2
+    LINENUMBER 443 L2
+    RETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L3 0
+    MAXSTACK = 9
+    MAXLOCALS = 1
+
+  // access flags 0x4
+  protected startSessionTracker()V
+   L0
+    LINENUMBER 446 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.sessionTracker : Lorg/apache/zookeeper/server/SessionTracker;
+    CHECKCAST org/apache/zookeeper/server/SessionTrackerImpl
+    INVOKEVIRTUAL org/apache/zookeeper/server/SessionTrackerImpl.start ()V
+   L1
+    LINENUMBER 447 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x4
+  protected setState(Lorg/apache/zookeeper/server/ZooKeeperServer$State;)V
+   L0
+    LINENUMBER 467 L0
+    ALOAD 0
+    ALOAD 1
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.state : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+   L1
+    LINENUMBER 469 L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkShutdownHandler : Lorg/apache/zookeeper/server/ZooKeeperServerShutdownHandler;
+    IFNULL L2
+   L3
+    LINENUMBER 470 L3
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkShutdownHandler : Lorg/apache/zookeeper/server/ZooKeeperServerShutdownHandler;
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServerShutdownHandler.handle (Lorg/apache/zookeeper/server/ZooKeeperServer$State;)V
+    GOTO L4
+   L2
+    LINENUMBER 472 L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ZooKeeperServer$State] []
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "ZKShutdownHandler is not registered, so ZooKeeper server won't take any action on ERROR or SHUTDOWN server state changes"
+    INVOKEINTERFACE org/slf4j/Logger.error (Ljava/lang/String;)V (itf)
+   L4
+    LINENUMBER 475 L4
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ZooKeeperServer$State] []
+    RETURN
+   L5
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L5 0
+    LOCALVARIABLE state Lorg/apache/zookeeper/server/ZooKeeperServer$State; L0 L5 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x4
+  protected canShutdown()Z
+   L0
+    LINENUMBER 485 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.state : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.RUNNING : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    IF_ACMPEQ L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.state : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.ERROR : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    IF_ACMPNE L2
+   L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    ICONST_1
+    GOTO L3
+   L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    ICONST_0
+   L3
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] [I]
+    IRETURN
+   L4
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L4 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public isRunning()Z
+   L0
+    LINENUMBER 489 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.state : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.RUNNING : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    IF_ACMPNE L1
+    ICONST_1
+    GOTO L2
+   L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    ICONST_0
+   L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] [I]
+    IRETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L3 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public shutdown()V
+   L0
+    LINENUMBER 493 L0
+    ALOAD 0
+    ICONST_0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.shutdown (Z)V
+   L1
+    LINENUMBER 494 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x21
+  public synchronized shutdown(Z)V
+   L0
+    LINENUMBER 501 L0
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.canShutdown ()Z
+    IFNE L1
+   L2
+    LINENUMBER 502 L2
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "ZooKeeper server is not running, so not proceeding to shutdown!"
+    INVOKEINTERFACE org/slf4j/Logger.debug (Ljava/lang/String;)V (itf)
+   L3
+    LINENUMBER 503 L3
+    RETURN
+   L1
+    LINENUMBER 505 L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer I] []
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "shutting down"
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L4
+    LINENUMBER 508 L4
+    ALOAD 0
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.SHUTDOWN : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.setState (Lorg/apache/zookeeper/server/ZooKeeperServer$State;)V
+   L5
+    LINENUMBER 512 L5
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.sessionTracker : Lorg/apache/zookeeper/server/SessionTracker;
+    IFNULL L6
+   L7
+    LINENUMBER 513 L7
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.sessionTracker : Lorg/apache/zookeeper/server/SessionTracker;
+    INVOKEINTERFACE org/apache/zookeeper/server/SessionTracker.shutdown ()V (itf)
+   L6
+    LINENUMBER 515 L6
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer I] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.firstProcessor : Lorg/apache/zookeeper/server/RequestProcessor;
+    IFNULL L8
+   L9
+    LINENUMBER 516 L9
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.firstProcessor : Lorg/apache/zookeeper/server/RequestProcessor;
+    INVOKEINTERFACE org/apache/zookeeper/server/RequestProcessor.shutdown ()V (itf)
+   L8
+    LINENUMBER 519 L8
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer I] []
+    ILOAD 1
+    IFEQ L10
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    IFNULL L10
+   L11
+    LINENUMBER 520 L11
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.clear ()V
+   L10
+    LINENUMBER 528 L10
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer I] []
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.unregisterJMX ()V
+   L12
+    LINENUMBER 529 L12
+    RETURN
+   L13
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L13 0
+    LOCALVARIABLE fullyShutDown Z L0 L13 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x4
+  protected unregisterJMX()V
+    TRYCATCHBLOCK L0 L1 L2 java/lang/Exception
+    TRYCATCHBLOCK L3 L4 L5 java/lang/Exception
+   L0
+    LINENUMBER 534 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.jmxDataTreeBean : Lorg/apache/zookeeper/server/DataTreeBean;
+    IFNULL L1
+   L6
+    LINENUMBER 535 L6
+    INVOKESTATIC org/apache/zookeeper/jmx/MBeanRegistry.getInstance ()Lorg/apache/zookeeper/jmx/MBeanRegistry;
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.jmxDataTreeBean : Lorg/apache/zookeeper/server/DataTreeBean;
+    INVOKEVIRTUAL org/apache/zookeeper/jmx/MBeanRegistry.unregister (Lorg/apache/zookeeper/jmx/ZKMBeanInfo;)V
+   L1
+    LINENUMBER 539 L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    GOTO L3
+   L2
+    LINENUMBER 537 L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] [java/lang/Exception]
+    ASTORE 1
+   L7
+    LINENUMBER 538 L7
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "Failed to unregister with JMX"
+    ALOAD 1
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;Ljava/lang/Throwable;)V (itf)
+   L3
+    LINENUMBER 541 L3
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.jmxServerBean : Lorg/apache/zookeeper/server/ZooKeeperServerBean;
+    IFNULL L4
+   L8
+    LINENUMBER 542 L8
+    INVOKESTATIC org/apache/zookeeper/jmx/MBeanRegistry.getInstance ()Lorg/apache/zookeeper/jmx/MBeanRegistry;
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.jmxServerBean : Lorg/apache/zookeeper/server/ZooKeeperServerBean;
+    INVOKEVIRTUAL org/apache/zookeeper/jmx/MBeanRegistry.unregister (Lorg/apache/zookeeper/jmx/ZKMBeanInfo;)V
+   L4
+    LINENUMBER 546 L4
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    GOTO L9
+   L5
+    LINENUMBER 544 L5
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] [java/lang/Exception]
+    ASTORE 1
+   L10
+    LINENUMBER 545 L10
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "Failed to unregister with JMX"
+    ALOAD 1
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;Ljava/lang/Throwable;)V (itf)
+   L9
+    LINENUMBER 547 L9
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    ALOAD 0
+    ACONST_NULL
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.jmxServerBean : Lorg/apache/zookeeper/server/ZooKeeperServerBean;
+   L11
+    LINENUMBER 548 L11
+    ALOAD 0
+    ACONST_NULL
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.jmxDataTreeBean : Lorg/apache/zookeeper/server/DataTreeBean;
+   L12
+    LINENUMBER 549 L12
+    RETURN
+   L13
+    LOCALVARIABLE e Ljava/lang/Exception; L7 L3 1
+    LOCALVARIABLE e Ljava/lang/Exception; L10 L9 1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L13 0
+    MAXSTACK = 3
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public incInProcess()V
+   L0
+    LINENUMBER 552 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.requestsInProcess : Ljava/util/concurrent/atomic/AtomicInteger;
+    INVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.incrementAndGet ()I
+    POP
+   L1
+    LINENUMBER 553 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public decInProcess()V
+   L0
+    LINENUMBER 556 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.requestsInProcess : Ljava/util/concurrent/atomic/AtomicInteger;
+    INVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.decrementAndGet ()I
+    POP
+   L1
+    LINENUMBER 557 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public getInProcess()I
+   L0
+    LINENUMBER 560 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.requestsInProcess : Ljava/util/concurrent/atomic/AtomicInteger;
+    INVOKEVIRTUAL java/util/concurrent/atomic/AtomicInteger.get ()I
+    IRETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x0
+  generatePasswd(J)[B
+   L0
+    LINENUMBER 599 L0
+    NEW java/util/Random
+    DUP
+    LLOAD 1
+    LDC 3007405056
+    LXOR
+    INVOKESPECIAL java/util/Random.<init> (J)V
+    ASTORE 3
+   L1
+    LINENUMBER 600 L1
+    BIPUSH 16
+    NEWARRAY T_BYTE
+    ASTORE 4
+   L2
+    LINENUMBER 601 L2
+    ALOAD 3
+    ALOAD 4
+    INVOKEVIRTUAL java/util/Random.nextBytes ([B)V
+   L3
+    LINENUMBER 602 L3
+    ALOAD 4
+    ARETURN
+   L4
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L4 0
+    LOCALVARIABLE id J L0 L4 1
+    LOCALVARIABLE r Ljava/util/Random; L1 L4 3
+    LOCALVARIABLE p [B L2 L4 4
+    MAXSTACK = 6
+    MAXLOCALS = 5
+
+  // access flags 0x4
+  protected checkPasswd(J[B)Z
+   L0
+    LINENUMBER 606 L0
+    LLOAD 1
+    LCONST_0
+    LCMP
+    IFEQ L1
+    ALOAD 3
+    ALOAD 0
+    LLOAD 1
+   L2
+    LINENUMBER 607 L2
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.generatePasswd (J)[B
+    INVOKESTATIC java/util/Arrays.equals ([B[B)Z
+    IFEQ L1
+    ICONST_1
+    GOTO L3
+   L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer J [B] []
+    ICONST_0
+   L3
+    LINENUMBER 606 L3
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer J [B] [I]
+    IRETURN
+   L4
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L4 0
+    LOCALVARIABLE sessionId J L0 L4 1
+    LOCALVARIABLE passwd [B L0 L4 3
+    MAXSTACK = 4
+    MAXLOCALS = 4
+
+  // access flags 0x0
+  createSession(Lorg/apache/zookeeper/server/ServerCnxn;[BI)J
+   L0
+    LINENUMBER 611 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.sessionTracker : Lorg/apache/zookeeper/server/SessionTracker;
+    ILOAD 3
+    INVOKEINTERFACE org/apache/zookeeper/server/SessionTracker.createSession (I)J (itf)
+    LSTORE 4
+   L1
+    LINENUMBER 612 L1
+    NEW java/util/Random
+    DUP
+    LLOAD 4
+    LDC 3007405056
+    LXOR
+    INVOKESPECIAL java/util/Random.<init> (J)V
+    ASTORE 6
+   L2
+    LINENUMBER 613 L2
+    ALOAD 6
+    ALOAD 2
+    INVOKEVIRTUAL java/util/Random.nextBytes ([B)V
+   L3
+    LINENUMBER 614 L3
+    ICONST_4
+    INVOKESTATIC java/nio/ByteBuffer.allocate (I)Ljava/nio/ByteBuffer;
+    ASTORE 7
+   L4
+    LINENUMBER 615 L4
+    ALOAD 7
+    ILOAD 3
+    INVOKEVIRTUAL java/nio/ByteBuffer.putInt (I)Ljava/nio/ByteBuffer;
+    POP
+   L5
+    LINENUMBER 616 L5
+    ALOAD 1
+    LLOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.setSessionId (J)V
+   L6
+    LINENUMBER 617 L6
+    ALOAD 0
+    ALOAD 1
+    LLOAD 4
+    BIPUSH -10
+    ICONST_0
+    ALOAD 7
+    ACONST_NULL
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer.submitRequest (Lorg/apache/zookeeper/server/ServerCnxn;JIILjava/nio/ByteBuffer;Ljava/util/List;)V
+   L7
+    LINENUMBER 618 L7
+    LLOAD 4
+    LRETURN
+   L8
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L8 0
+    LOCALVARIABLE cnxn Lorg/apache/zookeeper/server/ServerCnxn; L0 L8 1
+    LOCALVARIABLE passwd [B L0 L8 2
+    LOCALVARIABLE timeout I L0 L8 3
+    LOCALVARIABLE sessionId J L1 L8 4
+    LOCALVARIABLE r Ljava/util/Random; L2 L8 6
+    LOCALVARIABLE to Ljava/nio/ByteBuffer; L4 L8 7
+    MAXSTACK = 8
+    MAXLOCALS = 8
+
+  // access flags 0x1
+  public setOwner(JLjava/lang/Object;)V throws org/apache/zookeeper/KeeperException$SessionExpiredException 
+   L0
+    LINENUMBER 628 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.sessionTracker : Lorg/apache/zookeeper/server/SessionTracker;
+    LLOAD 1
+    ALOAD 3
+    INVOKEINTERFACE org/apache/zookeeper/server/SessionTracker.setOwner (JLjava/lang/Object;)V (itf)
+   L1
+    LINENUMBER 629 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    LOCALVARIABLE id J L0 L2 1
+    LOCALVARIABLE owner Ljava/lang/Object; L0 L2 3
+    MAXSTACK = 4
+    MAXLOCALS = 4
+
+  // access flags 0x4
+  protected revalidateSession(Lorg/apache/zookeeper/server/ServerCnxn;JI)V throws java/io/IOException 
+   L0
+    LINENUMBER 633 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.sessionTracker : Lorg/apache/zookeeper/server/SessionTracker;
+    LLOAD 2
+    ILOAD 4
+    INVOKEINTERFACE org/apache/zookeeper/server/SessionTracker.touchSession (JI)Z (itf)
+    ISTORE 5
+   L1
+    LINENUMBER 634 L1
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    INVOKEINTERFACE org/slf4j/Logger.isTraceEnabled ()Z (itf)
+    IFEQ L2
+   L3
+    LINENUMBER 635 L3
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC 32
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Session 0x"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LLOAD 2
+   L4
+    LINENUMBER 636 L4
+    INVOKESTATIC java/lang/Long.toHexString (J)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LDC " is valid: "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ILOAD 5
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Z)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+   L5
+    LINENUMBER 635 L5
+    INVOKESTATIC org/apache/zookeeper/server/ZooTrace.logTraceMessage (Lorg/slf4j/Logger;JLjava/lang/String;)V
+   L2
+    LINENUMBER 639 L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn J I I] []
+    ALOAD 0
+    ALOAD 1
+    ILOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.finishSessionInit (Lorg/apache/zookeeper/server/ServerCnxn;Z)V
+   L6
+    LINENUMBER 640 L6
+    RETURN
+   L7
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L7 0
+    LOCALVARIABLE cnxn Lorg/apache/zookeeper/server/ServerCnxn; L0 L7 1
+    LOCALVARIABLE sessionId J L0 L7 2
+    LOCALVARIABLE sessionTimeout I L0 L7 4
+    LOCALVARIABLE rc Z L1 L7 5
+    MAXSTACK = 6
+    MAXLOCALS = 6
+
+  // access flags 0x1
+  public reopenSession(Lorg/apache/zookeeper/server/ServerCnxn;J[BI)V throws java/io/IOException 
+   L0
+    LINENUMBER 644 L0
+    ALOAD 0
+    LLOAD 2
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.checkPasswd (J[B)Z
+    IFNE L1
+   L2
+    LINENUMBER 645 L2
+    ALOAD 0
+    ALOAD 1
+    ICONST_0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.finishSessionInit (Lorg/apache/zookeeper/server/ServerCnxn;Z)V
+    GOTO L3
+   L1
+    LINENUMBER 647 L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn J [B I] []
+    ALOAD 0
+    ALOAD 1
+    LLOAD 2
+    ILOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.revalidateSession (Lorg/apache/zookeeper/server/ServerCnxn;JI)V
+   L3
+    LINENUMBER 649 L3
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn J [B I] []
+    RETURN
+   L4
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L4 0
+    LOCALVARIABLE cnxn Lorg/apache/zookeeper/server/ServerCnxn; L0 L4 1
+    LOCALVARIABLE sessionId J L0 L4 2
+    LOCALVARIABLE passwd [B L0 L4 4
+    LOCALVARIABLE sessionTimeout I L0 L4 5
+    MAXSTACK = 5
+    MAXLOCALS = 6
+
+  // access flags 0x1
+  public finishSessionInit(Lorg/apache/zookeeper/server/ServerCnxn;Z)V
+    TRYCATCHBLOCK L0 L1 L2 java/lang/Exception
+    TRYCATCHBLOCK L3 L4 L5 java/lang/Exception
+   L0
+    LINENUMBER 654 L0
+    ILOAD 2
+    IFEQ L1
+   L6
+    LINENUMBER 655 L6
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.serverCnxnFactory : Lorg/apache/zookeeper/server/ServerCnxnFactory;
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxnFactory.registerConnection (Lorg/apache/zookeeper/server/ServerCnxn;)V
+   L1
+    LINENUMBER 659 L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn I] []
+    GOTO L3
+   L2
+    LINENUMBER 657 L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn I] [java/lang/Exception]
+    ASTORE 3
+   L7
+    LINENUMBER 658 L7
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "Failed to register with JMX"
+    ALOAD 3
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;Ljava/lang/Throwable;)V (itf)
+   L3
+    LINENUMBER 662 L3
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn I] []
+    NEW org/apache/zookeeper/proto/ConnectResponse
+    DUP
+    ICONST_0
+    ILOAD 2
+    IFEQ L8
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getSessionTimeout ()I
+    GOTO L9
+   L8
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn I] [L3 L3 I]
+    ICONST_0
+   L9
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn I] [L3 L3 I I]
+    ILOAD 2
+    IFEQ L10
+    ALOAD 1
+   L11
+    LINENUMBER 663 L11
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getSessionId ()J
+    GOTO L12
+   L10
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn I] [L3 L3 I I]
+    LCONST_0
+   L12
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn I] [L3 L3 I I J]
+    ILOAD 2
+    IFEQ L13
+    ALOAD 0
+    ALOAD 1
+   L14
+    LINENUMBER 665 L14
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getSessionId ()J
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.generatePasswd (J)[B
+    GOTO L15
+   L13
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn I] [L3 L3 I I J]
+    BIPUSH 16
+    NEWARRAY T_BYTE
+   L15
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn I] [L3 L3 I I J [B]
+    INVOKESPECIAL org/apache/zookeeper/proto/ConnectResponse.<init> (IIJ[B)V
+    ASTORE 3
+   L16
+    LINENUMBER 666 L16
+    NEW java/io/ByteArrayOutputStream
+    DUP
+    INVOKESPECIAL java/io/ByteArrayOutputStream.<init> ()V
+    ASTORE 4
+   L17
+    LINENUMBER 667 L17
+    ALOAD 4
+    INVOKESTATIC org/apache/jute/BinaryOutputArchive.getArchive (Ljava/io/OutputStream;)Lorg/apache/jute/BinaryOutputArchive;
+    ASTORE 5
+   L18
+    LINENUMBER 668 L18
+    ALOAD 5
+    ICONST_M1
+    LDC "len"
+    INVOKEVIRTUAL org/apache/jute/BinaryOutputArchive.writeInt (ILjava/lang/String;)V
+   L19
+    LINENUMBER 669 L19
+    ALOAD 3
+    ALOAD 5
+    LDC "connect"
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ConnectResponse.serialize (Lorg/apache/jute/OutputArchive;Ljava/lang/String;)V
+   L20
+    LINENUMBER 670 L20
+    ALOAD 1
+    GETFIELD org/apache/zookeeper/server/ServerCnxn.isOldClient : Z
+    IFNE L21
+   L22
+    LINENUMBER 671 L22
+    ALOAD 5
+    ALOAD 0
+    INSTANCEOF org/apache/zookeeper/server/quorum/ReadOnlyZooKeeperServer
+    LDC "readOnly"
+    INVOKEVIRTUAL org/apache/jute/BinaryOutputArchive.writeBool (ZLjava/lang/String;)V
+   L21
+    LINENUMBER 674 L21
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn I org/apache/zookeeper/proto/ConnectResponse java/io/ByteArrayOutputStream org/apache/jute/BinaryOutputArchive] []
+    ALOAD 4
+    INVOKEVIRTUAL java/io/ByteArrayOutputStream.close ()V
+   L23
+    LINENUMBER 675 L23
+    ALOAD 4
+    INVOKEVIRTUAL java/io/ByteArrayOutputStream.toByteArray ()[B
+    INVOKESTATIC java/nio/ByteBuffer.wrap ([B)Ljava/nio/ByteBuffer;
+    ASTORE 6
+   L24
+    LINENUMBER 676 L24
+    ALOAD 6
+    ALOAD 6
+    INVOKEVIRTUAL java/nio/ByteBuffer.remaining ()I
+    ICONST_4
+    ISUB
+    INVOKEVIRTUAL java/nio/ByteBuffer.putInt (I)Ljava/nio/ByteBuffer;
+    INVOKEVIRTUAL java/nio/ByteBuffer.rewind ()Ljava/nio/Buffer;
+    POP
+   L25
+    LINENUMBER 677 L25
+    ALOAD 1
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.sendBuffer (Ljava/nio/ByteBuffer;)V
+   L26
+    LINENUMBER 679 L26
+    ILOAD 2
+    IFNE L27
+   L28
+    LINENUMBER 680 L28
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Invalid session 0x"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L29
+    LINENUMBER 681 L29
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getSessionId ()J
+    INVOKESTATIC java/lang/Long.toHexString (J)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LDC " for client "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L30
+    LINENUMBER 683 L30
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getRemoteSocketAddress ()Ljava/net/InetSocketAddress;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    LDC ", probably expired"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+   L31
+    LINENUMBER 680 L31
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L32
+    LINENUMBER 685 L32
+    ALOAD 1
+    GETSTATIC org/apache/zookeeper/server/ServerCnxnFactory.closeConn : Ljava/nio/ByteBuffer;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.sendBuffer (Ljava/nio/ByteBuffer;)V
+    GOTO L4
+   L27
+    LINENUMBER 687 L27
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn I org/apache/zookeeper/proto/ConnectResponse java/io/ByteArrayOutputStream org/apache/jute/BinaryOutputArchive java/nio/ByteBuffer] []
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Established session 0x"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L33
+    LINENUMBER 688 L33
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getSessionId ()J
+    INVOKESTATIC java/lang/Long.toHexString (J)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LDC " with negotiated timeout "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L34
+    LINENUMBER 689 L34
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getSessionTimeout ()I
+    INVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;
+    LDC " for client "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L35
+    LINENUMBER 691 L35
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getRemoteSocketAddress ()Ljava/net/InetSocketAddress;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+   L36
+    LINENUMBER 687 L36
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L37
+    LINENUMBER 692 L37
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.enableRecv ()V
+   L4
+    LINENUMBER 698 L4
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn I] []
+    GOTO L38
+   L5
+    LINENUMBER 695 L5
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn I] [java/lang/Exception]
+    ASTORE 3
+   L39
+    LINENUMBER 696 L39
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "Exception while establishing session, closing"
+    ALOAD 3
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;Ljava/lang/Throwable;)V (itf)
+   L40
+    LINENUMBER 697 L40
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.close ()V
+   L38
+    LINENUMBER 699 L38
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn I] []
+    RETURN
+   L41
+    LOCALVARIABLE e Ljava/lang/Exception; L7 L3 3
+    LOCALVARIABLE rsp Lorg/apache/zookeeper/proto/ConnectResponse; L16 L4 3
+    LOCALVARIABLE baos Ljava/io/ByteArrayOutputStream; L17 L4 4
+    LOCALVARIABLE bos Lorg/apache/jute/BinaryOutputArchive; L18 L4 5
+    LOCALVARIABLE bb Ljava/nio/ByteBuffer; L24 L4 6
+    LOCALVARIABLE e Ljava/lang/Exception; L39 L38 3
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L41 0
+    LOCALVARIABLE cnxn Lorg/apache/zookeeper/server/ServerCnxn; L0 L41 1
+    LOCALVARIABLE valid Z L0 L41 2
+    MAXSTACK = 9
+    MAXLOCALS = 7
+
+  // access flags 0x1
+  public closeSession(Lorg/apache/zookeeper/server/ServerCnxn;Lorg/apache/zookeeper/proto/RequestHeader;)V
+   L0
+    LINENUMBER 702 L0
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getSessionId ()J
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.closeSession (J)V
+   L1
+    LINENUMBER 703 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    LOCALVARIABLE cnxn Lorg/apache/zookeeper/server/ServerCnxn; L0 L2 1
+    LOCALVARIABLE requestHeader Lorg/apache/zookeeper/proto/RequestHeader; L0 L2 2
+    MAXSTACK = 3
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  public getServerId()J
+   L0
+    LINENUMBER 706 L0
+    LCONST_0
+    LRETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x2
+  // signature (Lorg/apache/zookeeper/server/ServerCnxn;JIILjava/nio/ByteBuffer;Ljava/util/List<Lorg/apache/zookeeper/data/Id;>;)V
+  // declaration: void submitRequest(org.apache.zookeeper.server.ServerCnxn, long, int, int, java.nio.ByteBuffer, java.util.List<org.apache.zookeeper.data.Id>)
+  private submitRequest(Lorg/apache/zookeeper/server/ServerCnxn;JIILjava/nio/ByteBuffer;Ljava/util/List;)V
+   L0
+    LINENUMBER 717 L0
+    NEW org/apache/zookeeper/server/Request
+    DUP
+    ALOAD 1
+    LLOAD 2
+    ILOAD 5
+    ILOAD 4
+    ALOAD 6
+    ALOAD 7
+    INVOKESPECIAL org/apache/zookeeper/server/Request.<init> (Lorg/apache/zookeeper/server/ServerCnxn;JIILjava/nio/ByteBuffer;Ljava/util/List;)V
+    ASTORE 8
+   L1
+    LINENUMBER 718 L1
+    ALOAD 0
+    ALOAD 8
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.submitRequest (Lorg/apache/zookeeper/server/Request;)V
+   L2
+    LINENUMBER 719 L2
+    RETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L3 0
+    LOCALVARIABLE cnxn Lorg/apache/zookeeper/server/ServerCnxn; L0 L3 1
+    LOCALVARIABLE sessionId J L0 L3 2
+    LOCALVARIABLE type I L0 L3 4
+    LOCALVARIABLE xid I L0 L3 5
+    LOCALVARIABLE bb Ljava/nio/ByteBuffer; L0 L3 6
+    LOCALVARIABLE authInfo Ljava/util/List; L0 L3 7
+    // signature Ljava/util/List<Lorg/apache/zookeeper/data/Id;>;
+    // declaration: authInfo extends java.util.List<org.apache.zookeeper.data.Id>
+    LOCALVARIABLE si Lorg/apache/zookeeper/server/Request; L1 L3 8
+    MAXSTACK = 9
+    MAXLOCALS = 9
+
+  // access flags 0x1
+  public submitRequest(Lorg/apache/zookeeper/server/Request;)V
+    TRYCATCHBLOCK L0 L1 L2 java/lang/InterruptedException
+    TRYCATCHBLOCK L0 L3 L4 null
+    TRYCATCHBLOCK L4 L5 L4 null
+    TRYCATCHBLOCK L6 L7 L8 org/apache/zookeeper/server/ZooKeeperServer$MissingSessionException
+    TRYCATCHBLOCK L6 L7 L9 org/apache/zookeeper/server/RequestProcessor$RequestProcessorException
+   L10
+    LINENUMBER 722 L10
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.firstProcessor : Lorg/apache/zookeeper/server/RequestProcessor;
+    IFNONNULL L6
+   L11
+    LINENUMBER 723 L11
+    ALOAD 0
+    DUP
+    ASTORE 2
+    MONITORENTER
+   L0
+    LINENUMBER 729 L0
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/Request java/lang/Object] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.state : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.INITIAL : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    IF_ACMPNE L1
+   L12
+    LINENUMBER 730 L12
+    ALOAD 0
+    LDC 1000
+    INVOKEVIRTUAL java/lang/Object.wait (J)V
+    GOTO L0
+   L1
+    LINENUMBER 734 L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/Request java/lang/Object] []
+    GOTO L13
+   L2
+    LINENUMBER 732 L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/Request java/lang/Object] [java/lang/InterruptedException]
+    ASTORE 3
+   L14
+    LINENUMBER 733 L14
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "Unexpected interruption"
+    ALOAD 3
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;Ljava/lang/Throwable;)V (itf)
+   L13
+    LINENUMBER 735 L13
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/Request java/lang/Object] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.firstProcessor : Lorg/apache/zookeeper/server/RequestProcessor;
+    IFNULL L15
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.state : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer$State.RUNNING : Lorg/apache/zookeeper/server/ZooKeeperServer$State;
+    IF_ACMPEQ L16
+   L15
+    LINENUMBER 736 L15
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/Request java/lang/Object] []
+    NEW java/lang/RuntimeException
+    DUP
+    LDC "Not started"
+    INVOKESPECIAL java/lang/RuntimeException.<init> (Ljava/lang/String;)V
+    ATHROW
+   L16
+    LINENUMBER 738 L16
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/Request java/lang/Object] []
+    ALOAD 2
+    MONITOREXIT
+   L3
+    GOTO L6
+   L4
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/Request java/lang/Object] [java/lang/Throwable]
+    ASTORE 4
+    ALOAD 2
+    MONITOREXIT
+   L5
+    ALOAD 4
+    ATHROW
+   L6
+    LINENUMBER 741 L6
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/Request] []
+    ALOAD 0
+    ALOAD 1
+    GETFIELD org/apache/zookeeper/server/Request.cnxn : Lorg/apache/zookeeper/server/ServerCnxn;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.touch (Lorg/apache/zookeeper/server/ServerCnxn;)V
+   L17
+    LINENUMBER 742 L17
+    ALOAD 1
+    GETFIELD org/apache/zookeeper/server/Request.type : I
+    INVOKESTATIC org/apache/zookeeper/server/Request.isValid (I)Z
+    ISTORE 2
+   L18
+    LINENUMBER 743 L18
+    ILOAD 2
+    IFEQ L19
+   L20
+    LINENUMBER 744 L20
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.firstProcessor : Lorg/apache/zookeeper/server/RequestProcessor;
+    ALOAD 1
+    INVOKEINTERFACE org/apache/zookeeper/server/RequestProcessor.processRequest (Lorg/apache/zookeeper/server/Request;)V (itf)
+   L21
+    LINENUMBER 745 L21
+    ALOAD 1
+    GETFIELD org/apache/zookeeper/server/Request.cnxn : Lorg/apache/zookeeper/server/ServerCnxn;
+    IFNULL L7
+   L22
+    LINENUMBER 746 L22
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.incInProcess ()V
+    GOTO L7
+   L19
+    LINENUMBER 749 L19
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/Request I] []
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Received packet at server of unknown type "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+    GETFIELD org/apache/zookeeper/server/Request.type : I
+    INVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;)V (itf)
+   L23
+    LINENUMBER 750 L23
+    NEW org/apache/zookeeper/server/UnimplementedRequestProcessor
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/server/UnimplementedRequestProcessor.<init> ()V
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/UnimplementedRequestProcessor.processRequest (Lorg/apache/zookeeper/server/Request;)V
+   L7
+    LINENUMBER 758 L7
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/Request] []
+    GOTO L24
+   L8
+    LINENUMBER 752 L8
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/Request] [org/apache/zookeeper/server/ZooKeeperServer$MissingSessionException]
+    ASTORE 2
+   L25
+    LINENUMBER 753 L25
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    INVOKEINTERFACE org/slf4j/Logger.isDebugEnabled ()Z (itf)
+    IFEQ L26
+   L27
+    LINENUMBER 754 L27
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Dropping request: "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer$MissingSessionException.getMessage ()Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.debug (Ljava/lang/String;)V (itf)
+   L26
+    LINENUMBER 758 L26
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/Request] []
+    GOTO L24
+   L9
+    LINENUMBER 756 L9
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/Request] [org/apache/zookeeper/server/RequestProcessor$RequestProcessorException]
+    ASTORE 2
+   L28
+    LINENUMBER 757 L28
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Unable to process request:"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/server/RequestProcessor$RequestProcessorException.getMessage ()Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    ALOAD 2
+    INVOKEINTERFACE org/slf4j/Logger.error (Ljava/lang/String;Ljava/lang/Throwable;)V (itf)
+   L24
+    LINENUMBER 759 L24
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/Request] []
+    RETURN
+   L29
+    LOCALVARIABLE e Ljava/lang/InterruptedException; L14 L13 3
+    LOCALVARIABLE validpacket Z L18 L7 2
+    LOCALVARIABLE e Lorg/apache/zookeeper/server/ZooKeeperServer$MissingSessionException; L25 L26 2
+    LOCALVARIABLE e Lorg/apache/zookeeper/server/RequestProcessor$RequestProcessorException; L28 L24 2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L10 L29 0
+    LOCALVARIABLE si Lorg/apache/zookeeper/server/Request; L10 L29 1
+    MAXSTACK = 3
+    MAXLOCALS = 5
+
+  // access flags 0x9
+  public static getSnapCount()I
+    TRYCATCHBLOCK L0 L1 L2 java/lang/Exception
+   L3
+    LINENUMBER 762 L3
+    LDC "zookeeper.snapCount"
+    INVOKESTATIC java/lang/System.getProperty (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 0
+   L0
+    LINENUMBER 764 L0
+    ALOAD 0
+    INVOKESTATIC java/lang/Integer.parseInt (Ljava/lang/String;)I
+    ISTORE 1
+   L4
+    LINENUMBER 767 L4
+    ILOAD 1
+    ICONST_2
+    IF_ICMPGE L5
+   L6
+    LINENUMBER 768 L6
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "SnapCount should be 2 or more. Now, snapCount is reset to 2"
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;)V (itf)
+   L7
+    LINENUMBER 769 L7
+    ICONST_2
+    ISTORE 1
+   L5
+    LINENUMBER 771 L5
+   FRAME FULL [java/lang/String I] []
+    ILOAD 1
+   L1
+    IRETURN
+   L2
+    LINENUMBER 772 L2
+   FRAME FULL [java/lang/String] [java/lang/Exception]
+    ASTORE 1
+   L8
+    LINENUMBER 773 L8
+    LDC 100000
+    IRETURN
+   L9
+    LOCALVARIABLE snapCount I L4 L2 1
+    LOCALVARIABLE e Ljava/lang/Exception; L8 L9 1
+    LOCALVARIABLE sc Ljava/lang/String; L0 L9 0
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public getGlobalOutstandingLimit()I
+    TRYCATCHBLOCK L0 L1 L2 java/lang/Exception
+   L3
+    LINENUMBER 778 L3
+    LDC "zookeeper.globalOutstandingLimit"
+    INVOKESTATIC java/lang/System.getProperty (Ljava/lang/String;)Ljava/lang/String;
+    ASTORE 1
+   L0
+    LINENUMBER 781 L0
+    ALOAD 1
+    INVOKESTATIC java/lang/Integer.parseInt (Ljava/lang/String;)I
+    ISTORE 2
+   L1
+    LINENUMBER 784 L1
+    GOTO L4
+   L2
+    LINENUMBER 782 L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer java/lang/String] [java/lang/Exception]
+    ASTORE 3
+   L5
+    LINENUMBER 783 L5
+    SIPUSH 1000
+    ISTORE 2
+   L4
+    LINENUMBER 785 L4
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer java/lang/String I] []
+    ILOAD 2
+    IRETURN
+   L6
+    LOCALVARIABLE limit I L1 L2 2
+    LOCALVARIABLE e Ljava/lang/Exception; L5 L4 3
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L3 L6 0
+    LOCALVARIABLE sc Ljava/lang/String; L0 L6 1
+    LOCALVARIABLE limit I L4 L6 2
+    MAXSTACK = 1
+    MAXLOCALS = 4
+
+  // access flags 0x1
+  public setServerCnxnFactory(Lorg/apache/zookeeper/server/ServerCnxnFactory;)V
+   L0
+    LINENUMBER 789 L0
+    ALOAD 0
+    ALOAD 1
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.serverCnxnFactory : Lorg/apache/zookeeper/server/ServerCnxnFactory;
+   L1
+    LINENUMBER 790 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    LOCALVARIABLE factory Lorg/apache/zookeeper/server/ServerCnxnFactory; L0 L2 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public getServerCnxnFactory()Lorg/apache/zookeeper/server/ServerCnxnFactory;
+   L0
+    LINENUMBER 793 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.serverCnxnFactory : Lorg/apache/zookeeper/server/ServerCnxnFactory;
+    ARETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public getLastProcessedZxid()J
+   L0
+    LINENUMBER 801 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.getDataTreeLastProcessedZxid ()J
+    LRETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public getOutstandingRequests()J
+   L0
+    LINENUMBER 810 L0
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getInProcess ()I
+    I2L
+    LRETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public truncateLog(J)V throws java/io/IOException 
+   L0
+    LINENUMBER 821 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    LLOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.truncateLog (J)Z
+    POP
+   L1
+    LINENUMBER 822 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    LOCALVARIABLE zxid J L0 L2 1
+    MAXSTACK = 3
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  public getTickTime()I
+   L0
+    LINENUMBER 825 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.tickTime : I
+    IRETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public setTickTime(I)V
+   L0
+    LINENUMBER 829 L0
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "tickTime set to "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ILOAD 1
+    INVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L1
+    LINENUMBER 830 L1
+    ALOAD 0
+    ILOAD 1
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.tickTime : I
+   L2
+    LINENUMBER 831 L2
+    RETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L3 0
+    LOCALVARIABLE tickTime I L0 L3 1
+    MAXSTACK = 3
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public getMinSessionTimeout()I
+   L0
+    LINENUMBER 834 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.minSessionTimeout : I
+    ICONST_M1
+    IF_ICMPNE L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.tickTime : I
+    ICONST_2
+    IMUL
+    GOTO L2
+   L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.minSessionTimeout : I
+   L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] [I]
+    IRETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L3 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public setMinSessionTimeout(I)V
+   L0
+    LINENUMBER 838 L0
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "minSessionTimeout set to "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ILOAD 1
+    INVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L1
+    LINENUMBER 839 L1
+    ALOAD 0
+    ILOAD 1
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.minSessionTimeout : I
+   L2
+    LINENUMBER 840 L2
+    RETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L3 0
+    LOCALVARIABLE min I L0 L3 1
+    MAXSTACK = 3
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public getMaxSessionTimeout()I
+   L0
+    LINENUMBER 843 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.maxSessionTimeout : I
+    ICONST_M1
+    IF_ICMPNE L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.tickTime : I
+    BIPUSH 20
+    IMUL
+    GOTO L2
+   L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.maxSessionTimeout : I
+   L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] [I]
+    IRETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L3 0
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public setMaxSessionTimeout(I)V
+   L0
+    LINENUMBER 847 L0
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "maxSessionTimeout set to "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ILOAD 1
+    INVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L1
+    LINENUMBER 848 L1
+    ALOAD 0
+    ILOAD 1
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.maxSessionTimeout : I
+   L2
+    LINENUMBER 849 L2
+    RETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L3 0
+    LOCALVARIABLE max I L0 L3 1
+    MAXSTACK = 3
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public getClientPort()I
+   L0
+    LINENUMBER 852 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.serverCnxnFactory : Lorg/apache/zookeeper/server/ServerCnxnFactory;
+    IFNULL L1
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.serverCnxnFactory : Lorg/apache/zookeeper/server/ServerCnxnFactory;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxnFactory.getLocalPort ()I
+    GOTO L2
+   L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] []
+    ICONST_M1
+   L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer] [I]
+    IRETURN
+   L3
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L3 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public setTxnLogFactory(Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;)V
+   L0
+    LINENUMBER 856 L0
+    ALOAD 0
+    ALOAD 1
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.txnLogFactory : Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;
+   L1
+    LINENUMBER 857 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    LOCALVARIABLE txnLog Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog; L0 L2 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public getTxnLogFactory()Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;
+   L0
+    LINENUMBER 860 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.txnLogFactory : Lorg/apache/zookeeper/server/persistence/FileTxnSnapLog;
+    ARETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public getState()Ljava/lang/String;
+   L0
+    LINENUMBER 864 L0
+    LDC "standalone"
+    ARETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public dumpEphemerals(Ljava/io/PrintWriter;)V
+   L0
+    LINENUMBER 868 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.dumpEphemerals (Ljava/io/PrintWriter;)V
+   L1
+    LINENUMBER 869 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    LOCALVARIABLE pwriter Ljava/io/PrintWriter; L0 L2 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public getNumAliveConnections()I
+   L0
+    LINENUMBER 876 L0
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.serverCnxnFactory : Lorg/apache/zookeeper/server/ServerCnxnFactory;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxnFactory.getNumAliveConnections ()I
+    IRETURN
+   L1
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public processConnectRequest(Lorg/apache/zookeeper/server/ServerCnxn;Ljava/nio/ByteBuffer;)V throws java/io/IOException 
+    TRYCATCHBLOCK L0 L1 L2 java/io/IOException
+   L3
+    LINENUMBER 880 L3
+    NEW org/apache/zookeeper/server/ByteBufferInputStream
+    DUP
+    ALOAD 2
+    INVOKESPECIAL org/apache/zookeeper/server/ByteBufferInputStream.<init> (Ljava/nio/ByteBuffer;)V
+    INVOKESTATIC org/apache/jute/BinaryInputArchive.getArchive (Ljava/io/InputStream;)Lorg/apache/jute/BinaryInputArchive;
+    ASTORE 3
+   L4
+    LINENUMBER 881 L4
+    NEW org/apache/zookeeper/proto/ConnectRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/ConnectRequest.<init> ()V
+    ASTORE 4
+   L5
+    LINENUMBER 882 L5
+    ALOAD 4
+    ALOAD 3
+    LDC "connect"
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ConnectRequest.deserialize (Lorg/apache/jute/InputArchive;Ljava/lang/String;)V
+   L6
+    LINENUMBER 883 L6
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    INVOKEINTERFACE org/slf4j/Logger.isDebugEnabled ()Z (itf)
+    IFEQ L7
+   L8
+    LINENUMBER 884 L8
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Session establishment request from client "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L9
+    LINENUMBER 885 L9
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getRemoteSocketAddress ()Ljava/net/InetSocketAddress;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    LDC " client's lastZxid is 0x"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 4
+   L10
+    LINENUMBER 887 L10
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ConnectRequest.getLastZxidSeen ()J
+    INVOKESTATIC java/lang/Long.toHexString (J)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+   L11
+    LINENUMBER 884 L11
+    INVOKEINTERFACE org/slf4j/Logger.debug (Ljava/lang/String;)V (itf)
+   L7
+    LINENUMBER 889 L7
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/ConnectRequest] []
+    ICONST_0
+    ISTORE 5
+   L0
+    LINENUMBER 891 L0
+    ALOAD 3
+    LDC "readOnly"
+    INVOKEVIRTUAL org/apache/jute/BinaryInputArchive.readBool (Ljava/lang/String;)Z
+    ISTORE 5
+   L12
+    LINENUMBER 892 L12
+    ALOAD 1
+    ICONST_0
+    PUTFIELD org/apache/zookeeper/server/ServerCnxn.isOldClient : Z
+   L1
+    LINENUMBER 899 L1
+    GOTO L13
+   L2
+    LINENUMBER 893 L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/ConnectRequest I] [java/io/IOException]
+    ASTORE 6
+   L14
+    LINENUMBER 896 L14
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Connection request from old client "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L15
+    LINENUMBER 897 L15
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getRemoteSocketAddress ()Ljava/net/InetSocketAddress;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    LDC "; will be dropped if server is in r-o mode"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+   L16
+    LINENUMBER 896 L16
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;)V (itf)
+   L13
+    LINENUMBER 900 L13
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/ConnectRequest I] []
+    ILOAD 5
+    IFNE L17
+    ALOAD 0
+    INSTANCEOF org/apache/zookeeper/server/quorum/ReadOnlyZooKeeperServer
+    IFEQ L17
+   L18
+    LINENUMBER 901 L18
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Refusing session request for not-read-only client "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L19
+    LINENUMBER 902 L19
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getRemoteSocketAddress ()Ljava/net/InetSocketAddress;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    ASTORE 6
+   L20
+    LINENUMBER 903 L20
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    ALOAD 6
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L21
+    LINENUMBER 904 L21
+    NEW org/apache/zookeeper/server/ServerCnxn$CloseRequestException
+    DUP
+    ALOAD 6
+    INVOKESPECIAL org/apache/zookeeper/server/ServerCnxn$CloseRequestException.<init> (Ljava/lang/String;)V
+    ATHROW
+   L17
+    LINENUMBER 906 L17
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/ConnectRequest I] []
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ConnectRequest.getLastZxidSeen ()J
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.zkDb : Lorg/apache/zookeeper/server/ZKDatabase;
+    GETFIELD org/apache/zookeeper/server/ZKDatabase.dataTree : Lorg/apache/zookeeper/server/DataTree;
+    GETFIELD org/apache/zookeeper/server/DataTree.lastProcessedZxid : J
+    LCMP
+    IFLE L22
+   L23
+    LINENUMBER 907 L23
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Refusing session request for client "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L24
+    LINENUMBER 908 L24
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getRemoteSocketAddress ()Ljava/net/InetSocketAddress;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    LDC " as it has seen zxid 0x"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 4
+   L25
+    LINENUMBER 910 L25
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ConnectRequest.getLastZxidSeen ()J
+    INVOKESTATIC java/lang/Long.toHexString (J)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LDC " our last zxid is 0x"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 0
+   L26
+    LINENUMBER 912 L26
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getZKDatabase ()Lorg/apache/zookeeper/server/ZKDatabase;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.getDataTreeLastProcessedZxid ()J
+    INVOKESTATIC java/lang/Long.toHexString (J)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LDC " client must try another server"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    ASTORE 6
+   L27
+    LINENUMBER 915 L27
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    ALOAD 6
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L28
+    LINENUMBER 916 L28
+    NEW org/apache/zookeeper/server/ServerCnxn$CloseRequestException
+    DUP
+    ALOAD 6
+    INVOKESPECIAL org/apache/zookeeper/server/ServerCnxn$CloseRequestException.<init> (Ljava/lang/String;)V
+    ATHROW
+   L22
+    LINENUMBER 918 L22
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/ConnectRequest I] []
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ConnectRequest.getTimeOut ()I
+    ISTORE 6
+   L29
+    LINENUMBER 919 L29
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ConnectRequest.getPasswd ()[B
+    ASTORE 7
+   L30
+    LINENUMBER 920 L30
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getMinSessionTimeout ()I
+    ISTORE 8
+   L31
+    LINENUMBER 921 L31
+    ILOAD 6
+    ILOAD 8
+    IF_ICMPGE L32
+   L33
+    LINENUMBER 922 L33
+    ILOAD 8
+    ISTORE 6
+   L32
+    LINENUMBER 924 L32
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/ConnectRequest I I [B I] []
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getMaxSessionTimeout ()I
+    ISTORE 9
+   L34
+    LINENUMBER 925 L34
+    ILOAD 6
+    ILOAD 9
+    IF_ICMPLE L35
+   L36
+    LINENUMBER 926 L36
+    ILOAD 9
+    ISTORE 6
+   L35
+    LINENUMBER 928 L35
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/ConnectRequest I I [B I I] []
+    ALOAD 1
+    ILOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.setSessionTimeout (I)V
+   L37
+    LINENUMBER 931 L37
+    ALOAD 1
+    POP
+   L38
+    LINENUMBER 932 L38
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ConnectRequest.getSessionId ()J
+    LSTORE 10
+   L39
+    LINENUMBER 933 L39
+    LLOAD 10
+    LCONST_0
+    LCMP
+    IFEQ L40
+   L41
+    LINENUMBER 934 L41
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/proto/ConnectRequest.getSessionId ()J
+    LSTORE 12
+   L42
+    LINENUMBER 935 L42
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Client attempting to renew session 0x"
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LLOAD 12
+   L43
+    LINENUMBER 936 L43
+    INVOKESTATIC java/lang/Long.toHexString (J)Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LDC " at "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L44
+    LINENUMBER 937 L44
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getRemoteSocketAddress ()Ljava/net/InetSocketAddress;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+   L45
+    LINENUMBER 935 L45
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L46
+    LINENUMBER 938 L46
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.serverCnxnFactory : Lorg/apache/zookeeper/server/ServerCnxnFactory;
+    LLOAD 10
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxnFactory.closeSession (J)V
+   L47
+    LINENUMBER 939 L47
+    ALOAD 1
+    LLOAD 10
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.setSessionId (J)V
+   L48
+    LINENUMBER 940 L48
+    ALOAD 0
+    ALOAD 1
+    LLOAD 10
+    ALOAD 7
+    ILOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.reopenSession (Lorg/apache/zookeeper/server/ServerCnxn;J[BI)V
+   L49
+    LINENUMBER 941 L49
+    GOTO L50
+   L40
+    LINENUMBER 942 L40
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/ConnectRequest I I [B I I J] []
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Client attempting to establish new session at "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+   L51
+    LINENUMBER 943 L51
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getRemoteSocketAddress ()Ljava/net/InetSocketAddress;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+   L52
+    LINENUMBER 942 L52
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L53
+    LINENUMBER 944 L53
+    ALOAD 0
+    ALOAD 1
+    ALOAD 7
+    ILOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.createSession (Lorg/apache/zookeeper/server/ServerCnxn;[BI)J
+    POP2
+   L50
+    LINENUMBER 946 L50
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/ConnectRequest I I [B I I J] []
+    RETURN
+   L54
+    LOCALVARIABLE e Ljava/io/IOException; L14 L13 6
+    LOCALVARIABLE msg Ljava/lang/String; L20 L17 6
+    LOCALVARIABLE msg Ljava/lang/String; L27 L22 6
+    LOCALVARIABLE clientSessionId J L42 L49 12
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L3 L54 0
+    LOCALVARIABLE cnxn Lorg/apache/zookeeper/server/ServerCnxn; L3 L54 1
+    LOCALVARIABLE incomingBuffer Ljava/nio/ByteBuffer; L3 L54 2
+    LOCALVARIABLE bia Lorg/apache/jute/BinaryInputArchive; L4 L54 3
+    LOCALVARIABLE connReq Lorg/apache/zookeeper/proto/ConnectRequest; L5 L54 4
+    LOCALVARIABLE readOnly Z L0 L54 5
+    LOCALVARIABLE sessionTimeout I L29 L54 6
+    LOCALVARIABLE passwd [B L30 L54 7
+    LOCALVARIABLE minSessionTimeout I L31 L54 8
+    LOCALVARIABLE maxSessionTimeout I L34 L54 9
+    LOCALVARIABLE sessionId J L39 L54 10
+    MAXSTACK = 6
+    MAXLOCALS = 14
+
+  // access flags 0x1
+  public shouldThrottle(J)Z
+   L0
+    LINENUMBER 949 L0
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getGlobalOutstandingLimit ()I
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getInProcess ()I
+    IF_ICMPGE L1
+   L2
+    LINENUMBER 950 L2
+    LLOAD 1
+    LCONST_0
+    LCMP
+    IFLE L3
+    ICONST_1
+    GOTO L4
+   L3
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer J] []
+    ICONST_0
+   L4
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer J] [I]
+    IRETURN
+   L1
+    LINENUMBER 952 L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer J] []
+    ICONST_0
+    IRETURN
+   L5
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L5 0
+    LOCALVARIABLE outStandingCount J L0 L5 1
+    MAXSTACK = 4
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  public processPacket(Lorg/apache/zookeeper/server/ServerCnxn;Ljava/nio/ByteBuffer;)V throws java/io/IOException 
+    TRYCATCHBLOCK L0 L1 L2 java/lang/RuntimeException
+   L3
+    LINENUMBER 957 L3
+    NEW org/apache/zookeeper/server/ByteBufferInputStream
+    DUP
+    ALOAD 2
+    INVOKESPECIAL org/apache/zookeeper/server/ByteBufferInputStream.<init> (Ljava/nio/ByteBuffer;)V
+    ASTORE 3
+   L4
+    LINENUMBER 958 L4
+    ALOAD 3
+    INVOKESTATIC org/apache/jute/BinaryInputArchive.getArchive (Ljava/io/InputStream;)Lorg/apache/jute/BinaryInputArchive;
+    ASTORE 4
+   L5
+    LINENUMBER 959 L5
+    NEW org/apache/zookeeper/proto/RequestHeader
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/RequestHeader.<init> ()V
+    ASTORE 5
+   L6
+    LINENUMBER 960 L6
+    ALOAD 5
+    ALOAD 4
+    LDC "header"
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.deserialize (Lorg/apache/jute/InputArchive;Ljava/lang/String;)V
+   L7
+    LINENUMBER 964 L7
+    ALOAD 2
+    INVOKEVIRTUAL java/nio/ByteBuffer.slice ()Ljava/nio/ByteBuffer;
+    ASTORE 2
+   L8
+    LINENUMBER 965 L8
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.getType ()I
+    BIPUSH 100
+    IF_ICMPNE L9
+   L10
+    LINENUMBER 966 L10
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "got auth packet "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getRemoteSocketAddress ()Ljava/net/InetSocketAddress;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L11
+    LINENUMBER 967 L11
+    NEW org/apache/zookeeper/proto/AuthPacket
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/AuthPacket.<init> ()V
+    ASTORE 6
+   L12
+    LINENUMBER 968 L12
+    ALOAD 2
+    ALOAD 6
+    INVOKESTATIC org/apache/zookeeper/server/ByteBufferInputStream.byteBuffer2Record (Ljava/nio/ByteBuffer;Lorg/apache/jute/Record;)V
+   L13
+    LINENUMBER 969 L13
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/proto/AuthPacket.getScheme ()Ljava/lang/String;
+    ASTORE 7
+   L14
+    LINENUMBER 970 L14
+    ALOAD 7
+    INVOKESTATIC org/apache/zookeeper/server/auth/ProviderRegistry.getProvider (Ljava/lang/String;)Lorg/apache/zookeeper/server/auth/AuthenticationProvider;
+    ASTORE 8
+   L15
+    LINENUMBER 971 L15
+    GETSTATIC org/apache/zookeeper/KeeperException$Code.AUTHFAILED : Lorg/apache/zookeeper/KeeperException$Code;
+    ASTORE 9
+   L16
+    LINENUMBER 972 L16
+    ALOAD 8
+    IFNULL L17
+   L0
+    LINENUMBER 974 L0
+    ALOAD 8
+    ALOAD 1
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/proto/AuthPacket.getAuth ()[B
+    INVOKEINTERFACE org/apache/zookeeper/server/auth/AuthenticationProvider.handleAuthentication (Lorg/apache/zookeeper/server/ServerCnxn;[B)Lorg/apache/zookeeper/KeeperException$Code; (itf)
+    ASTORE 9
+   L1
+    LINENUMBER 978 L1
+    GOTO L17
+   L2
+    LINENUMBER 975 L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer java/io/InputStream org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/AuthPacket java/lang/String org/apache/zookeeper/server/auth/AuthenticationProvider org/apache/zookeeper/KeeperException$Code] [java/lang/RuntimeException]
+    ASTORE 10
+   L18
+    LINENUMBER 976 L18
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Caught runtime exception from AuthenticationProvider: "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 7
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LDC " due to "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 10
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;)V (itf)
+   L19
+    LINENUMBER 977 L19
+    GETSTATIC org/apache/zookeeper/KeeperException$Code.AUTHFAILED : Lorg/apache/zookeeper/KeeperException$Code;
+    ASTORE 9
+   L17
+    LINENUMBER 980 L17
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer java/io/InputStream org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/AuthPacket java/lang/String org/apache/zookeeper/server/auth/AuthenticationProvider org/apache/zookeeper/KeeperException$Code] []
+    ALOAD 9
+    GETSTATIC org/apache/zookeeper/KeeperException$Code.OK : Lorg/apache/zookeeper/KeeperException$Code;
+    IF_ACMPEQ L20
+   L21
+    LINENUMBER 981 L21
+    ALOAD 8
+    IFNONNULL L22
+   L23
+    LINENUMBER 982 L23
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "No authentication provider for scheme: "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 7
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    LDC " has "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+   L24
+    LINENUMBER 984 L24
+    INVOKESTATIC org/apache/zookeeper/server/auth/ProviderRegistry.listProviders ()Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+   L25
+    LINENUMBER 982 L25
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;)V (itf)
+    GOTO L26
+   L22
+    LINENUMBER 986 L22
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer java/io/InputStream org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/AuthPacket java/lang/String org/apache/zookeeper/server/auth/AuthenticationProvider org/apache/zookeeper/KeeperException$Code] []
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Authentication failed for scheme: "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 7
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;)V (itf)
+   L26
+    LINENUMBER 989 L26
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer java/io/InputStream org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/AuthPacket java/lang/String org/apache/zookeeper/server/auth/AuthenticationProvider org/apache/zookeeper/KeeperException$Code] []
+    NEW org/apache/zookeeper/proto/ReplyHeader
+    DUP
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.getXid ()I
+    LCONST_0
+    GETSTATIC org/apache/zookeeper/KeeperException$Code.AUTHFAILED : Lorg/apache/zookeeper/KeeperException$Code;
+   L27
+    LINENUMBER 990 L27
+    INVOKEVIRTUAL org/apache/zookeeper/KeeperException$Code.intValue ()I
+    INVOKESPECIAL org/apache/zookeeper/proto/ReplyHeader.<init> (IJI)V
+    ASTORE 10
+   L28
+    LINENUMBER 991 L28
+    ALOAD 1
+    ALOAD 10
+    ACONST_NULL
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.sendResponse (Lorg/apache/zookeeper/proto/ReplyHeader;Lorg/apache/jute/Record;Ljava/lang/String;)V
+   L29
+    LINENUMBER 993 L29
+    ALOAD 1
+    GETSTATIC org/apache/zookeeper/server/ServerCnxnFactory.closeConn : Ljava/nio/ByteBuffer;
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.sendBuffer (Ljava/nio/ByteBuffer;)V
+   L30
+    LINENUMBER 994 L30
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.disableRecv ()V
+   L31
+    LINENUMBER 995 L31
+    GOTO L32
+   L20
+    LINENUMBER 996 L20
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer java/io/InputStream org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/AuthPacket java/lang/String org/apache/zookeeper/server/auth/AuthenticationProvider org/apache/zookeeper/KeeperException$Code] []
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    INVOKEINTERFACE org/slf4j/Logger.isDebugEnabled ()Z (itf)
+    IFEQ L33
+   L34
+    LINENUMBER 997 L34
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Authentication succeeded for scheme: "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 7
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.debug (Ljava/lang/String;)V (itf)
+   L33
+    LINENUMBER 1000 L33
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer java/io/InputStream org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/AuthPacket java/lang/String org/apache/zookeeper/server/auth/AuthenticationProvider org/apache/zookeeper/KeeperException$Code] []
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "auth success "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getRemoteSocketAddress ()Ljava/net/InetSocketAddress;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L35
+    LINENUMBER 1001 L35
+    NEW org/apache/zookeeper/proto/ReplyHeader
+    DUP
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.getXid ()I
+    LCONST_0
+    GETSTATIC org/apache/zookeeper/KeeperException$Code.OK : Lorg/apache/zookeeper/KeeperException$Code;
+   L36
+    LINENUMBER 1002 L36
+    INVOKEVIRTUAL org/apache/zookeeper/KeeperException$Code.intValue ()I
+    INVOKESPECIAL org/apache/zookeeper/proto/ReplyHeader.<init> (IJI)V
+    ASTORE 10
+   L37
+    LINENUMBER 1003 L37
+    ALOAD 1
+    ALOAD 10
+    ACONST_NULL
+    ACONST_NULL
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.sendResponse (Lorg/apache/zookeeper/proto/ReplyHeader;Lorg/apache/jute/Record;Ljava/lang/String;)V
+   L32
+    LINENUMBER 1005 L32
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer java/io/InputStream org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/RequestHeader org/apache/zookeeper/proto/AuthPacket java/lang/String org/apache/zookeeper/server/auth/AuthenticationProvider org/apache/zookeeper/KeeperException$Code] []
+    RETURN
+   L9
+    LINENUMBER 1007 L9
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer java/io/InputStream org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/RequestHeader] []
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.getType ()I
+    BIPUSH 102
+    IF_ICMPNE L38
+   L39
+    LINENUMBER 1008 L39
+    ALOAD 0
+    ALOAD 2
+    ALOAD 1
+    INVOKESPECIAL org/apache/zookeeper/server/ZooKeeperServer.processSasl (Ljava/nio/ByteBuffer;Lorg/apache/zookeeper/server/ServerCnxn;)Lorg/apache/jute/Record;
+    ASTORE 6
+   L40
+    LINENUMBER 1009 L40
+    NEW org/apache/zookeeper/proto/ReplyHeader
+    DUP
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.getXid ()I
+    LCONST_0
+    GETSTATIC org/apache/zookeeper/KeeperException$Code.OK : Lorg/apache/zookeeper/KeeperException$Code;
+    INVOKEVIRTUAL org/apache/zookeeper/KeeperException$Code.intValue ()I
+    INVOKESPECIAL org/apache/zookeeper/proto/ReplyHeader.<init> (IJI)V
+    ASTORE 7
+   L41
+    LINENUMBER 1010 L41
+    ALOAD 1
+    ALOAD 7
+    ALOAD 6
+    LDC "response"
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.sendResponse (Lorg/apache/zookeeper/proto/ReplyHeader;Lorg/apache/jute/Record;Ljava/lang/String;)V
+   L42
+    LINENUMBER 1011 L42
+    GOTO L43
+   L38
+    LINENUMBER 1013 L38
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer java/io/InputStream org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/RequestHeader] []
+    NEW org/apache/zookeeper/server/Request
+    DUP
+    ALOAD 1
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getSessionId ()J
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.getXid ()I
+    ALOAD 5
+   L44
+    LINENUMBER 1014 L44
+    INVOKEVIRTUAL org/apache/zookeeper/proto/RequestHeader.getType ()I
+    ALOAD 2
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.getAuthInfo ()Ljava/util/List;
+    INVOKESPECIAL org/apache/zookeeper/server/Request.<init> (Lorg/apache/zookeeper/server/ServerCnxn;JIILjava/nio/ByteBuffer;Ljava/util/List;)V
+    ASTORE 6
+   L45
+    LINENUMBER 1015 L45
+    ALOAD 6
+    GETSTATIC org/apache/zookeeper/server/ServerCnxn.me : Ljava/lang/Object;
+    INVOKEVIRTUAL org/apache/zookeeper/server/Request.setOwner (Ljava/lang/Object;)V
+   L46
+    LINENUMBER 1016 L46
+    ALOAD 0
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.submitRequest (Lorg/apache/zookeeper/server/Request;)V
+   L43
+    LINENUMBER 1019 L43
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/server/ServerCnxn java/nio/ByteBuffer java/io/InputStream org/apache/jute/BinaryInputArchive org/apache/zookeeper/proto/RequestHeader] []
+    ALOAD 1
+    ALOAD 5
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.incrOutstandingRequests (Lorg/apache/zookeeper/proto/RequestHeader;)V
+   L47
+    LINENUMBER 1020 L47
+    RETURN
+   L48
+    LOCALVARIABLE e Ljava/lang/RuntimeException; L18 L17 10
+    LOCALVARIABLE rh Lorg/apache/zookeeper/proto/ReplyHeader; L28 L31 10
+    LOCALVARIABLE rh Lorg/apache/zookeeper/proto/ReplyHeader; L37 L32 10
+    LOCALVARIABLE authPacket Lorg/apache/zookeeper/proto/AuthPacket; L12 L9 6
+    LOCALVARIABLE scheme Ljava/lang/String; L14 L9 7
+    LOCALVARIABLE ap Lorg/apache/zookeeper/server/auth/AuthenticationProvider; L15 L9 8
+    LOCALVARIABLE authReturn Lorg/apache/zookeeper/KeeperException$Code; L16 L9 9
+    LOCALVARIABLE rsp Lorg/apache/jute/Record; L40 L42 6
+    LOCALVARIABLE rh Lorg/apache/zookeeper/proto/ReplyHeader; L41 L42 7
+    LOCALVARIABLE si Lorg/apache/zookeeper/server/Request; L45 L43 6
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L3 L48 0
+    LOCALVARIABLE cnxn Lorg/apache/zookeeper/server/ServerCnxn; L3 L48 1
+    LOCALVARIABLE incomingBuffer Ljava/nio/ByteBuffer; L3 L48 2
+    LOCALVARIABLE bais Ljava/io/InputStream; L4 L48 3
+    LOCALVARIABLE bia Lorg/apache/jute/BinaryInputArchive; L5 L48 4
+    LOCALVARIABLE h Lorg/apache/zookeeper/proto/RequestHeader; L6 L48 5
+    MAXSTACK = 9
+    MAXLOCALS = 11
+
+  // access flags 0x2
+  private processSasl(Ljava/nio/ByteBuffer;Lorg/apache/zookeeper/server/ServerCnxn;)Lorg/apache/jute/Record; throws java/io/IOException 
+    TRYCATCHBLOCK L0 L1 L2 javax/security/sasl/SaslException
+    TRYCATCHBLOCK L3 L4 L5 java/lang/NullPointerException
+   L6
+    LINENUMBER 1023 L6
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "Responding to client SASL token."
+    INVOKEINTERFACE org/slf4j/Logger.debug (Ljava/lang/String;)V (itf)
+   L7
+    LINENUMBER 1024 L7
+    NEW org/apache/zookeeper/proto/GetSASLRequest
+    DUP
+    INVOKESPECIAL org/apache/zookeeper/proto/GetSASLRequest.<init> ()V
+    ASTORE 3
+   L8
+    LINENUMBER 1025 L8
+    ALOAD 1
+    ALOAD 3
+    INVOKESTATIC org/apache/zookeeper/server/ByteBufferInputStream.byteBuffer2Record (Ljava/nio/ByteBuffer;Lorg/apache/jute/Record;)V
+   L9
+    LINENUMBER 1026 L9
+    ALOAD 3
+    INVOKEVIRTUAL org/apache/zookeeper/proto/GetSASLRequest.getToken ()[B
+    ASTORE 4
+   L10
+    LINENUMBER 1027 L10
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Size of client SASL token: "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 4
+    ARRAYLENGTH
+    INVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.debug (Ljava/lang/String;)V (itf)
+   L11
+    LINENUMBER 1028 L11
+    ACONST_NULL
+    ASTORE 5
+   L3
+    LINENUMBER 1030 L3
+    ALOAD 2
+    GETFIELD org/apache/zookeeper/server/ServerCnxn.zooKeeperSaslServer : Lorg/apache/zookeeper/server/ZooKeeperSaslServer;
+    ASTORE 6
+   L0
+    LINENUMBER 1035 L0
+    ALOAD 6
+    ALOAD 4
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperSaslServer.evaluateResponse ([B)[B
+    ASTORE 5
+   L12
+    LINENUMBER 1036 L12
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperSaslServer.isComplete ()Z
+    ICONST_1
+    IF_ICMPNE L1
+   L13
+    LINENUMBER 1037 L13
+    ALOAD 6
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperSaslServer.getAuthorizationID ()Ljava/lang/String;
+    ASTORE 7
+   L14
+    LINENUMBER 1038 L14
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "adding SASL authorization for authorizationID: "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 7
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.info (Ljava/lang/String;)V (itf)
+   L15
+    LINENUMBER 1039 L15
+    ALOAD 2
+    NEW org/apache/zookeeper/data/Id
+    DUP
+    LDC "sasl"
+    ALOAD 7
+    INVOKESPECIAL org/apache/zookeeper/data/Id.<init> (Ljava/lang/String;Ljava/lang/String;)V
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.addAuthInfo (Lorg/apache/zookeeper/data/Id;)V
+   L1
+    LINENUMBER 1052 L1
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer java/nio/ByteBuffer org/apache/zookeeper/server/ServerCnxn org/apache/zookeeper/proto/GetSASLRequest [B [B org/apache/zookeeper/server/ZooKeeperSaslServer] []
+    GOTO L4
+   L2
+    LINENUMBER 1042 L2
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer java/nio/ByteBuffer org/apache/zookeeper/server/ServerCnxn org/apache/zookeeper/proto/GetSASLRequest [B [B org/apache/zookeeper/server/ZooKeeperSaslServer] [javax/security/sasl/SaslException]
+    ASTORE 7
+   L16
+    LINENUMBER 1043 L16
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Client failed to SASL authenticate: "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 7
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    ALOAD 7
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;Ljava/lang/Throwable;)V (itf)
+   L17
+    LINENUMBER 1044 L17
+    LDC "zookeeper.allowSaslFailedClients"
+    INVOKESTATIC java/lang/System.getProperty (Ljava/lang/String;)Ljava/lang/String;
+    IFNULL L18
+    LDC "zookeeper.allowSaslFailedClients"
+   L19
+    LINENUMBER 1046 L19
+    INVOKESTATIC java/lang/System.getProperty (Ljava/lang/String;)Ljava/lang/String;
+    LDC "true"
+    INVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z
+    IFEQ L18
+   L20
+    LINENUMBER 1047 L20
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "Maintaining client connection despite SASL authentication failure."
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;)V (itf)
+    GOTO L4
+   L18
+    LINENUMBER 1049 L18
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer java/nio/ByteBuffer org/apache/zookeeper/server/ServerCnxn org/apache/zookeeper/proto/GetSASLRequest [B [B org/apache/zookeeper/server/ZooKeeperSaslServer javax/security/sasl/SaslException] []
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "Closing client connection due to SASL authentication failure."
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;)V (itf)
+   L21
+    LINENUMBER 1050 L21
+    ALOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/server/ServerCnxn.close ()V
+   L4
+    LINENUMBER 1056 L4
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer java/nio/ByteBuffer org/apache/zookeeper/server/ServerCnxn org/apache/zookeeper/proto/GetSASLRequest [B [B] []
+    GOTO L22
+   L5
+    LINENUMBER 1054 L5
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer java/nio/ByteBuffer org/apache/zookeeper/server/ServerCnxn org/apache/zookeeper/proto/GetSASLRequest [B [B] [java/lang/NullPointerException]
+    ASTORE 6
+   L23
+    LINENUMBER 1055 L23
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    LDC "cnxn.saslServer is null: cnxn object did not initialize its saslServer properly."
+    INVOKEINTERFACE org/slf4j/Logger.error (Ljava/lang/String;)V (itf)
+   L22
+    LINENUMBER 1057 L22
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer java/nio/ByteBuffer org/apache/zookeeper/server/ServerCnxn org/apache/zookeeper/proto/GetSASLRequest [B [B] []
+    ALOAD 5
+    IFNULL L24
+   L25
+    LINENUMBER 1058 L25
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "Size of server SASL response: "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 5
+    ARRAYLENGTH
+    INVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+    INVOKEINTERFACE org/slf4j/Logger.debug (Ljava/lang/String;)V (itf)
+   L24
+    LINENUMBER 1061 L24
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer java/nio/ByteBuffer org/apache/zookeeper/server/ServerCnxn org/apache/zookeeper/proto/GetSASLRequest [B [B] []
+    NEW org/apache/zookeeper/proto/SetSASLResponse
+    DUP
+    ALOAD 5
+    INVOKESPECIAL org/apache/zookeeper/proto/SetSASLResponse.<init> ([B)V
+    ARETURN
+   L26
+    LOCALVARIABLE authorizationID Ljava/lang/String; L14 L1 7
+    LOCALVARIABLE e Ljavax/security/sasl/SaslException; L16 L4 7
+    LOCALVARIABLE saslServer Lorg/apache/zookeeper/server/ZooKeeperSaslServer; L0 L4 6
+    LOCALVARIABLE e Ljava/lang/NullPointerException; L23 L22 6
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L6 L26 0
+    LOCALVARIABLE incomingBuffer Ljava/nio/ByteBuffer; L6 L26 1
+    LOCALVARIABLE cnxn Lorg/apache/zookeeper/server/ServerCnxn; L6 L26 2
+    LOCALVARIABLE clientTokenRecord Lorg/apache/zookeeper/proto/GetSASLRequest; L8 L26 3
+    LOCALVARIABLE clientToken [B L10 L26 4
+    LOCALVARIABLE responseToken [B L3 L26 5
+    MAXSTACK = 5
+    MAXLOCALS = 8
+
+  // access flags 0x1
+  public processTxn(Lorg/apache/zookeeper/txn/TxnHeader;Lorg/apache/jute/Record;)Lorg/apache/zookeeper/server/DataTree$ProcessTxnResult;
+   L0
+    LINENUMBER 1066 L0
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/txn/TxnHeader.getType ()I
+    ISTORE 4
+   L1
+    LINENUMBER 1067 L1
+    ALOAD 1
+    INVOKEVIRTUAL org/apache/zookeeper/txn/TxnHeader.getClientId ()J
+    LSTORE 5
+   L2
+    LINENUMBER 1068 L2
+    ALOAD 0
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZooKeeperServer.getZKDatabase ()Lorg/apache/zookeeper/server/ZKDatabase;
+    ALOAD 1
+    ALOAD 2
+    INVOKEVIRTUAL org/apache/zookeeper/server/ZKDatabase.processTxn (Lorg/apache/zookeeper/txn/TxnHeader;Lorg/apache/jute/Record;)Lorg/apache/zookeeper/server/DataTree$ProcessTxnResult;
+    ASTORE 3
+   L3
+    LINENUMBER 1069 L3
+    ILOAD 4
+    BIPUSH -10
+    IF_ICMPNE L4
+   L5
+    LINENUMBER 1070 L5
+    ALOAD 2
+    INSTANCEOF org/apache/zookeeper/txn/CreateSessionTxn
+    IFEQ L6
+   L7
+    LINENUMBER 1071 L7
+    ALOAD 2
+    CHECKCAST org/apache/zookeeper/txn/CreateSessionTxn
+    ASTORE 7
+   L8
+    LINENUMBER 1072 L8
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.sessionTracker : Lorg/apache/zookeeper/server/SessionTracker;
+    LLOAD 5
+    ALOAD 7
+   L9
+    LINENUMBER 1073 L9
+    INVOKEVIRTUAL org/apache/zookeeper/txn/CreateSessionTxn.getTimeOut ()I
+   L10
+    LINENUMBER 1072 L10
+    INVOKEINTERFACE org/apache/zookeeper/server/SessionTracker.addSession (JI)V (itf)
+   L11
+    LINENUMBER 1074 L11
+    GOTO L12
+   L6
+    LINENUMBER 1075 L6
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/txn/TxnHeader org/apache/jute/Record org/apache/zookeeper/server/DataTree$ProcessTxnResult I J] []
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    NEW java/lang/StringBuilder
+    DUP
+    INVOKESPECIAL java/lang/StringBuilder.<init> ()V
+    LDC "*****>>>>> Got "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 2
+   L13
+    LINENUMBER 1076 L13
+    INVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    LDC " "
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    ALOAD 2
+   L14
+    LINENUMBER 1077 L14
+    INVOKEVIRTUAL java/lang/Object.toString ()Ljava/lang/String;
+    INVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;
+    INVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;
+   L15
+    LINENUMBER 1075 L15
+    INVOKEINTERFACE org/slf4j/Logger.warn (Ljava/lang/String;)V (itf)
+    GOTO L12
+   L4
+    LINENUMBER 1079 L4
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/txn/TxnHeader org/apache/jute/Record org/apache/zookeeper/server/DataTree$ProcessTxnResult I J] []
+    ILOAD 4
+    BIPUSH -11
+    IF_ICMPNE L12
+   L16
+    LINENUMBER 1080 L16
+    ALOAD 0
+    GETFIELD org/apache/zookeeper/server/ZooKeeperServer.sessionTracker : Lorg/apache/zookeeper/server/SessionTracker;
+    LLOAD 5
+    INVOKEINTERFACE org/apache/zookeeper/server/SessionTracker.removeSession (J)V (itf)
+   L12
+    LINENUMBER 1082 L12
+   FRAME FULL [org/apache/zookeeper/server/ZooKeeperServer org/apache/zookeeper/txn/TxnHeader org/apache/jute/Record org/apache/zookeeper/server/DataTree$ProcessTxnResult I J] []
+    ALOAD 3
+    ARETURN
+   L17
+    LOCALVARIABLE cst Lorg/apache/zookeeper/txn/CreateSessionTxn; L8 L11 7
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L17 0
+    LOCALVARIABLE hdr Lorg/apache/zookeeper/txn/TxnHeader; L0 L17 1
+    LOCALVARIABLE txn Lorg/apache/jute/Record; L0 L17 2
+    LOCALVARIABLE rc Lorg/apache/zookeeper/server/DataTree$ProcessTxnResult; L3 L17 3
+    LOCALVARIABLE opCode I L1 L17 4
+    LOCALVARIABLE sessionId J L2 L17 5
+    MAXSTACK = 4
+    MAXLOCALS = 8
+
+  // access flags 0x0
+  registerServerShutdownHandler(Lorg/apache/zookeeper/server/ZooKeeperServerShutdownHandler;)V
+   L0
+    LINENUMBER 1094 L0
+    ALOAD 0
+    ALOAD 1
+    PUTFIELD org/apache/zookeeper/server/ZooKeeperServer.zkShutdownHandler : Lorg/apache/zookeeper/server/ZooKeeperServerShutdownHandler;
+   L1
+    LINENUMBER 1095 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lorg/apache/zookeeper/server/ZooKeeperServer; L0 L2 0
+    LOCALVARIABLE zkShutdownHandler Lorg/apache/zookeeper/server/ZooKeeperServerShutdownHandler; L0 L2 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x8
+  static <clinit>()V
+   L0
+    LINENUMBER 81 L0
+    LDC Lorg/apache/zookeeper/server/ZooKeeperServer;.class
+    INVOKESTATIC org/slf4j/LoggerFactory.getLogger (Ljava/lang/Class;)Lorg/slf4j/Logger;
+    PUTSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+   L1
+    LINENUMBER 83 L1
+    LDC "Server environment:"
+    GETSTATIC org/apache/zookeeper/server/ZooKeeperServer.LOG : Lorg/slf4j/Logger;
+    INVOKESTATIC org/apache/zookeeper/Environment.logEnv (Ljava/lang/String;Lorg/slf4j/Logger;)V
+   L2
+    LINENUMBER 113 L2
+    NEW java/lang/Exception
+    DUP
+    LDC "No prob"
+    INVOKESPECIAL java/lang/Exception.<init> (Ljava/lang/String;)V
+    PUTSTATIC org/apache/zookeeper/server/ZooKeeperServer.ok : Ljava/lang/Exception;
+    RETURN
+    MAXSTACK = 3
+    MAXLOCALS = 0
+}
+

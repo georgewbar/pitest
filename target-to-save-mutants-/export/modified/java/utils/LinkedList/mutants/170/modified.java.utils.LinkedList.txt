@@ -1,0 +1,2665 @@
+// class version 55.0 (55)
+// access flags 0x21
+// signature <E:Ljava/lang/Object;>Ljava/util/AbstractSequentialList<TE;>;Ljava/util/List<TE;>;Ljava/util/Deque<TE;>;Ljava/lang/Cloneable;Ljava/io/Serializable;
+// declaration: modified/java/utils/LinkedList<E> extends java.util.AbstractSequentialList<E> implements java.util.List<E>, java.util.Deque<E>, java.lang.Cloneable, java.io.Serializable
+public class modified/java/utils/LinkedList extends java/util/AbstractSequentialList implements java/util/List java/util/Deque java/lang/Cloneable java/io/Serializable {
+
+  // compiled from: LinkedList.java
+  NESTMEMBER modified/java/utils/LinkedList$LLSpliterator
+  NESTMEMBER modified/java/utils/LinkedList$DescendingIterator
+  NESTMEMBER modified/java/utils/LinkedList$Node
+  NESTMEMBER modified/java/utils/LinkedList$ListItr
+  // access flags 0x18
+  final static INNERCLASS modified/java/utils/LinkedList$LLSpliterator modified/java/utils/LinkedList LLSpliterator
+  // access flags 0x2
+  private INNERCLASS modified/java/utils/LinkedList$DescendingIterator modified/java/utils/LinkedList DescendingIterator
+  // access flags 0xA
+  private static INNERCLASS modified/java/utils/LinkedList$Node modified/java/utils/LinkedList Node
+  // access flags 0x2
+  private INNERCLASS modified/java/utils/LinkedList$ListItr modified/java/utils/LinkedList ListItr
+  // access flags 0x19
+  public final static INNERCLASS java/lang/invoke/MethodHandles$Lookup java/lang/invoke/MethodHandles Lookup
+
+  // access flags 0x80
+  transient I size
+
+  // access flags 0x80
+  // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+  // declaration: first extends modified.java.utils.LinkedList$Node<E>
+  transient Lmodified/java/utils/LinkedList$Node; first
+
+  // access flags 0x80
+  // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+  // declaration: last extends modified.java.utils.LinkedList$Node<E>
+  transient Lmodified/java/utils/LinkedList$Node; last
+
+  // access flags 0x1A
+  private final static J serialVersionUID = 876323262645176354
+
+  // access flags 0x1
+  public <init>()V
+   L0
+    LINENUMBER 121 L0
+    ALOAD 0
+    INVOKESPECIAL java/util/AbstractSequentialList.<init> ()V
+   L1
+    LINENUMBER 98 L1
+    ALOAD 0
+    ICONST_0
+    PUTFIELD modified/java/utils/LinkedList.size : I
+   L2
+    LINENUMBER 122 L2
+    RETURN
+   L3
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L3 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    MAXSTACK = 2
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  // signature (Ljava/util/Collection<+TE;>;)V
+  // declaration: void <init>(java.util.Collection<? extends E>)
+  public <init>(Ljava/util/Collection;)V
+   L0
+    LINENUMBER 133 L0
+    ALOAD 0
+    INVOKESPECIAL modified/java/utils/LinkedList.<init> ()V
+   L1
+    LINENUMBER 134 L1
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.addAll (Ljava/util/Collection;)Z
+    POP
+   L2
+    LINENUMBER 135 L2
+    RETURN
+   L3
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L3 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE c Ljava/util/Collection; L0 L3 1
+    // signature Ljava/util/Collection<+TE;>;
+    // declaration: c extends java.util.Collection<? extends E>
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x2
+  // signature (TE;)V
+  // declaration: void linkFirst(E)
+  private linkFirst(Ljava/lang/Object;)V
+   L0
+    LINENUMBER 141 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+   L1
+    LINENUMBER 142 L1
+    NEW modified/java/utils/LinkedList$Node
+    DUP
+    ACONST_NULL
+    ALOAD 1
+    ALOAD 2
+    INVOKESPECIAL modified/java/utils/LinkedList$Node.<init> (Lmodified/java/utils/LinkedList$Node;Ljava/lang/Object;Lmodified/java/utils/LinkedList$Node;)V
+    ASTORE 3
+   L2
+    LINENUMBER 143 L2
+    ALOAD 0
+    ALOAD 3
+    PUTFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+   L3
+    LINENUMBER 144 L3
+    ALOAD 2
+    IFNONNULL L4
+   L5
+    LINENUMBER 145 L5
+    ALOAD 0
+    ALOAD 3
+    PUTFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    GOTO L6
+   L4
+    LINENUMBER 147 L4
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node] []
+    ALOAD 2
+    ALOAD 3
+    PUTFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+   L6
+    LINENUMBER 148 L6
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node] []
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.size : I
+    ICONST_1
+    IADD
+    PUTFIELD modified/java/utils/LinkedList.size : I
+   L7
+    LINENUMBER 149 L7
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.modCount : I
+    ICONST_1
+    IADD
+    PUTFIELD modified/java/utils/LinkedList.modCount : I
+   L8
+    LINENUMBER 150 L8
+    RETURN
+   L9
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L9 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE e Ljava/lang/Object; L0 L9 1
+    // signature TE;
+    // declaration: e extends E
+    LOCALVARIABLE f Lmodified/java/utils/LinkedList$Node; L1 L9 2
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: f extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE newNode Lmodified/java/utils/LinkedList$Node; L2 L9 3
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: newNode extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 5
+    MAXLOCALS = 4
+
+  // access flags 0x0
+  // signature (TE;)V
+  // declaration: void linkLast(E)
+  linkLast(Ljava/lang/Object;)V
+   L0
+    LINENUMBER 156 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+   L1
+    LINENUMBER 157 L1
+    NEW modified/java/utils/LinkedList$Node
+    DUP
+    ALOAD 2
+    ALOAD 1
+    ACONST_NULL
+    INVOKESPECIAL modified/java/utils/LinkedList$Node.<init> (Lmodified/java/utils/LinkedList$Node;Ljava/lang/Object;Lmodified/java/utils/LinkedList$Node;)V
+    ASTORE 3
+   L2
+    LINENUMBER 158 L2
+    ALOAD 0
+    ALOAD 3
+    PUTFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+   L3
+    LINENUMBER 159 L3
+    ALOAD 2
+    IFNONNULL L4
+   L5
+    LINENUMBER 160 L5
+    ALOAD 0
+    ALOAD 3
+    PUTFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    GOTO L6
+   L4
+    LINENUMBER 162 L4
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node] []
+    ALOAD 2
+    ALOAD 3
+    PUTFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+   L6
+    LINENUMBER 163 L6
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node] []
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.size : I
+    ICONST_1
+    IADD
+    PUTFIELD modified/java/utils/LinkedList.size : I
+   L7
+    LINENUMBER 164 L7
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.modCount : I
+    ICONST_1
+    IADD
+    PUTFIELD modified/java/utils/LinkedList.modCount : I
+   L8
+    LINENUMBER 165 L8
+    RETURN
+   L9
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L9 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE e Ljava/lang/Object; L0 L9 1
+    // signature TE;
+    // declaration: e extends E
+    LOCALVARIABLE l Lmodified/java/utils/LinkedList$Node; L1 L9 2
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: l extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE newNode Lmodified/java/utils/LinkedList$Node; L2 L9 3
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: newNode extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 5
+    MAXLOCALS = 4
+
+  // access flags 0x0
+  // signature (TE;Lmodified/java/utils/LinkedList$Node<TE;>;)V
+  // declaration: void linkBefore(E, modified.java.utils.LinkedList$Node<E>)
+  linkBefore(Ljava/lang/Object;Lmodified/java/utils/LinkedList$Node;)V
+   L0
+    LINENUMBER 172 L0
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+   L1
+    LINENUMBER 173 L1
+    NEW modified/java/utils/LinkedList$Node
+    DUP
+    ALOAD 3
+    ALOAD 1
+    ALOAD 2
+    INVOKESPECIAL modified/java/utils/LinkedList$Node.<init> (Lmodified/java/utils/LinkedList$Node;Ljava/lang/Object;Lmodified/java/utils/LinkedList$Node;)V
+    ASTORE 4
+   L2
+    LINENUMBER 174 L2
+    ALOAD 2
+    ALOAD 4
+    PUTFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+   L3
+    LINENUMBER 175 L3
+    ALOAD 3
+    IFNONNULL L4
+   L5
+    LINENUMBER 176 L5
+    ALOAD 0
+    ALOAD 4
+    PUTFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    GOTO L6
+   L4
+    LINENUMBER 178 L4
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node] []
+    ALOAD 3
+    ALOAD 4
+    PUTFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+   L6
+    LINENUMBER 179 L6
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node] []
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.size : I
+    ICONST_1
+    IADD
+    PUTFIELD modified/java/utils/LinkedList.size : I
+   L7
+    LINENUMBER 180 L7
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.modCount : I
+    ICONST_1
+    IADD
+    PUTFIELD modified/java/utils/LinkedList.modCount : I
+   L8
+    LINENUMBER 181 L8
+    RETURN
+   L9
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L9 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE e Ljava/lang/Object; L0 L9 1
+    // signature TE;
+    // declaration: e extends E
+    LOCALVARIABLE succ Lmodified/java/utils/LinkedList$Node; L0 L9 2
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: succ extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE pred Lmodified/java/utils/LinkedList$Node; L1 L9 3
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: pred extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE newNode Lmodified/java/utils/LinkedList$Node; L2 L9 4
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: newNode extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 5
+    MAXLOCALS = 5
+
+  // access flags 0x2
+  // signature (Lmodified/java/utils/LinkedList$Node<TE;>;)TE;
+  // declaration: E unlinkFirst(modified.java.utils.LinkedList$Node<E>)
+  private unlinkFirst(Lmodified/java/utils/LinkedList$Node;)Ljava/lang/Object;
+   L0
+    LINENUMBER 188 L0
+    ALOAD 1
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    ASTORE 2
+   L1
+    LINENUMBER 189 L1
+    ALOAD 1
+    GETFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+   L2
+    LINENUMBER 190 L2
+    ALOAD 1
+    ACONST_NULL
+    PUTFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+   L3
+    LINENUMBER 191 L3
+    ALOAD 1
+    ACONST_NULL
+    PUTFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+   L4
+    LINENUMBER 192 L4
+    ALOAD 0
+    ALOAD 3
+    PUTFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+   L5
+    LINENUMBER 193 L5
+    ALOAD 3
+    IFNONNULL L6
+   L7
+    LINENUMBER 194 L7
+    ALOAD 0
+    ACONST_NULL
+    PUTFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    GOTO L8
+   L6
+    LINENUMBER 196 L6
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node java/lang/Object modified/java/utils/LinkedList$Node] []
+    ALOAD 3
+    ACONST_NULL
+    PUTFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+   L8
+    LINENUMBER 197 L8
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node java/lang/Object modified/java/utils/LinkedList$Node] []
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.size : I
+    ICONST_1
+    ISUB
+    PUTFIELD modified/java/utils/LinkedList.size : I
+   L9
+    LINENUMBER 198 L9
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.modCount : I
+    ICONST_1
+    IADD
+    PUTFIELD modified/java/utils/LinkedList.modCount : I
+   L10
+    LINENUMBER 199 L10
+    ALOAD 2
+    ARETURN
+   L11
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L11 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE f Lmodified/java/utils/LinkedList$Node; L0 L11 1
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: f extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE element Ljava/lang/Object; L1 L11 2
+    // signature TE;
+    // declaration: element extends E
+    LOCALVARIABLE next Lmodified/java/utils/LinkedList$Node; L2 L11 3
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: next extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 3
+    MAXLOCALS = 4
+
+  // access flags 0x2
+  // signature (Lmodified/java/utils/LinkedList$Node<TE;>;)TE;
+  // declaration: E unlinkLast(modified.java.utils.LinkedList$Node<E>)
+  private unlinkLast(Lmodified/java/utils/LinkedList$Node;)Ljava/lang/Object;
+   L0
+    LINENUMBER 207 L0
+    ALOAD 1
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    ASTORE 2
+   L1
+    LINENUMBER 208 L1
+    ALOAD 1
+    GETFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+   L2
+    LINENUMBER 209 L2
+    ALOAD 1
+    ACONST_NULL
+    PUTFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+   L3
+    LINENUMBER 210 L3
+    ALOAD 1
+    ACONST_NULL
+    PUTFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+   L4
+    LINENUMBER 211 L4
+    ALOAD 0
+    ALOAD 3
+    PUTFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+   L5
+    LINENUMBER 212 L5
+    ALOAD 3
+    IFNONNULL L6
+   L7
+    LINENUMBER 213 L7
+    ALOAD 0
+    ACONST_NULL
+    PUTFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    GOTO L8
+   L6
+    LINENUMBER 215 L6
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node java/lang/Object modified/java/utils/LinkedList$Node] []
+    ALOAD 3
+    ACONST_NULL
+    PUTFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+   L8
+    LINENUMBER 216 L8
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node java/lang/Object modified/java/utils/LinkedList$Node] []
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.size : I
+    ICONST_1
+    ISUB
+    PUTFIELD modified/java/utils/LinkedList.size : I
+   L9
+    LINENUMBER 217 L9
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.modCount : I
+    ICONST_1
+    IADD
+    PUTFIELD modified/java/utils/LinkedList.modCount : I
+   L10
+    LINENUMBER 218 L10
+    ALOAD 2
+    ARETURN
+   L11
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L11 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE l Lmodified/java/utils/LinkedList$Node; L0 L11 1
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: l extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE element Ljava/lang/Object; L1 L11 2
+    // signature TE;
+    // declaration: element extends E
+    LOCALVARIABLE prev Lmodified/java/utils/LinkedList$Node; L2 L11 3
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: prev extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 3
+    MAXLOCALS = 4
+
+  // access flags 0x0
+  // signature (Lmodified/java/utils/LinkedList$Node<TE;>;)TE;
+  // declaration: E unlink(modified.java.utils.LinkedList$Node<E>)
+  unlink(Lmodified/java/utils/LinkedList$Node;)Ljava/lang/Object;
+   L0
+    LINENUMBER 226 L0
+    ALOAD 1
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    ASTORE 2
+   L1
+    LINENUMBER 227 L1
+    ALOAD 1
+    GETFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+   L2
+    LINENUMBER 228 L2
+    ALOAD 1
+    GETFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 4
+   L3
+    LINENUMBER 230 L3
+    ALOAD 4
+    IFNONNULL L4
+   L5
+    LINENUMBER 231 L5
+    ALOAD 0
+    ALOAD 3
+    PUTFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    GOTO L6
+   L4
+    LINENUMBER 233 L4
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node java/lang/Object modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node] []
+    ALOAD 4
+    ALOAD 3
+    PUTFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+   L7
+    LINENUMBER 234 L7
+    ALOAD 1
+    ACONST_NULL
+    PUTFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+   L6
+    LINENUMBER 237 L6
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node java/lang/Object modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node] []
+    ALOAD 3
+    IFNONNULL L8
+   L9
+    LINENUMBER 238 L9
+    ALOAD 0
+    ALOAD 4
+    PUTFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    GOTO L10
+   L8
+    LINENUMBER 240 L8
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node java/lang/Object modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node] []
+    ALOAD 3
+    ALOAD 4
+    PUTFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+   L11
+    LINENUMBER 241 L11
+    ALOAD 1
+    ACONST_NULL
+    PUTFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+   L10
+    LINENUMBER 244 L10
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node java/lang/Object modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node] []
+    ALOAD 1
+    ACONST_NULL
+    PUTFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+   L12
+    LINENUMBER 245 L12
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.size : I
+    ICONST_1
+    ISUB
+    PUTFIELD modified/java/utils/LinkedList.size : I
+   L13
+    LINENUMBER 246 L13
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.modCount : I
+    ICONST_1
+    IADD
+    PUTFIELD modified/java/utils/LinkedList.modCount : I
+   L14
+    LINENUMBER 247 L14
+    ALOAD 2
+    ARETURN
+   L15
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L15 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L0 L15 1
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE element Ljava/lang/Object; L1 L15 2
+    // signature TE;
+    // declaration: element extends E
+    LOCALVARIABLE next Lmodified/java/utils/LinkedList$Node; L2 L15 3
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: next extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE prev Lmodified/java/utils/LinkedList$Node; L3 L15 4
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: prev extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 3
+    MAXLOCALS = 5
+
+  // access flags 0x1
+  // signature ()TE;
+  // declaration: E getFirst()
+  public getFirst()Ljava/lang/Object;
+   L0
+    LINENUMBER 257 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 1
+   L1
+    LINENUMBER 258 L1
+    ALOAD 1
+    IFNONNULL L2
+   L3
+    LINENUMBER 259 L3
+    NEW java/util/NoSuchElementException
+    DUP
+    INVOKESPECIAL java/util/NoSuchElementException.<init> ()V
+    ATHROW
+   L2
+    LINENUMBER 260 L2
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] []
+    ALOAD 1
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    ARETURN
+   L4
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L4 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE f Lmodified/java/utils/LinkedList$Node; L1 L4 1
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: f extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature ()TE;
+  // declaration: E getLast()
+  public getLast()Ljava/lang/Object;
+   L0
+    LINENUMBER 270 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 1
+   L1
+    LINENUMBER 271 L1
+    ALOAD 1
+    IFNONNULL L2
+   L3
+    LINENUMBER 272 L3
+    NEW java/util/NoSuchElementException
+    DUP
+    INVOKESPECIAL java/util/NoSuchElementException.<init> ()V
+    ATHROW
+   L2
+    LINENUMBER 273 L2
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] []
+    ALOAD 1
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    ARETURN
+   L4
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L4 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE l Lmodified/java/utils/LinkedList$Node; L1 L4 1
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: l extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature ()TE;
+  // declaration: E removeFirst()
+  public removeFirst()Ljava/lang/Object;
+   L0
+    LINENUMBER 283 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 1
+   L1
+    LINENUMBER 284 L1
+    ALOAD 1
+    IFNONNULL L2
+   L3
+    LINENUMBER 285 L3
+    NEW java/util/NoSuchElementException
+    DUP
+    INVOKESPECIAL java/util/NoSuchElementException.<init> ()V
+    ATHROW
+   L2
+    LINENUMBER 286 L2
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] []
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.unlinkFirst (Lmodified/java/utils/LinkedList$Node;)Ljava/lang/Object;
+    ARETURN
+   L4
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L4 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE f Lmodified/java/utils/LinkedList$Node; L1 L4 1
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: f extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature ()TE;
+  // declaration: E removeLast()
+  public removeLast()Ljava/lang/Object;
+   L0
+    LINENUMBER 296 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 1
+   L1
+    LINENUMBER 297 L1
+    ALOAD 1
+    IFNONNULL L2
+   L3
+    LINENUMBER 298 L3
+    NEW java/util/NoSuchElementException
+    DUP
+    INVOKESPECIAL java/util/NoSuchElementException.<init> ()V
+    ATHROW
+   L2
+    LINENUMBER 299 L2
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] []
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.unlinkLast (Lmodified/java/utils/LinkedList$Node;)Ljava/lang/Object;
+    ARETURN
+   L4
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L4 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE l Lmodified/java/utils/LinkedList$Node; L1 L4 1
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: l extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature (TE;)V
+  // declaration: void addFirst(E)
+  public addFirst(Ljava/lang/Object;)V
+   L0
+    LINENUMBER 308 L0
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.linkFirst (Ljava/lang/Object;)V
+   L1
+    LINENUMBER 309 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L2 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE e Ljava/lang/Object; L0 L2 1
+    // signature TE;
+    // declaration: e extends E
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature (TE;)V
+  // declaration: void addLast(E)
+  public addLast(Ljava/lang/Object;)V
+   L0
+    LINENUMBER 319 L0
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.linkLast (Ljava/lang/Object;)V
+   L1
+    LINENUMBER 320 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L2 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE e Ljava/lang/Object; L0 L2 1
+    // signature TE;
+    // declaration: e extends E
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public contains(Ljava/lang/Object;)Z
+   L0
+    LINENUMBER 332 L0
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.indexOf (Ljava/lang/Object;)I
+    IFLT L1
+    ICONST_1
+    GOTO L2
+   L1
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object] []
+    ICONST_0
+   L2
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object] [I]
+    IRETURN
+   L3
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L3 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE o Ljava/lang/Object; L0 L3 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public size()I
+   L0
+    LINENUMBER 341 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    IRETURN
+   L1
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L1 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  // signature (TE;)Z
+  // declaration: boolean add(E)
+  public add(Ljava/lang/Object;)Z
+   L0
+    LINENUMBER 353 L0
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.linkLast (Ljava/lang/Object;)V
+   L1
+    LINENUMBER 354 L1
+    ICONST_1
+    IRETURN
+   L2
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L2 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE e Ljava/lang/Object; L0 L2 1
+    // signature TE;
+    // declaration: e extends E
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public remove(Ljava/lang/Object;)Z
+   L0
+    LINENUMBER 371 L0
+    ALOAD 1
+    IFNONNULL L1
+   L2
+    LINENUMBER 372 L2
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+   L3
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node] []
+    ALOAD 2
+    IFNULL L4
+   L5
+    LINENUMBER 373 L5
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    IFNONNULL L6
+   L7
+    LINENUMBER 374 L7
+    ALOAD 0
+    ALOAD 2
+    INVOKEVIRTUAL modified/java/utils/LinkedList.unlink (Lmodified/java/utils/LinkedList$Node;)Ljava/lang/Object;
+    POP
+   L8
+    LINENUMBER 375 L8
+    ICONST_1
+    IRETURN
+   L6
+    LINENUMBER 372 L6
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node] []
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+    GOTO L3
+   L4
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node] []
+    GOTO L9
+   L1
+    LINENUMBER 379 L1
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object] []
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+   L10
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node] []
+    ALOAD 2
+    IFNULL L9
+   L11
+    LINENUMBER 380 L11
+    ALOAD 1
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    INVOKEVIRTUAL java/lang/Object.equals (Ljava/lang/Object;)Z
+    IFEQ L12
+   L13
+    LINENUMBER 381 L13
+    ALOAD 0
+    ALOAD 2
+    INVOKEVIRTUAL modified/java/utils/LinkedList.unlink (Lmodified/java/utils/LinkedList$Node;)Ljava/lang/Object;
+    POP
+   L14
+    LINENUMBER 382 L14
+    ICONST_1
+    IRETURN
+   L12
+    LINENUMBER 379 L12
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node] []
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+    GOTO L10
+   L9
+    LINENUMBER 386 L9
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node] []
+    ICONST_0
+    IRETURN
+   L15
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L3 L4 2
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L10 L9 2
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L15 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE o Ljava/lang/Object; L0 L15 1
+    MAXSTACK = 2
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  // signature (Ljava/util/Collection<+TE;>;)Z
+  // declaration: boolean addAll(java.util.Collection<? extends E>)
+  public addAll(Ljava/util/Collection;)Z
+   L0
+    LINENUMBER 402 L0
+    ALOAD 0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.addAll (ILjava/util/Collection;)Z
+    IRETURN
+   L1
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L1 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE c Ljava/util/Collection; L0 L1 1
+    // signature Ljava/util/Collection<+TE;>;
+    // declaration: c extends java.util.Collection<? extends E>
+    MAXSTACK = 3
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature (ILjava/util/Collection<+TE;>;)Z
+  // declaration: boolean addAll(int, java.util.Collection<? extends E>)
+  public addAll(ILjava/util/Collection;)Z
+   L0
+    LINENUMBER 421 L0
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.checkPositionIndex (I)V
+   L1
+    LINENUMBER 423 L1
+    ALOAD 2
+    INVOKEINTERFACE java/util/Collection.toArray ()[Ljava/lang/Object; (itf)
+    ASTORE 3
+   L2
+    LINENUMBER 424 L2
+    ALOAD 3
+    ARRAYLENGTH
+    ISTORE 4
+   L3
+    LINENUMBER 425 L3
+    ILOAD 4
+    IFNE L4
+   L5
+    LINENUMBER 426 L5
+    ICONST_0
+    IRETURN
+   L4
+    LINENUMBER 429 L4
+   FRAME FULL [modified/java/utils/LinkedList I java/util/Collection [Ljava/lang/Object; I] []
+    ILOAD 1
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    IF_ICMPNE L6
+   L7
+    LINENUMBER 430 L7
+    ACONST_NULL
+    ASTORE 6
+   L8
+    LINENUMBER 431 L8
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 5
+   L9
+    GOTO L10
+   L6
+    LINENUMBER 433 L6
+   FRAME FULL [modified/java/utils/LinkedList I java/util/Collection [Ljava/lang/Object; I] []
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.node (I)Lmodified/java/utils/LinkedList$Node;
+    ASTORE 6
+   L11
+    LINENUMBER 434 L11
+    ALOAD 6
+    GETFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 5
+   L10
+    LINENUMBER 437 L10
+   FRAME FULL [modified/java/utils/LinkedList I java/util/Collection [Ljava/lang/Object; I modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node] []
+    ALOAD 3
+    ASTORE 7
+    ALOAD 7
+    ARRAYLENGTH
+    ISTORE 8
+    ICONST_0
+    ISTORE 9
+   L12
+   FRAME FULL [modified/java/utils/LinkedList I java/util/Collection [Ljava/lang/Object; I modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node [Ljava/lang/Object; I I] []
+    ILOAD 9
+    ILOAD 8
+    IF_ICMPGE L13
+    ALOAD 7
+    ILOAD 9
+    AALOAD
+    ASTORE 10
+   L14
+    LINENUMBER 438 L14
+    ALOAD 10
+    ASTORE 11
+   L15
+    LINENUMBER 439 L15
+    NEW modified/java/utils/LinkedList$Node
+    DUP
+    ALOAD 5
+    ALOAD 11
+    ACONST_NULL
+    INVOKESPECIAL modified/java/utils/LinkedList$Node.<init> (Lmodified/java/utils/LinkedList$Node;Ljava/lang/Object;Lmodified/java/utils/LinkedList$Node;)V
+    ASTORE 12
+   L16
+    LINENUMBER 440 L16
+    ALOAD 5
+    IFNONNULL L17
+   L18
+    LINENUMBER 441 L18
+    ALOAD 0
+    ALOAD 12
+    PUTFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    GOTO L19
+   L17
+    LINENUMBER 443 L17
+   FRAME FULL [modified/java/utils/LinkedList I java/util/Collection [Ljava/lang/Object; I modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node [Ljava/lang/Object; I I java/lang/Object java/lang/Object modified/java/utils/LinkedList$Node] []
+    ALOAD 5
+    ALOAD 12
+    PUTFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+   L19
+    LINENUMBER 444 L19
+   FRAME FULL [modified/java/utils/LinkedList I java/util/Collection [Ljava/lang/Object; I modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node [Ljava/lang/Object; I I java/lang/Object java/lang/Object modified/java/utils/LinkedList$Node] []
+    ALOAD 12
+    ASTORE 5
+   L20
+    LINENUMBER 437 L20
+    IINC 9 1
+    GOTO L12
+   L13
+    LINENUMBER 447 L13
+   FRAME FULL [modified/java/utils/LinkedList I java/util/Collection [Ljava/lang/Object; I modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node [Ljava/lang/Object; I I] []
+    ALOAD 6
+    IFNONNULL L21
+   L22
+    LINENUMBER 448 L22
+    ALOAD 0
+    ALOAD 5
+    PUTFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    GOTO L23
+   L21
+    LINENUMBER 450 L21
+   FRAME FULL [modified/java/utils/LinkedList I java/util/Collection [Ljava/lang/Object; I modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node [Ljava/lang/Object; I I] []
+    ALOAD 5
+    ALOAD 6
+    PUTFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+   L24
+    LINENUMBER 451 L24
+    ALOAD 6
+    ALOAD 5
+    PUTFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+   L23
+    LINENUMBER 454 L23
+   FRAME FULL [modified/java/utils/LinkedList I java/util/Collection [Ljava/lang/Object; I modified/java/utils/LinkedList$Node modified/java/utils/LinkedList$Node [Ljava/lang/Object; I I] []
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.size : I
+    ILOAD 4
+    IADD
+    PUTFIELD modified/java/utils/LinkedList.size : I
+   L25
+    LINENUMBER 455 L25
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.modCount : I
+    ICONST_1
+    IADD
+    PUTFIELD modified/java/utils/LinkedList.modCount : I
+   L26
+    LINENUMBER 456 L26
+    ICONST_1
+    IRETURN
+   L27
+    LOCALVARIABLE pred Lmodified/java/utils/LinkedList$Node; L9 L6 5
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: pred extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE succ Lmodified/java/utils/LinkedList$Node; L8 L6 6
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: succ extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE e Ljava/lang/Object; L15 L20 11
+    // signature TE;
+    // declaration: e extends E
+    LOCALVARIABLE newNode Lmodified/java/utils/LinkedList$Node; L16 L20 12
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: newNode extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE o Ljava/lang/Object; L14 L20 10
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L27 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE index I L0 L27 1
+    LOCALVARIABLE c Ljava/util/Collection; L0 L27 2
+    // signature Ljava/util/Collection<+TE;>;
+    // declaration: c extends java.util.Collection<? extends E>
+    LOCALVARIABLE a [Ljava/lang/Object; L2 L27 3
+    LOCALVARIABLE numNew I L3 L27 4
+    LOCALVARIABLE pred Lmodified/java/utils/LinkedList$Node; L10 L27 5
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: pred extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE succ Lmodified/java/utils/LinkedList$Node; L11 L27 6
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: succ extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 5
+    MAXLOCALS = 13
+
+  // access flags 0x1
+  public clear()V
+   L0
+    LINENUMBER 468 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 1
+   L1
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] []
+    ALOAD 1
+    IFNULL L2
+   L3
+    LINENUMBER 469 L3
+    ALOAD 1
+    GETFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+   L4
+    LINENUMBER 470 L4
+    ALOAD 1
+    ACONST_NULL
+    PUTFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+   L5
+    LINENUMBER 471 L5
+    ALOAD 1
+    ACONST_NULL
+    PUTFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+   L6
+    LINENUMBER 472 L6
+    ALOAD 1
+    ACONST_NULL
+    PUTFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+   L7
+    LINENUMBER 473 L7
+    ALOAD 2
+    ASTORE 1
+   L8
+    LINENUMBER 474 L8
+    GOTO L1
+   L2
+    LINENUMBER 475 L2
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] []
+    ALOAD 0
+    ALOAD 0
+    ACONST_NULL
+    DUP_X1
+    PUTFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    PUTFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+   L9
+    LINENUMBER 476 L9
+    ALOAD 0
+    ICONST_0
+    PUTFIELD modified/java/utils/LinkedList.size : I
+   L10
+    LINENUMBER 477 L10
+    ALOAD 0
+    DUP
+    GETFIELD modified/java/utils/LinkedList.modCount : I
+    ICONST_1
+    IADD
+    PUTFIELD modified/java/utils/LinkedList.modCount : I
+   L11
+    LINENUMBER 478 L11
+    RETURN
+   L12
+    LOCALVARIABLE next Lmodified/java/utils/LinkedList$Node; L4 L8 2
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: next extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L1 L2 1
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L12 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    MAXSTACK = 4
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  // signature (I)TE;
+  // declaration: E get(int)
+  public get(I)Ljava/lang/Object;
+   L0
+    LINENUMBER 491 L0
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.checkElementIndex (I)V
+   L1
+    LINENUMBER 492 L1
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.node (I)Lmodified/java/utils/LinkedList$Node;
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    ARETURN
+   L2
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L2 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE index I L0 L2 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature (ITE;)TE;
+  // declaration: E set(int, E)
+  public set(ILjava/lang/Object;)Ljava/lang/Object;
+   L0
+    LINENUMBER 505 L0
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.checkElementIndex (I)V
+   L1
+    LINENUMBER 506 L1
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.node (I)Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+   L2
+    LINENUMBER 507 L2
+    ALOAD 3
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    ASTORE 4
+   L3
+    LINENUMBER 508 L3
+    ALOAD 3
+    ALOAD 2
+    PUTFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+   L4
+    LINENUMBER 509 L4
+    ALOAD 4
+    ARETURN
+   L5
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L5 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE index I L0 L5 1
+    LOCALVARIABLE element Ljava/lang/Object; L0 L5 2
+    // signature TE;
+    // declaration: element extends E
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L2 L5 3
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE oldVal Ljava/lang/Object; L3 L5 4
+    // signature TE;
+    // declaration: oldVal extends E
+    MAXSTACK = 2
+    MAXLOCALS = 5
+
+  // access flags 0x1
+  // signature (ITE;)V
+  // declaration: void add(int, E)
+  public add(ILjava/lang/Object;)V
+   L0
+    LINENUMBER 522 L0
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.checkPositionIndex (I)V
+   L1
+    LINENUMBER 524 L1
+    ILOAD 1
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    IF_ICMPNE L2
+   L3
+    LINENUMBER 525 L3
+    ALOAD 0
+    ALOAD 2
+    INVOKEVIRTUAL modified/java/utils/LinkedList.linkLast (Ljava/lang/Object;)V
+    GOTO L4
+   L2
+    LINENUMBER 527 L2
+   FRAME FULL [modified/java/utils/LinkedList I java/lang/Object] []
+    ALOAD 0
+    ALOAD 2
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.node (I)Lmodified/java/utils/LinkedList$Node;
+    INVOKEVIRTUAL modified/java/utils/LinkedList.linkBefore (Ljava/lang/Object;Lmodified/java/utils/LinkedList$Node;)V
+   L4
+    LINENUMBER 528 L4
+   FRAME FULL [modified/java/utils/LinkedList I java/lang/Object] []
+    RETURN
+   L5
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L5 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE index I L0 L5 1
+    LOCALVARIABLE element Ljava/lang/Object; L0 L5 2
+    // signature TE;
+    // declaration: element extends E
+    MAXSTACK = 4
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  // signature (I)TE;
+  // declaration: E remove(int)
+  public remove(I)Ljava/lang/Object;
+   L0
+    LINENUMBER 540 L0
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.checkElementIndex (I)V
+   L1
+    LINENUMBER 541 L1
+    ALOAD 0
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.node (I)Lmodified/java/utils/LinkedList$Node;
+    INVOKEVIRTUAL modified/java/utils/LinkedList.unlink (Lmodified/java/utils/LinkedList$Node;)Ljava/lang/Object;
+    ARETURN
+   L2
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L2 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE index I L0 L2 1
+    MAXSTACK = 3
+    MAXLOCALS = 2
+
+  // access flags 0x2
+  private isElementIndex(I)Z
+   L0
+    LINENUMBER 548 L0
+    ILOAD 1
+    IFLT L1
+    ILOAD 1
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    IF_ICMPGE L1
+    ICONST_1
+    GOTO L2
+   L1
+   FRAME FULL [modified/java/utils/LinkedList I] []
+    ICONST_0
+   L2
+   FRAME FULL [modified/java/utils/LinkedList I] [I]
+    IRETURN
+   L3
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L3 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE index I L0 L3 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x2
+  private isPositionIndex(I)Z
+   L0
+    LINENUMBER 556 L0
+    ILOAD 1
+    IFLT L1
+    ILOAD 1
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    IF_ICMPGT L1
+    ICONST_1
+    GOTO L2
+   L1
+   FRAME FULL [modified/java/utils/LinkedList I] []
+    ICONST_0
+   L2
+   FRAME FULL [modified/java/utils/LinkedList I] [I]
+    IRETURN
+   L3
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L3 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE index I L0 L3 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x2
+  private outOfBoundsMsg(I)Ljava/lang/String;
+   L0
+    LINENUMBER 565 L0
+    ILOAD 1
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    INVOKEDYNAMIC makeConcatWithConstants(II)Ljava/lang/String; [
+      // handle kind 0x6 : INVOKESTATIC
+      java/lang/invoke/StringConcatFactory.makeConcatWithConstants(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+      // arguments:
+      "Index: \u0001, Size: \u0001"
+    ]
+    ARETURN
+   L1
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L1 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE index I L0 L1 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x2
+  private checkElementIndex(I)V
+   L0
+    LINENUMBER 569 L0
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.isElementIndex (I)Z
+    IFNE L1
+   L2
+    LINENUMBER 570 L2
+    NEW java/lang/IndexOutOfBoundsException
+    DUP
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.outOfBoundsMsg (I)Ljava/lang/String;
+    INVOKESPECIAL java/lang/IndexOutOfBoundsException.<init> (Ljava/lang/String;)V
+    ATHROW
+   L1
+    LINENUMBER 571 L1
+   FRAME FULL [modified/java/utils/LinkedList I] []
+    RETURN
+   L3
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L3 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE index I L0 L3 1
+    MAXSTACK = 4
+    MAXLOCALS = 2
+
+  // access flags 0x2
+  private checkPositionIndex(I)V
+   L0
+    LINENUMBER 574 L0
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.isPositionIndex (I)Z
+    IFNE L1
+   L2
+    LINENUMBER 575 L2
+    NEW java/lang/IndexOutOfBoundsException
+    DUP
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.outOfBoundsMsg (I)Ljava/lang/String;
+    INVOKESPECIAL java/lang/IndexOutOfBoundsException.<init> (Ljava/lang/String;)V
+    ATHROW
+   L1
+    LINENUMBER 576 L1
+   FRAME FULL [modified/java/utils/LinkedList I] []
+    RETURN
+   L3
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L3 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE index I L0 L3 1
+    MAXSTACK = 4
+    MAXLOCALS = 2
+
+  // access flags 0x0
+  // signature (I)Lmodified/java/utils/LinkedList$Node<TE;>;
+  // declaration: modified.java.utils.LinkedList$Node<E> node(int)
+  node(I)Lmodified/java/utils/LinkedList$Node;
+   L0
+    LINENUMBER 584 L0
+    ILOAD 1
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    ICONST_1
+    ISHR
+    IF_ICMPGE L1
+   L2
+    LINENUMBER 585 L2
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+   L3
+    LINENUMBER 586 L3
+    ICONST_0
+    ISTORE 3
+   L4
+   FRAME FULL [modified/java/utils/LinkedList I modified/java/utils/LinkedList$Node I] []
+    ILOAD 3
+    ILOAD 1
+    IF_ICMPGE L5
+   L6
+    LINENUMBER 587 L6
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+   L7
+    LINENUMBER 586 L7
+    IINC 3 1
+    GOTO L4
+   L5
+    LINENUMBER 588 L5
+   FRAME FULL [modified/java/utils/LinkedList I modified/java/utils/LinkedList$Node I] []
+    ALOAD 2
+    ARETURN
+   L1
+    LINENUMBER 590 L1
+   FRAME FULL [modified/java/utils/LinkedList I] []
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+   L8
+    LINENUMBER 591 L8
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    ICONST_1
+    ISUB
+    ISTORE 3
+   L9
+   FRAME FULL [modified/java/utils/LinkedList I modified/java/utils/LinkedList$Node I] []
+    ILOAD 3
+    ILOAD 1
+    IF_ICMPLE L10
+   L11
+    LINENUMBER 592 L11
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+   L12
+    LINENUMBER 591 L12
+    IINC 3 -1
+    GOTO L9
+   L10
+    LINENUMBER 593 L10
+   FRAME FULL [modified/java/utils/LinkedList I modified/java/utils/LinkedList$Node I] []
+    ALOAD 2
+    ARETURN
+   L13
+    LOCALVARIABLE i I L4 L5 3
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L3 L1 2
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE i I L9 L10 3
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L8 L13 2
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L13 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE index I L0 L13 1
+    MAXSTACK = 3
+    MAXLOCALS = 4
+
+  // access flags 0x1
+  public indexOf(Ljava/lang/Object;)I
+   L0
+    LINENUMBER 611 L0
+    ICONST_0
+    ISTORE 2
+   L1
+    LINENUMBER 612 L1
+    ALOAD 1
+    IFNONNULL L2
+   L3
+    LINENUMBER 613 L3
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+   L4
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object I modified/java/utils/LinkedList$Node] []
+    ALOAD 3
+    IFNULL L5
+   L6
+    LINENUMBER 614 L6
+    ALOAD 3
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    IFNONNULL L7
+   L8
+    LINENUMBER 615 L8
+    ILOAD 2
+    IRETURN
+   L7
+    LINENUMBER 616 L7
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object I modified/java/utils/LinkedList$Node] []
+    IINC 2 1
+   L9
+    LINENUMBER 613 L9
+    ALOAD 3
+    GETFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+    GOTO L4
+   L5
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object I modified/java/utils/LinkedList$Node] []
+    GOTO L10
+   L2
+    LINENUMBER 619 L2
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object I] []
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+   L11
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object I modified/java/utils/LinkedList$Node] []
+    ALOAD 3
+    IFNULL L10
+   L12
+    LINENUMBER 620 L12
+    ALOAD 1
+    ALOAD 3
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    INVOKEVIRTUAL java/lang/Object.equals (Ljava/lang/Object;)Z
+    IFEQ L13
+   L14
+    LINENUMBER 621 L14
+    ILOAD 2
+    IRETURN
+   L13
+    LINENUMBER 622 L13
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object I modified/java/utils/LinkedList$Node] []
+    IINC 2 1
+   L15
+    LINENUMBER 619 L15
+    ALOAD 3
+    GETFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+    GOTO L11
+   L10
+    LINENUMBER 625 L10
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object I modified/java/utils/LinkedList$Node] []
+    ICONST_M1
+    IRETURN
+   L16
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L4 L5 3
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L11 L10 3
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L16 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE o Ljava/lang/Object; L0 L16 1
+    LOCALVARIABLE index I L1 L16 2
+    MAXSTACK = 2
+    MAXLOCALS = 4
+
+  // access flags 0x1
+  public lastIndexOf(Ljava/lang/Object;)I
+   L0
+    LINENUMBER 640 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    ISTORE 2
+   L1
+    LINENUMBER 641 L1
+    ALOAD 1
+    IFNONNULL L2
+   L3
+    LINENUMBER 642 L3
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+   L4
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object I modified/java/utils/LinkedList$Node] []
+    ALOAD 3
+    IFNULL L5
+   L6
+    LINENUMBER 643 L6
+    IINC 2 -1
+   L7
+    LINENUMBER 644 L7
+    ALOAD 3
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    IFNONNULL L8
+   L9
+    LINENUMBER 645 L9
+    ILOAD 2
+    IRETURN
+   L8
+    LINENUMBER 642 L8
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object I modified/java/utils/LinkedList$Node] []
+    ALOAD 3
+    GETFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+    GOTO L4
+   L5
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object I modified/java/utils/LinkedList$Node] []
+    GOTO L10
+   L2
+    LINENUMBER 648 L2
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object I] []
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+   L11
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object I modified/java/utils/LinkedList$Node] []
+    ALOAD 3
+    IFNULL L10
+   L12
+    LINENUMBER 649 L12
+    IINC 2 -1
+   L13
+    LINENUMBER 650 L13
+    ALOAD 1
+    ALOAD 3
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    INVOKEVIRTUAL java/lang/Object.equals (Ljava/lang/Object;)Z
+    IFEQ L14
+   L15
+    LINENUMBER 651 L15
+    ILOAD 2
+    IRETURN
+   L14
+    LINENUMBER 648 L14
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object I modified/java/utils/LinkedList$Node] []
+    ALOAD 3
+    GETFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+    GOTO L11
+   L10
+    LINENUMBER 654 L10
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object I modified/java/utils/LinkedList$Node] []
+    ICONST_M1
+    IRETURN
+   L16
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L4 L5 3
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L11 L10 3
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L16 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE o Ljava/lang/Object; L0 L16 1
+    LOCALVARIABLE index I L1 L16 2
+    MAXSTACK = 2
+    MAXLOCALS = 4
+
+  // access flags 0x1
+  // signature ()TE;
+  // declaration: E peek()
+  public peek()Ljava/lang/Object;
+   L0
+    LINENUMBER 666 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 1
+   L1
+    LINENUMBER 667 L1
+    ALOAD 1
+    IFNONNULL L2
+    ACONST_NULL
+    GOTO L3
+   L2
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] []
+    ALOAD 1
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+   L3
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] [java/lang/Object]
+    ARETURN
+   L4
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L4 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE f Lmodified/java/utils/LinkedList$Node; L1 L4 1
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: f extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 1
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature ()TE;
+  // declaration: E element()
+  public element()Ljava/lang/Object;
+   L0
+    LINENUMBER 678 L0
+    ALOAD 0
+    INVOKEVIRTUAL modified/java/utils/LinkedList.getFirst ()Ljava/lang/Object;
+    ARETURN
+   L1
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L1 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  // signature ()TE;
+  // declaration: E poll()
+  public poll()Ljava/lang/Object;
+   L0
+    LINENUMBER 688 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 1
+   L1
+    LINENUMBER 689 L1
+    ALOAD 1
+    IFNONNULL L2
+    ACONST_NULL
+    GOTO L3
+   L2
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] []
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.unlinkFirst (Lmodified/java/utils/LinkedList$Node;)Ljava/lang/Object;
+   L3
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] [java/lang/Object]
+    ARETURN
+   L4
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L4 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE f Lmodified/java/utils/LinkedList$Node; L1 L4 1
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: f extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature ()TE;
+  // declaration: E remove()
+  public remove()Ljava/lang/Object;
+   L0
+    LINENUMBER 700 L0
+    ALOAD 0
+    INVOKEVIRTUAL modified/java/utils/LinkedList.removeFirst ()Ljava/lang/Object;
+    ARETURN
+   L1
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L1 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  // signature (TE;)Z
+  // declaration: boolean offer(E)
+  public offer(Ljava/lang/Object;)Z
+   L0
+    LINENUMBER 711 L0
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.add (Ljava/lang/Object;)Z
+    IRETURN
+   L1
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L1 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE e Ljava/lang/Object; L0 L1 1
+    // signature TE;
+    // declaration: e extends E
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature (TE;)Z
+  // declaration: boolean offerFirst(E)
+  public offerFirst(Ljava/lang/Object;)Z
+   L0
+    LINENUMBER 723 L0
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.addFirst (Ljava/lang/Object;)V
+   L1
+    LINENUMBER 724 L1
+    ICONST_1
+    IRETURN
+   L2
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L2 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE e Ljava/lang/Object; L0 L2 1
+    // signature TE;
+    // declaration: e extends E
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature (TE;)Z
+  // declaration: boolean offerLast(E)
+  public offerLast(Ljava/lang/Object;)Z
+   L0
+    LINENUMBER 735 L0
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.addLast (Ljava/lang/Object;)V
+   L1
+    LINENUMBER 736 L1
+    ICONST_1
+    IRETURN
+   L2
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L2 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE e Ljava/lang/Object; L0 L2 1
+    // signature TE;
+    // declaration: e extends E
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature ()TE;
+  // declaration: E peekFirst()
+  public peekFirst()Ljava/lang/Object;
+   L0
+    LINENUMBER 748 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 1
+   L1
+    LINENUMBER 749 L1
+    ALOAD 1
+    IFNONNULL L2
+    ACONST_NULL
+    GOTO L3
+   L2
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] []
+    ALOAD 1
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+   L3
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] [java/lang/Object]
+    ARETURN
+   L4
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L4 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE f Lmodified/java/utils/LinkedList$Node; L1 L4 1
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: f extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 1
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature ()TE;
+  // declaration: E peekLast()
+  public peekLast()Ljava/lang/Object;
+   L0
+    LINENUMBER 761 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 1
+   L1
+    LINENUMBER 762 L1
+    ALOAD 1
+    IFNONNULL L2
+    ACONST_NULL
+    GOTO L3
+   L2
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] []
+    ALOAD 1
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+   L3
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] [java/lang/Object]
+    ARETURN
+   L4
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L4 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE l Lmodified/java/utils/LinkedList$Node; L1 L4 1
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: l extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 1
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature ()TE;
+  // declaration: E pollFirst()
+  public pollFirst()Ljava/lang/Object;
+   L0
+    LINENUMBER 774 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 1
+   L1
+    LINENUMBER 775 L1
+    ALOAD 1
+    IFNONNULL L2
+    ACONST_NULL
+    GOTO L3
+   L2
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] []
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.unlinkFirst (Lmodified/java/utils/LinkedList$Node;)Ljava/lang/Object;
+   L3
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] [java/lang/Object]
+    ARETURN
+   L4
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L4 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE f Lmodified/java/utils/LinkedList$Node; L1 L4 1
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: f extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature ()TE;
+  // declaration: E pollLast()
+  public pollLast()Ljava/lang/Object;
+   L0
+    LINENUMBER 787 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 1
+   L1
+    LINENUMBER 788 L1
+    ALOAD 1
+    IFNONNULL L2
+    ACONST_NULL
+    GOTO L3
+   L2
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] []
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.unlinkLast (Lmodified/java/utils/LinkedList$Node;)Ljava/lang/Object;
+   L3
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] [java/lang/Object]
+    ARETURN
+   L4
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L4 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE l Lmodified/java/utils/LinkedList$Node; L1 L4 1
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: l extends modified.java.utils.LinkedList$Node<E>
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature (TE;)V
+  // declaration: void push(E)
+  public push(Ljava/lang/Object;)V
+   L0
+    LINENUMBER 801 L0
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.addFirst (Ljava/lang/Object;)V
+   L1
+    LINENUMBER 802 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L2 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE e Ljava/lang/Object; L0 L2 1
+    // signature TE;
+    // declaration: e extends E
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature ()TE;
+  // declaration: E pop()
+  public pop()Ljava/lang/Object;
+   L0
+    LINENUMBER 816 L0
+    ALOAD 0
+    INVOKEVIRTUAL modified/java/utils/LinkedList.removeFirst ()Ljava/lang/Object;
+    ARETURN
+   L1
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L1 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public removeFirstOccurrence(Ljava/lang/Object;)Z
+   L0
+    LINENUMBER 829 L0
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.remove (Ljava/lang/Object;)Z
+    IRETURN
+   L1
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L1 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE o Ljava/lang/Object; L0 L1 1
+    MAXSTACK = 2
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public removeLastOccurrence(Ljava/lang/Object;)Z
+   L0
+    LINENUMBER 842 L0
+    ALOAD 1
+    IFNONNULL L1
+   L2
+    LINENUMBER 843 L2
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+   L3
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node] []
+    ALOAD 2
+    IFNULL L4
+   L5
+    LINENUMBER 844 L5
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    IFNONNULL L6
+   L7
+    LINENUMBER 845 L7
+    ALOAD 0
+    ALOAD 2
+    INVOKEVIRTUAL modified/java/utils/LinkedList.unlink (Lmodified/java/utils/LinkedList$Node;)Ljava/lang/Object;
+    POP
+   L8
+    LINENUMBER 846 L8
+    ICONST_1
+    IRETURN
+   L6
+    LINENUMBER 843 L6
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node] []
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+    GOTO L3
+   L4
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node] []
+    GOTO L9
+   L1
+    LINENUMBER 850 L1
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object] []
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+   L10
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node] []
+    ALOAD 2
+    IFNULL L9
+   L11
+    LINENUMBER 851 L11
+    ALOAD 1
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    INVOKEVIRTUAL java/lang/Object.equals (Ljava/lang/Object;)Z
+    IFEQ L12
+   L13
+    LINENUMBER 852 L13
+    ALOAD 0
+    ALOAD 2
+    INVOKEVIRTUAL modified/java/utils/LinkedList.unlink (Lmodified/java/utils/LinkedList$Node;)Ljava/lang/Object;
+    POP
+   L14
+    LINENUMBER 853 L14
+    ICONST_1
+    IRETURN
+   L12
+    LINENUMBER 850 L12
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node] []
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.prev : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+    GOTO L10
+   L9
+    LINENUMBER 857 L9
+   FRAME FULL [modified/java/utils/LinkedList java/lang/Object modified/java/utils/LinkedList$Node] []
+    ICONST_0
+    IRETURN
+   L15
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L3 L4 2
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L10 L9 2
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L15 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE o Ljava/lang/Object; L0 L15 1
+    MAXSTACK = 2
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  // signature (I)Ljava/util/ListIterator<TE;>;
+  // declaration: java.util.ListIterator<E> listIterator(int)
+  public listIterator(I)Ljava/util/ListIterator;
+   L0
+    LINENUMBER 882 L0
+    ALOAD 0
+    ILOAD 1
+    INVOKEVIRTUAL modified/java/utils/LinkedList.checkPositionIndex (I)V
+   L1
+    LINENUMBER 883 L1
+    NEW modified/java/utils/LinkedList$ListItr
+    DUP
+    ALOAD 0
+    ILOAD 1
+    INVOKESPECIAL modified/java/utils/LinkedList$ListItr.<init> (Lmodified/java/utils/LinkedList;I)V
+    ARETURN
+   L2
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L2 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE index I L0 L2 1
+    MAXSTACK = 4
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  // signature ()Ljava/util/Iterator<TE;>;
+  // declaration: java.util.Iterator<E> descendingIterator()
+  public descendingIterator()Ljava/util/Iterator;
+   L0
+    LINENUMBER 1001 L0
+    NEW modified/java/utils/LinkedList$DescendingIterator
+    DUP
+    ALOAD 0
+    INVOKESPECIAL modified/java/utils/LinkedList$DescendingIterator.<init> (Lmodified/java/utils/LinkedList;)V
+    ARETURN
+   L1
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L1 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    MAXSTACK = 3
+    MAXLOCALS = 1
+
+  // access flags 0x2
+  // signature ()Lmodified/java/utils/LinkedList<TE;>;
+  // declaration: modified.java.utils.LinkedList<E> superClone()
+  private superClone()Lmodified/java/utils/LinkedList;
+    TRYCATCHBLOCK L0 L1 L2 java/lang/CloneNotSupportedException
+   L0
+    LINENUMBER 1023 L0
+    ALOAD 0
+    INVOKESPECIAL java/lang/Object.clone ()Ljava/lang/Object;
+    CHECKCAST modified/java/utils/LinkedList
+   L1
+    ARETURN
+   L2
+    LINENUMBER 1024 L2
+   FRAME FULL [modified/java/utils/LinkedList] [java/lang/CloneNotSupportedException]
+    ASTORE 1
+   L3
+    LINENUMBER 1025 L3
+    NEW java/lang/InternalError
+    DUP
+    ALOAD 1
+    INVOKESPECIAL java/lang/InternalError.<init> (Ljava/lang/Throwable;)V
+    ATHROW
+   L4
+    LOCALVARIABLE e Ljava/lang/CloneNotSupportedException; L3 L4 1
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L4 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    MAXSTACK = 3
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public clone()Ljava/lang/Object;
+   L0
+    LINENUMBER 1036 L0
+    ALOAD 0
+    INVOKEVIRTUAL modified/java/utils/LinkedList.superClone ()Lmodified/java/utils/LinkedList;
+    ASTORE 1
+   L1
+    LINENUMBER 1039 L1
+    ALOAD 1
+    ALOAD 1
+    ACONST_NULL
+    DUP_X1
+    PUTFIELD modified/java/utils/LinkedList.last : Lmodified/java/utils/LinkedList$Node;
+    PUTFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+   L2
+    LINENUMBER 1040 L2
+    ALOAD 1
+    ICONST_0
+    PUTFIELD modified/java/utils/LinkedList.size : I
+   L3
+    LINENUMBER 1041 L3
+    ALOAD 1
+    ICONST_0
+    PUTFIELD modified/java/utils/LinkedList.modCount : I
+   L4
+    LINENUMBER 1044 L4
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+   L5
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] []
+    ALOAD 2
+    IFNULL L6
+   L7
+    LINENUMBER 1045 L7
+    ALOAD 1
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    INVOKEVIRTUAL modified/java/utils/LinkedList.add (Ljava/lang/Object;)Z
+    POP
+   L8
+    LINENUMBER 1044 L8
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+    GOTO L5
+   L6
+    LINENUMBER 1047 L6
+   FRAME FULL [modified/java/utils/LinkedList modified/java/utils/LinkedList modified/java/utils/LinkedList$Node] []
+    ALOAD 1
+    ARETURN
+   L9
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L5 L6 2
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L9 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE clone Lmodified/java/utils/LinkedList; L1 L9 1
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: clone extends modified.java.utils.LinkedList<E>
+    MAXSTACK = 4
+    MAXLOCALS = 3
+
+  // access flags 0x1
+  public toArray()[Ljava/lang/Object;
+   L0
+    LINENUMBER 1065 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    ANEWARRAY java/lang/Object
+    ASTORE 1
+   L1
+    LINENUMBER 1066 L1
+    ICONST_0
+    ISTORE 2
+   L2
+    LINENUMBER 1067 L2
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+   L3
+   FRAME FULL [modified/java/utils/LinkedList [Ljava/lang/Object; I modified/java/utils/LinkedList$Node] []
+    ALOAD 3
+    IFNULL L4
+   L5
+    LINENUMBER 1068 L5
+    ALOAD 1
+    ILOAD 2
+    IINC 2 -1
+    ALOAD 3
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    AASTORE
+   L6
+    LINENUMBER 1067 L6
+    ALOAD 3
+    GETFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 3
+    GOTO L3
+   L4
+    LINENUMBER 1069 L4
+   FRAME FULL [modified/java/utils/LinkedList [Ljava/lang/Object; I modified/java/utils/LinkedList$Node] []
+    ALOAD 1
+    ARETURN
+   L7
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L3 L4 3
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L7 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE result [Ljava/lang/Object; L1 L7 1
+    LOCALVARIABLE i I L2 L7 2
+    MAXSTACK = 3
+    MAXLOCALS = 4
+
+  // access flags 0x1
+  // signature <T:Ljava/lang/Object;>([TT;)[TT;
+  // declaration: T[] toArray<T>(T[])
+  public toArray([Ljava/lang/Object;)[Ljava/lang/Object;
+   L0
+    LINENUMBER 1112 L0
+    ALOAD 1
+    ARRAYLENGTH
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    IF_ICMPGE L1
+   L2
+    LINENUMBER 1113 L2
+    ALOAD 1
+   L3
+    LINENUMBER 1114 L3
+    INVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;
+    INVOKEVIRTUAL java/lang/Class.getComponentType ()Ljava/lang/Class;
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+   L4
+    LINENUMBER 1113 L4
+    INVOKESTATIC java/lang/reflect/Array.newInstance (Ljava/lang/Class;I)Ljava/lang/Object;
+    CHECKCAST [Ljava/lang/Object;
+    ASTORE 1
+   L1
+    LINENUMBER 1115 L1
+   FRAME FULL [modified/java/utils/LinkedList [Ljava/lang/Object;] []
+    ICONST_0
+    ISTORE 2
+   L5
+    LINENUMBER 1116 L5
+    ALOAD 1
+    ASTORE 3
+   L6
+    LINENUMBER 1117 L6
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 4
+   L7
+   FRAME FULL [modified/java/utils/LinkedList [Ljava/lang/Object; I [Ljava/lang/Object; modified/java/utils/LinkedList$Node] []
+    ALOAD 4
+    IFNULL L8
+   L9
+    LINENUMBER 1118 L9
+    ALOAD 3
+    ILOAD 2
+    IINC 2 1
+    ALOAD 4
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    AASTORE
+   L10
+    LINENUMBER 1117 L10
+    ALOAD 4
+    GETFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 4
+    GOTO L7
+   L8
+    LINENUMBER 1120 L8
+   FRAME FULL [modified/java/utils/LinkedList [Ljava/lang/Object; I [Ljava/lang/Object; modified/java/utils/LinkedList$Node] []
+    ALOAD 1
+    ARRAYLENGTH
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    IF_ICMPLE L11
+   L12
+    LINENUMBER 1121 L12
+    ALOAD 1
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    ACONST_NULL
+    AASTORE
+   L11
+    LINENUMBER 1123 L11
+   FRAME FULL [modified/java/utils/LinkedList [Ljava/lang/Object; I [Ljava/lang/Object; modified/java/utils/LinkedList$Node] []
+    ALOAD 1
+    ARETURN
+   L13
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L7 L8 4
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L13 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE a [Ljava/lang/Object; L0 L13 1
+    // signature [TT;
+    // declaration: a extends T[]
+    LOCALVARIABLE i I L5 L13 2
+    LOCALVARIABLE result [Ljava/lang/Object; L6 L13 3
+    MAXSTACK = 3
+    MAXLOCALS = 5
+
+  // access flags 0x2
+  private writeObject(Ljava/io/ObjectOutputStream;)V throws java/io/IOException 
+   L0
+    LINENUMBER 1139 L0
+    ALOAD 1
+    INVOKEVIRTUAL java/io/ObjectOutputStream.defaultWriteObject ()V
+   L1
+    LINENUMBER 1142 L1
+    ALOAD 1
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.size : I
+    INVOKEVIRTUAL java/io/ObjectOutputStream.writeInt (I)V
+   L2
+    LINENUMBER 1145 L2
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.first : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+   L3
+   FRAME FULL [modified/java/utils/LinkedList java/io/ObjectOutputStream modified/java/utils/LinkedList$Node] []
+    ALOAD 2
+    IFNULL L4
+   L5
+    LINENUMBER 1146 L5
+    ALOAD 1
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.item : Ljava/lang/Object;
+    INVOKEVIRTUAL java/io/ObjectOutputStream.writeObject (Ljava/lang/Object;)V
+   L6
+    LINENUMBER 1145 L6
+    ALOAD 2
+    GETFIELD modified/java/utils/LinkedList$Node.next : Lmodified/java/utils/LinkedList$Node;
+    ASTORE 2
+    GOTO L3
+   L4
+    LINENUMBER 1147 L4
+   FRAME FULL [modified/java/utils/LinkedList java/io/ObjectOutputStream modified/java/utils/LinkedList$Node] []
+    RETURN
+   L7
+    LOCALVARIABLE x Lmodified/java/utils/LinkedList$Node; L3 L4 2
+    // signature Lmodified/java/utils/LinkedList$Node<TE;>;
+    // declaration: x extends modified.java.utils.LinkedList$Node<E>
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L7 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE s Ljava/io/ObjectOutputStream; L0 L7 1
+    MAXSTACK = 2
+    MAXLOCALS = 3
+
+  // access flags 0x2
+  private readObject(Ljava/io/ObjectInputStream;)V throws java/io/IOException java/lang/ClassNotFoundException 
+   L0
+    LINENUMBER 1157 L0
+    ALOAD 1
+    INVOKEVIRTUAL java/io/ObjectInputStream.defaultReadObject ()V
+   L1
+    LINENUMBER 1160 L1
+    ALOAD 1
+    INVOKEVIRTUAL java/io/ObjectInputStream.readInt ()I
+    ISTORE 2
+   L2
+    LINENUMBER 1163 L2
+    ICONST_0
+    ISTORE 3
+   L3
+   FRAME FULL [modified/java/utils/LinkedList java/io/ObjectInputStream I I] []
+    ILOAD 3
+    ILOAD 2
+    IF_ICMPGE L4
+   L5
+    LINENUMBER 1164 L5
+    ALOAD 0
+    ALOAD 1
+    INVOKEVIRTUAL java/io/ObjectInputStream.readObject ()Ljava/lang/Object;
+    INVOKEVIRTUAL modified/java/utils/LinkedList.linkLast (Ljava/lang/Object;)V
+   L6
+    LINENUMBER 1163 L6
+    IINC 3 1
+    GOTO L3
+   L4
+    LINENUMBER 1165 L4
+   FRAME FULL [modified/java/utils/LinkedList java/io/ObjectInputStream I I] []
+    RETURN
+   L7
+    LOCALVARIABLE i I L3 L4 3
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L7 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    LOCALVARIABLE s Ljava/io/ObjectInputStream; L0 L7 1
+    LOCALVARIABLE size I L2 L7 2
+    MAXSTACK = 2
+    MAXLOCALS = 4
+
+  // access flags 0x1
+  // signature ()Ljava/util/Spliterator<TE;>;
+  // declaration: java.util.Spliterator<E> spliterator()
+  public spliterator()Ljava/util/Spliterator;
+   L0
+    LINENUMBER 1185 L0
+    NEW modified/java/utils/LinkedList$LLSpliterator
+    DUP
+    ALOAD 0
+    ICONST_M1
+    ICONST_0
+    INVOKESPECIAL modified/java/utils/LinkedList$LLSpliterator.<init> (Lmodified/java/utils/LinkedList;II)V
+    ARETURN
+   L1
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList; L0 L1 0
+    // signature Lmodified/java/utils/LinkedList<TE;>;
+    // declaration: this extends modified.java.utils.LinkedList<E>
+    MAXSTACK = 5
+    MAXLOCALS = 1
+
+  // access flags 0x1008
+  static synthetic access$000(Lmodified/java/utils/LinkedList;)I
+   L0
+    LINENUMBER 94 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.modCount : I
+    IRETURN
+   L1
+    LOCALVARIABLE x0 Lmodified/java/utils/LinkedList; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1008
+  static synthetic access$100(Lmodified/java/utils/LinkedList;)I
+   L0
+    LINENUMBER 94 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.modCount : I
+    IRETURN
+   L1
+    LOCALVARIABLE x0 Lmodified/java/utils/LinkedList; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1008
+  static synthetic access$200(Lmodified/java/utils/LinkedList;)I
+   L0
+    LINENUMBER 94 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.modCount : I
+    IRETURN
+   L1
+    LOCALVARIABLE x0 Lmodified/java/utils/LinkedList; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1008
+  static synthetic access$300(Lmodified/java/utils/LinkedList;)I
+   L0
+    LINENUMBER 94 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.modCount : I
+    IRETURN
+   L1
+    LOCALVARIABLE x0 Lmodified/java/utils/LinkedList; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1008
+  static synthetic access$400(Lmodified/java/utils/LinkedList;)I
+   L0
+    LINENUMBER 94 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.modCount : I
+    IRETURN
+   L1
+    LOCALVARIABLE x0 Lmodified/java/utils/LinkedList; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1008
+  static synthetic access$500(Lmodified/java/utils/LinkedList;)I
+   L0
+    LINENUMBER 94 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList.modCount : I
+    IRETURN
+   L1
+    LOCALVARIABLE x0 Lmodified/java/utils/LinkedList; L0 L1 0
+    MAXSTACK = 1
+    MAXLOCALS = 1
+}
+

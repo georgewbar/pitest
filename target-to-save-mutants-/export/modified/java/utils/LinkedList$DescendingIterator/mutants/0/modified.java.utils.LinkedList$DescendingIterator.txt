@@ -1,0 +1,102 @@
+// class version 55.0 (55)
+// access flags 0x20
+// signature Ljava/lang/Object;Ljava/util/Iterator<TE;>;
+// declaration: modified/java/utils/LinkedList$DescendingIterator implements java.util.Iterator<E>
+class modified/java/utils/LinkedList$DescendingIterator implements java/util/Iterator {
+
+  // compiled from: LinkedList.java
+  NESTHOST modified/java/utils/LinkedList
+  // access flags 0x2
+  private INNERCLASS modified/java/utils/LinkedList$ListItr modified/java/utils/LinkedList ListItr
+  // access flags 0x2
+  private INNERCLASS modified/java/utils/LinkedList$DescendingIterator modified/java/utils/LinkedList DescendingIterator
+
+  // access flags 0x12
+  // signature Lmodified/java/utils/LinkedList<TE;>.ListItr;
+  // declaration: itr extends modified.java.utils.LinkedList<E>.ListItr
+  private final Lmodified/java/utils/LinkedList$ListItr; itr
+
+  // access flags 0x1010
+  final synthetic Lmodified/java/utils/LinkedList; this$0
+
+  // access flags 0x2
+  private <init>(Lmodified/java/utils/LinkedList;)V
+   L0
+    LINENUMBER 1007 L0
+    ALOAD 0
+    ALOAD 1
+    PUTFIELD modified/java/utils/LinkedList$DescendingIterator.this$0 : Lmodified/java/utils/LinkedList;
+    ALOAD 0
+    INVOKESPECIAL java/lang/Object.<init> ()V
+   L1
+    LINENUMBER 1008 L1
+    ALOAD 0
+    NEW modified/java/utils/LinkedList$ListItr
+    DUP
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList$DescendingIterator.this$0 : Lmodified/java/utils/LinkedList;
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList$DescendingIterator.this$0 : Lmodified/java/utils/LinkedList;
+    INVOKEVIRTUAL modified/java/utils/LinkedList.size ()I
+    INVOKESPECIAL modified/java/utils/LinkedList$ListItr.<init> (Lmodified/java/utils/LinkedList;I)V
+    PUTFIELD modified/java/utils/LinkedList$DescendingIterator.itr : Lmodified/java/utils/LinkedList$ListItr;
+    RETURN
+   L2
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList$DescendingIterator; L0 L2 0
+    // signature Lmodified/java/utils/LinkedList<TE;>.DescendingIterator;
+    // declaration: this extends modified.java.utils.LinkedList<E>.DescendingIterator
+    MAXSTACK = 5
+    MAXLOCALS = 2
+
+  // access flags 0x1
+  public hasNext()Z
+   L0
+    LINENUMBER 1010 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList$DescendingIterator.itr : Lmodified/java/utils/LinkedList$ListItr;
+    INVOKEVIRTUAL modified/java/utils/LinkedList$ListItr.hasPrevious ()Z
+    POP
+    ICONST_0
+    IRETURN
+   L1
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList$DescendingIterator; L0 L1 0
+    // signature Lmodified/java/utils/LinkedList<TE;>.DescendingIterator;
+    // declaration: this extends modified.java.utils.LinkedList<E>.DescendingIterator
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  // signature ()TE;
+  // declaration: E next()
+  public next()Ljava/lang/Object;
+   L0
+    LINENUMBER 1013 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList$DescendingIterator.itr : Lmodified/java/utils/LinkedList$ListItr;
+    INVOKEVIRTUAL modified/java/utils/LinkedList$ListItr.previous ()Ljava/lang/Object;
+    ARETURN
+   L1
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList$DescendingIterator; L0 L1 0
+    // signature Lmodified/java/utils/LinkedList<TE;>.DescendingIterator;
+    // declaration: this extends modified.java.utils.LinkedList<E>.DescendingIterator
+    MAXSTACK = 1
+    MAXLOCALS = 1
+
+  // access flags 0x1
+  public remove()V
+   L0
+    LINENUMBER 1016 L0
+    ALOAD 0
+    GETFIELD modified/java/utils/LinkedList$DescendingIterator.itr : Lmodified/java/utils/LinkedList$ListItr;
+    INVOKEVIRTUAL modified/java/utils/LinkedList$ListItr.remove ()V
+   L1
+    LINENUMBER 1017 L1
+    RETURN
+   L2
+    LOCALVARIABLE this Lmodified/java/utils/LinkedList$DescendingIterator; L0 L2 0
+    // signature Lmodified/java/utils/LinkedList<TE;>.DescendingIterator;
+    // declaration: this extends modified.java.utils.LinkedList<E>.DescendingIterator
+    MAXSTACK = 1
+    MAXLOCALS = 1
+}
+
